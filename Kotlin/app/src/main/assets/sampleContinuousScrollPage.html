@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Sanchez:400italic,400);
+
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+
+    body {
+        font-family: 'Sanchez', serif;
+        font-size: 12px;
+        background: #868B97;
+        color: #fff;
+        margin: 0 20px;
+
+    }
+
+    h1 {
+        font-size: 36px;
+        margin: 30px;
+        text-align: center;
+        text-transform: uppercase;
+
+    }
+
+    .container {
+        max-width: 768px;
+        margin: 2em auto;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quotes {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    blockquote {
+        margin-bottom: 25px;
+    }
+
+    .quote {
+        position: relative;
+        font-size: 20px;
+        line-height: 1.7em;
+        word-break: break-word;
+
+
+    }
+
+    .quote footer {
+        font-size: 0.6em;
+        font-weight: 700;
+        color: #d3d3cf;
+        text-align: right;
+    }
+
+    .quote footer:before {
+        content: '\2015';
+    }
+
+    .quote:after {
+        content: '\201D';
+        position: absolute;
+        top: 0.28em;
+        right: 0;
+        font-size: 6em;
+        font-style: italic;
+        color: #e7e6e4;
+        z-index: -1;
+    }
+
+    /* loader */
+
+    .loader {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+
+    }
+
+
+    .loader.show {
+        opacity: 1;
+    }
+
+    .loader div {
+        display: inline-block;
+        position: absolute;
+        left: 8px;
+        width: 16px;
+        background: #f4f4f4;
+        animation: loader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+    }
+
+    .loader div:nth-child(1) {
+        left: 8px;
+        animation-delay: -0.24s;
+    }
+
+    .loader div:nth-child(2) {
+        left: 32px;
+        animation-delay: -0.12s;
+    }
+
+    .loader div:nth-child(3) {
+        left: 56px;
+        animation-delay: 0;
+    }
+
+    .textClass {
+        text-align: center;
+        font-size: large;
+    }
+
+    @keyframes loader {
+        0% {
+            top: 8px;
+            height: 64px;
+        }
+
+        50%,
+        100% {
+            top: 24px;
+            height: 32px;
+        }
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taboola Continuous Scroll Example - Quotes</title>
+
+    <script type="text/javascript">
+        window._taboola = window._taboola || [];
+        _taboola.push({
+            article: 'auto',
+            url: 'https://example.com/'
+        });
+        ! function (e, f, u, i) {
+            if (!document.getElementById(i)) {
+                e.async = 1;
+                e.src = u;
+                e.id = i;
+                f.parentNode.insertBefore(e, f);
+            }
+        }(document.createElement('script'), document.getElementsByTagName('script')[0],
+            'https://cdn.taboola.com/libtrc/sdk-tester/mobile-loader.js',
+            'tb_mobile_loader_script');
+    </script>
+
+
+
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Taboola Continuous Scroll Example</h1>
+    <div class="textClass"> This page extends the scroll view by fetching new content dynamiclly upon scrolling down. <br> Each time
+        new content is fetched a new widget will rendered as well.</div>
+
+    <div class="quotes">
+
+    </div>
+    <div class="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<div class="textClass" id="flush"></div>
+</body>
+
+<!-- add the Taboola placement -->
+<script type="text/javascript">
+    function showWidget(counter, page_url) {
+
+        window._taboola = window._taboola || [];
+        _taboola.push({
+            mode: 'thumbnails-a',
+            container: 'taboola-below-article-thumbnails' + counter,
+            placement: 'Below Article Thumbnails' + counter,
+            page_type: 'article',
+            target_type: 'mix',
+            url: page_url
+        });
+    }
+
+    // Notice - this part is unique to mobile SDK JS integrations!
+    _taboola["mobile"] = window._taboola["mobile"] || [];
+    _taboola["mobile"].push({
+        publisher: 'sdk-tester'
+    });
+</script>
+
+
+<script>
+    (function () {
+
+        const quotesEl = document.querySelector('.quotes');
+        const loaderEl = document.querySelector('.loader');
+        const CANOLICAL_URL = `https://api.javascripttutorial.net/v1/quotes/`;
+        const LAST_PAGE = 13
+        var API_URL
+        var pageCounter = 0
+
+        // get the quotes from API
+        const getQuotes = async (page, limit) => {
+            API_URL = (API_URL == null) ? CANOLICAL_URL :
+                `https://api.javascripttutorial.net/v1/quotes/?page=${page}&limit=${limit}`;
+            response = await fetch(API_URL);
+            // handle 404
+            if (!response.ok) {
+                throw new Error(`An error occurred: ${response.status}`);
+            }
+            return await response.json();
+        }
+
+        //add and shows taboola widget
+        const addWidget = () => {
+            const widget = document.createElement('div')
+            widget.setAttribute("id", "taboola-below-article-thumbnails" + pageCounter)
+            quotesEl.appendChild(widget)
+            showWidget(pageCounter, CANOLICAL_URL)
+            pageCounter = pageCounter + 1
+        }
+
+        // show the quotes
+        const showQuotes = (quotes) => {
+            quotes.forEach(quote => {
+                const quoteEl = document.createElement('blockquote');
+                quoteEl.classList.add('quote');
+
+                quoteEl.innerHTML = `
+        <span>${quote.id})</span>
+        ${quote.quote}
+        <footer>${quote.author}</footer>`;
+
+                quotesEl.appendChild(quoteEl);
+            });
+            addWidget()
+        };
+
+        const hideLoader = () => {
+            loaderEl.classList.remove('show');
+        };
+
+        const showLoader = () => {
+            loaderEl.classList.add('show');
+        };
+
+        const hasMoreQuotes = (page, limit, total) => {
+            const startIndex = (page - 1) * limit + 1;
+            return total === 0 || startIndex < total;
+        };
+
+        // load quotes
+        const loadQuotes = async (page, limit) => {
+
+            // show the loader
+            showLoader();
+
+            // 1.5 second later
+            setTimeout(async () => {
+                try {
+                    // if having more quotes to fetch
+                    if (hasMoreQuotes(page, limit, total)) {
+                        // call the API to get quotes
+                        const response = await getQuotes(page, limit);
+                        // show quotes
+                        showQuotes(response.data);
+                        // update the total
+                        total = response.total;
+                    }
+                } catch (error) {} finally {
+                    hideLoader();
+                }
+            }, 1500);
+
+        };
+
+        // control variables
+        let currentPage = 1;
+        const limit = 10;
+        let total = 0;
+
+
+        window.addEventListener('scroll', () => {
+            const {
+                scrollTop,
+                scrollHeight,
+                clientHeight
+            } = document.documentElement;
+            if (scrollTop + clientHeight >= scrollHeight - 5 && hasMoreQuotes(currentPage, limit, total)) {
+                currentPage++;
+                loadQuotes(currentPage, limit);
+            } else if (currentPage == LAST_PAGE) {
+                window.document.getElementById("flush").innerHTML = 'end of quotes flushing....'
+                window._taboola = window._taboola || [];
+                _taboola.push({
+                    flush: true
+                });
+            }
+        }, {
+            passive: true
+        });
+
+        // initialize
+        loadQuotes(currentPage, limit);
+
+    })();
+</script>
+
+</html>

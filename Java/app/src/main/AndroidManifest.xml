@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.taboola.sdk4example">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name="com.taboola.sdk4example.TaboolaSampleApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/taboola_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/taboola_icon_round"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="com.taboola.sdk4example.sdk_web.SDKWebContinuousScroll" />
+        <activity android:name="com.taboola.sdk4example.sdk_web.WebPagerviajs" />
+        <activity android:name="com.taboola.sdk4example.sdk_web.SDKWebMenuActivity" />
+        <activity android:name="com.taboola.sdk4example.sdk_web.SDKWeb" />
+        <activity android:name="com.taboola.sdk4example.sdk_web.SDKWebSplitFeed" />
+        <activity android:name="com.taboola.sdk4example.SDKClassicMenuActivity" />
+        <activity android:name="com.taboola.sdk4example.sdk_native.SDKNativeMenuActivity" />
+        <activity
+            android:name="com.taboola.sdk4example.SplashScreen"
+            android:theme="@style/SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.taboola.sdk4example.TaboolaSDKType" />
+    </application>
+
+</manifest>
