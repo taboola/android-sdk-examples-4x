@@ -20,7 +20,6 @@ import com.taboola.sdk4example.R;
 
 public class SDKNativeMenuActivity extends AppCompatActivity implements SDKNativeMenuFragment.OnFragmentInteractionListener {
 
-
     private Toolbar mToolbar;
     private ActionBar mSupportActionBar;
     private FragmentManager mSupportFragmentManager;

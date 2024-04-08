@@ -47,7 +47,7 @@ public class NativeFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             Context context = adContainer.getContext();
             addTaboolaViewComponentsToContainer(item, adContainer, context);
         } else {
-            Log.d(TAG,"Data item is null, unable to bind");
+            Log.d(TAG, "Data item is null, unable to bind");
         }
     }
 

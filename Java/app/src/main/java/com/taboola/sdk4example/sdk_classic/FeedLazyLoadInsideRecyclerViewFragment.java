@@ -60,7 +60,6 @@ public class FeedLazyLoadInsideRecyclerViewFragment extends BaseTaboolaFragment 
         return baseTaboolaFragment;
     }
 
-
     static TBLClassicUnit createTaboolaWidget(Context context, boolean infiniteWidget) {
         TBLClassicPage tblClassicPage =
                 Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
@@ -110,13 +109,11 @@ public class FeedLazyLoadInsideRecyclerViewFragment extends BaseTaboolaFragment 
             tblClassicUnit.fetchContent();
         }
 
-
         @Override
         public int getItemViewType(int position) {
             ListItemsGenerator.FeedListItem item = getItem(position);
             return item.type;
         }
-
 
         @Override
         public int getItemCount() {

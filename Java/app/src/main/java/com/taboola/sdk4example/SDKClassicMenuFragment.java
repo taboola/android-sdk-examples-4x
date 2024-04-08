@@ -26,7 +26,6 @@ import com.taboola.sdk4example.sdk_classic.ViewPagerFragment;
 
 public class SDKClassicMenuFragment extends Fragment implements View.OnClickListener {
 
-
     private OnFragmentInteractionListener onFragmentInteractionListener;
 
     @Override
@@ -45,7 +44,6 @@ public class SDKClassicMenuFragment extends Fragment implements View.OnClickList
         super.onDetach();
         onFragmentInteractionListener = null;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -112,7 +110,6 @@ public class SDKClassicMenuFragment extends Fragment implements View.OnClickList
             openFragment(fragmentToOpen, screenName);
         }
     }
-
 
     private void openFragment(Fragment fragment, String screenName) {
         if (onFragmentInteractionListener != null) {

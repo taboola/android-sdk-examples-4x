@@ -97,5 +97,4 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
         baseTaboolaFragment.setArguments(bundle);
         return baseTaboolaFragment;
     }
-
 }

@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * This example shows the Middle Article Widget + Feed units in a Recyclerview. The units created in code using: tblClassicPage.build
  */
-public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment  {
+public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment {
 
     private static final String TAG = "Feed+MidArticleRecycler";
 
@@ -59,9 +59,8 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment  {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG,"onDestroy");
+        Log.d(TAG, "onDestroy");
     }
-
 
     public TBLClassicUnit createTaboolaWidget(TBLClassicPage tblClassicPage) {
         TBLClassicUnit tblClassicUnit = tblClassicPage.build(getContext(), Const.WIDGET_MIDDLE_PLACEMENT_NAME, Const.WIDGET_MIDDLE_MODE, TBL_PLACEMENT_TYPE.PAGE_MIDDLE, new TBLClassicListener() {
@@ -69,10 +68,11 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment  {
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
             }
+
             @Override
             public void onAdReceiveSuccess() {
                 super.onAdReceiveSuccess();
-                Log.d(TAG,"onAdReceiveSuccess");
+                Log.d(TAG, "onAdReceiveSuccess");
             }
         });
 
@@ -87,10 +87,11 @@ public class FeedWithMiddleArticleInsideRecyclerViewFragment extends Fragment  {
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
             }
+
             @Override
             public void onAdReceiveSuccess() {
                 super.onAdReceiveSuccess();
-                Log.d(TAG,"onAdReceiveSuccess");
+                Log.d(TAG, "onAdReceiveSuccess");
             }
         });
 

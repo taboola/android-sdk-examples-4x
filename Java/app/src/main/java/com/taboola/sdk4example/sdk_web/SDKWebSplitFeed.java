@@ -26,10 +26,11 @@ public class SDKWebSplitFeed extends AppCompatActivity {
     private static final String HTML_CONTENT_FILE_TITLE = "sampleContentPageSplitFeed.html";
     WebView webView;
     private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_s_d_k__web);
         toolbar = findViewById(R.id.toolbar);
@@ -40,7 +41,8 @@ public class SDKWebSplitFeed extends AppCompatActivity {
         webView = findViewById(R.id.webview);
 
 
-        TBLWebPage tblWebPage = Taboola.getWebPage();;
+        TBLWebPage tblWebPage = Taboola.getWebPage();
+        ;
         TBLWebUnit tblWebUnit = tblWebPage.build(webView, new TBLWebListener() {
             @Override
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, @Nullable String customData) {
@@ -50,15 +52,11 @@ public class SDKWebSplitFeed extends AppCompatActivity {
 
         initWebViewSettings(webView);
         loadHtml();
-
     }
+
     private void resetToolbarTitle() {
         toolbar.setTitle("SDK Web Split Feed");
     }
-
-
-
-
 
     private static void initWebViewSettings(WebView webView) {
         final WebSettings settings = webView.getSettings();
@@ -75,9 +73,7 @@ public class SDKWebSplitFeed extends AppCompatActivity {
         CookieManager.getInstance().setAcceptCookie(true);
     }
 
-
-
-    private void loadHtml () {
+    private void loadHtml() {
         String htmlContent = null;
         try {
             htmlContent = TBLAssetUtil.getHtmlTemplateFileContent(getApplicationContext(), HTML_CONTENT_FILE_TITLE);
@@ -87,6 +83,4 @@ public class SDKWebSplitFeed extends AppCompatActivity {
         }
         webView.loadDataWithBaseURL(Const.BASE_URL, htmlContent, "text/html", "UTF-8", "");
     }
-
-
 }

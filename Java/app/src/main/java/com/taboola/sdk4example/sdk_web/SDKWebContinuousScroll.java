@@ -42,7 +42,8 @@ public class SDKWebContinuousScroll extends AppCompatActivity {
         mWebView = findViewById(R.id.webview);
 
 
-        TBLWebPage tblWebPage = Taboola.getWebPage();;
+        TBLWebPage tblWebPage = Taboola.getWebPage();
+        ;
         TBLWebUnit tblWebUnit = tblWebPage.build(mWebView, new TBLWebListener() {
             @Override
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, @Nullable String customData) {
@@ -73,7 +74,7 @@ public class SDKWebContinuousScroll extends AppCompatActivity {
         mToolbar.setTitle("SDK Web Continuous Scroll");
     }
 
-    private void loadHtml () {
+    private void loadHtml() {
         String htmlContent = null;
         try {
             htmlContent = TBLAssetUtil.getHtmlTemplateFileContent(getApplicationContext(), HTML_CONTENT_FILE_TITLE);

@@ -39,7 +39,6 @@ public class RecyclerViewPreloadFragment extends Fragment {
     }
 
     static TBLClassicUnit createTaboolaWidget(Context context) {
-
         TBLClassicPage tblClassicPage =
                 Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
         TBLClassicUnit tblClassicUnit = tblClassicPage.build(context, Const.WIDGET_MIDDLE_PLACEMENT_NAME, Const.WIDGET_BELOW_MODE,
@@ -53,7 +52,6 @@ public class RecyclerViewPreloadFragment extends Fragment {
         return tblClassicUnit;
 
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -69,7 +67,6 @@ public class RecyclerViewPreloadFragment extends Fragment {
         private final List<ListItemsGenerator.FeedListItem> mData;
         private final TBLClassicUnit tblClassicUnit;
 
-
         RecyclerViewAdapter(TBLClassicUnit tblClassicUnit1) {
             mData = ListItemsGenerator.getGeneratedDataForWidgetDynamic();
             tblClassicUnit = tblClassicUnit1;
@@ -80,7 +77,6 @@ public class RecyclerViewPreloadFragment extends Fragment {
             ListItemsGenerator.FeedListItem item = getItem(position);
             return item.type;
         }
-
 
         @Override
         public int getItemCount() {

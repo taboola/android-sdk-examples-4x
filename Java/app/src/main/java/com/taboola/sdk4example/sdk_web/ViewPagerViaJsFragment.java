@@ -78,7 +78,6 @@ public class ViewPagerViaJsFragment extends BaseTabFragment<ViewPagerViaJsFragme
             webView.loadDataWithBaseURL(Const.BASE_URL, htmlContent, "text/html", "UTF-8", "");
         }
 
-
         @Override
         public void onDetach() {
             initWebViewSettings(webView);
@@ -97,7 +96,6 @@ public class ViewPagerViaJsFragment extends BaseTabFragment<ViewPagerViaJsFragme
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 WebView.setWebContentsDebuggingEnabled(true);
             }
-
 
             settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
             CookieManager.getInstance().setAcceptCookie(true);

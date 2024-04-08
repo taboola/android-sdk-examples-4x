@@ -20,8 +20,6 @@ public class SimpleWidgetFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_simple_widget, container, false);
         TBLClassicUnit tblClassicUnit = view.findViewById(R.id.taboola_view);
 
@@ -39,9 +37,6 @@ public class SimpleWidgetFragment extends Fragment {
 
         tblClassicUnit.fetchContent();
 
-
         return view;
-
-
     }
 }

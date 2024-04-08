@@ -56,8 +56,8 @@ public class SDKWebMenuActivity extends AppCompatActivity implements OnClickList
                 targetActivityClass = WebPagerviajs.class;
                 break;
             case R.id.continuousScroll:
-                 targetActivityClass = SDKWebContinuousScroll.class;
-                 break;
+                targetActivityClass = SDKWebContinuousScroll.class;
+                break;
             default:
                 return;
         }

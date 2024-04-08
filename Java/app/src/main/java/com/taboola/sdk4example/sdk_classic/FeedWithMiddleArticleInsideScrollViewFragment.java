@@ -63,8 +63,6 @@ public class FeedWithMiddleArticleInsideScrollViewFragment extends Fragment {
                 Const.WIDGET_MIDDLE_MODE,
                 TBL_PLACEMENT_TYPE.FEED,
                 tblClassicListener);
-        ;
-
     }
 
     private void configureBelowArticleWidget(TBLClassicUnit tblClassicUnit, TBLClassicPage tblClassicPage) {
