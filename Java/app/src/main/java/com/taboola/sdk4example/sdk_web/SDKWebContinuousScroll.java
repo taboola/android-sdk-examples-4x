@@ -18,6 +18,7 @@ import com.taboola.android.listeners.TBLWebListener;
 import com.taboola.android.tblweb.TBLWebPage;
 import com.taboola.android.tblweb.TBLWebUnit;
 import com.taboola.android.utils.TBLAssetUtil;
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 
 public class SDKWebContinuousScroll extends AppCompatActivity {
@@ -26,8 +27,6 @@ public class SDKWebContinuousScroll extends AppCompatActivity {
     private WebView mWebView;
     private Toolbar mToolbar;
     private String HTML_CONTENT_FILE_TITLE = "sampleContinuousScrollPage.html";
-    private static final String base_url = "https://example.com";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +81,6 @@ public class SDKWebContinuousScroll extends AppCompatActivity {
             Log.e(TAG, "Failed to read asset file: " + e.getLocalizedMessage());
             e.printStackTrace();
         }
-        mWebView.loadDataWithBaseURL(base_url, htmlContent, "text/html", "UTF-8", "");
+        mWebView.loadDataWithBaseURL(Const.BASE_URL, htmlContent, "text/html", "UTF-8", "");
     }
 }

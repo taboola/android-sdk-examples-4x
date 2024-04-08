@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.tabs.BaseTabFragment;
 import com.taboola.sdk4example.tabs.BaseTaboolaFragment;
 import com.taboola.sdk4example.tabs.FragmentsAdapter;
@@ -37,7 +38,6 @@ public class ViewPagerViaJsFragment extends BaseTabFragment<ViewPagerViaJsFragme
 
         private static final String TAG = "SampleJsTaboolaFragment";
         private static final String HTML_CONTENT_FILE = "sampleContentPagePrefetch.html";
-        private static final String BASE_URL = "https://example.com";
 
         private WebView webView;
 
@@ -75,7 +75,7 @@ public class ViewPagerViaJsFragment extends BaseTabFragment<ViewPagerViaJsFragme
                 Log.e(TAG, "Failed to read asset file: " + e.getLocalizedMessage());
                 e.printStackTrace();
             }
-            webView.loadDataWithBaseURL(BASE_URL, htmlContent, "text/html", "UTF-8", "");
+            webView.loadDataWithBaseURL(Const.BASE_URL, htmlContent, "text/html", "UTF-8", "");
         }
 
 
@@ -102,8 +102,5 @@ public class ViewPagerViaJsFragment extends BaseTabFragment<ViewPagerViaJsFragme
             settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
             CookieManager.getInstance().setAcceptCookie(true);
         }
-
     }
-
-
 }

@@ -2,6 +2,7 @@ package com.taboola.sdk4example;
 
 public class Const {
 
+    public static final String BASE_URL = "https://example.com";
     public static final String PUBLISHER_NAME = "sdk-tester-demo";
     public static final String API_KEY = "30dfcf6b094361ccc367bbbef5973bdaa24dbcd6";
     public static final String PAGE_TYPE = "article";
@@ -21,4 +22,5 @@ public class Const {
     //Feed
     public static final String FEED_PLACEMENT_NAME =  "Feed without video";
     public static final String FEED_MODE =  "thumbs-feed-01";
+    public static final String DARK_MODE = "darkMode";
 }

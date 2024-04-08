@@ -49,7 +49,7 @@ public class FeedLazyLoadInsideRecyclerViewFragment extends BaseTaboolaFragment 
         RecyclerView recyclerView = view.findViewById(R.id.feed_rv);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new RecyclerViewAdapter(getViewId));
+        recyclerView.setAdapter(new RecyclerViewAdapter(viewId));
     }
 
     public static FeedLazyLoadInsideRecyclerViewFragment getInstance(String viewId) {

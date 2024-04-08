@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 import com.taboola.android.Taboola;
 import com.taboola.android.listeners.TBLWebListener;
@@ -23,7 +24,6 @@ import com.taboola.android.utils.TBLAssetUtil;
 public class SDKWebSplitFeed extends AppCompatActivity {
     private static final String TAG = "DEBUG";
     private static final String HTML_CONTENT_FILE_TITLE = "sampleContentPageSplitFeed.html";
-    private static final String base_url = "https://example.com";
     WebView webView;
     private Toolbar toolbar;
     @Override
@@ -85,7 +85,7 @@ public class SDKWebSplitFeed extends AppCompatActivity {
             Log.e(TAG, "Failed to read asset file: " + e.getLocalizedMessage());
             e.printStackTrace();
         }
-        webView.loadDataWithBaseURL(base_url, htmlContent, "text/html", "UTF-8", "");
+        webView.loadDataWithBaseURL(Const.BASE_URL, htmlContent, "text/html", "UTF-8", "");
     }
 
 

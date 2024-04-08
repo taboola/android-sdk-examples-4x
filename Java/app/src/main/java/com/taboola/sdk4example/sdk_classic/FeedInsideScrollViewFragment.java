@@ -57,8 +57,8 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
                 .setTargetType("mix");
 
         //optional
-        if (!TextUtils.isEmpty(getViewId)) {
-            tblClassicUnit.setPageId(getViewId);
+        if (!TextUtils.isEmpty(viewId)) {
+            tblClassicUnit.setPageId(viewId);
         }
 
         //used for enable horizontal scroll

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 import com.taboola.android.Taboola;
 import com.taboola.android.listeners.TBLWebListener;
@@ -21,18 +22,16 @@ import com.taboola.android.tblweb.TBLWebUnit;
 import com.taboola.android.utils.TBLAssetUtil;
 
 
-
-
 public class SDKWeb extends AppCompatActivity {
     private static final String TAG = "DEBUG";
     private static final String HTML_CONTENT_FILE_TITLE = "sampleContentPage.html";
-    private static final String base_url = "https://example.com";
     WebView webView;
     private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_s_d_k__web);
 
@@ -42,7 +41,7 @@ public class SDKWeb extends AppCompatActivity {
         getSupportActionBar().setTitle("SDK Web Widget + Feed");
         resetToolbarTitle();
         webView = findViewById(R.id.webview);
-        
+
         TBLWebPage tblWebPage = Taboola.getWebPage();
         TBLWebUnit tblWebUnit = tblWebPage.build(webView, new TBLWebListener() {
             @Override
@@ -60,7 +59,6 @@ public class SDKWeb extends AppCompatActivity {
     private void resetToolbarTitle() {
         toolbar.setTitle("SDK Web Widget + Feed");
     }
-
 
 
     private static void initWebViewSettings(WebView webView) {
@@ -81,8 +79,7 @@ public class SDKWeb extends AppCompatActivity {
     }
 
 
-
-    private void loadHtml () {
+    private void loadHtml() {
         String htmlContent = null;
         try {
             htmlContent = TBLAssetUtil.getHtmlTemplateFileContent(getApplicationContext(), HTML_CONTENT_FILE_TITLE);
@@ -91,7 +88,7 @@ public class SDKWeb extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        webView.loadDataWithBaseURL(base_url, htmlContent, "text/html", "UTF-8", "");
+        webView.loadDataWithBaseURL(Const.BASE_URL, htmlContent, "text/html", "UTF-8", "");
     }
 
     public void onRenderSuccessful(WebView webView, String placementName, int height) {

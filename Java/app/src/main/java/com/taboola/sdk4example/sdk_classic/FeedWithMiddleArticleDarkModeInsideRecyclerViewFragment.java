@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.taboola.sdk4example.AdFailureConst;
 import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 import com.taboola.android.TBLClassicPage;
@@ -86,16 +87,16 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
             public void onAdReceiveFail(String error) {
                 Log.d(TAG, "onAdReceiveFailed" + error);
                 switch (error) {
-                    case "NO_ITEMS":
+                    case AdFailureConst.NO_ITEMS:
                         Log.d(TAG, "Taboola server returned a valid response, but without any items");
                         break;
-                    case "TIMEOUT":
+                    case AdFailureConst.TIMEOUT:
                         Log.d(TAG, "no response from Taboola server after 10 seconds");
                         break;
-                    case "WRONG_PARAMS":
+                    case AdFailureConst.WRONG_PARAMS:
                         Log.d(TAG, "wrong Taboola mode");
                         break;
-                    case "RESPONSE_ERROR":
+                    case AdFailureConst.RESPONSE_ERROR:
                         Log.d(TAG, "Taboola server is not reachable, or it returned a bad response");
                         break;
                     default:
@@ -233,7 +234,7 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
         switch (nightModeFlags) {
             case Configuration.UI_MODE_NIGHT_YES:
                 // Device dark mode on
-                extraProperties.put("darkMode", "true");
+                extraProperties.put(Const.DARK_MODE, "true");
                 break;
             case Configuration.UI_MODE_NIGHT_NO:
                 // Device dark mode off
