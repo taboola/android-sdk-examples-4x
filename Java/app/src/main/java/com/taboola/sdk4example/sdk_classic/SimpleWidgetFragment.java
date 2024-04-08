@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 import com.taboola.android.TBLClassicPage;
 import com.taboola.android.TBLClassicUnit;
@@ -21,20 +22,19 @@ public class SimpleWidgetFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-
         View view = inflater.inflate(R.layout.fragment_simple_widget, container, false);
-        TBLClassicUnit tblClassicUnit =view.findViewById(R.id.taboola_view);
+        TBLClassicUnit tblClassicUnit = view.findViewById(R.id.taboola_view);
 
-        TBLClassicPage tblClassicPage=Taboola.getClassicPage("https://blog.taboola.com", "article");
+        TBLClassicPage tblClassicPage = Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
 
-        TBLClassicListener tblClassicListener=new TBLClassicListener() {
+        TBLClassicListener tblClassicListener = new TBLClassicListener() {
             @Override
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
             }
         };
-        tblClassicPage.addUnitToPage(tblClassicUnit,"Below Article","alternating-widget-without-video-1x4",
-                                     TBL_PLACEMENT_TYPE.PAGE_BOTTOM,tblClassicListener);
+        tblClassicPage.addUnitToPage(tblClassicUnit, Const.WIDGET_BELOW_PLACEMENT_NAME, Const.WIDGET_BELOW_MODE,
+                TBL_PLACEMENT_TYPE.PAGE_BOTTOM, tblClassicListener);
 
 
         tblClassicUnit.fetchContent();

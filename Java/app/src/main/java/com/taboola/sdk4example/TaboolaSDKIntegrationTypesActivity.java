@@ -12,17 +12,17 @@ import android.widget.Button;
 import com.taboola.sdk4example.sdk_native.SDKNativeMenuActivity;
 import com.taboola.sdk4example.sdk_web.SDKWebMenuActivity;
 
-public class TaboolaSDKType extends AppCompatActivity implements View.OnClickListener {
+public class TaboolaSDKIntegrationTypesActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        Button sdk_classic=findViewById(R.id.sdk_classic);
-        Button sdk_native=findViewById(R.id.sdk_native);
-        Button sdk_web=findViewById(R.id.sdk_web);
+        Button sdk_classic = findViewById(R.id.sdk_classic);
+        Button sdk_native = findViewById(R.id.sdk_native);
+        Button sdk_web = findViewById(R.id.sdk_web);
         sdk_classic.setOnClickListener(this);
         sdk_native.setOnClickListener(this);
         sdk_web.setOnClickListener(this);
@@ -31,19 +31,19 @@ public class TaboolaSDKType extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         Class targetActivityClass;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sdk_classic:
-                targetActivityClass= SDKClassicMenuActivity.class;
+                targetActivityClass = SDKClassicMenuActivity.class;
                 break;
-                case R.id.sdk_web:
-                    targetActivityClass= SDKWebMenuActivity.class;
+            case R.id.sdk_web:
+                targetActivityClass = SDKWebMenuActivity.class;
                 break;
-              case R.id.sdk_native:
-              targetActivityClass= SDKNativeMenuActivity.class;
+            case R.id.sdk_native:
+                targetActivityClass = SDKNativeMenuActivity.class;
                 break;
             default:
                 return;
         }
-        startActivity(new Intent(this,targetActivityClass));
+        startActivity(new Intent(this, targetActivityClass));
     }
 }

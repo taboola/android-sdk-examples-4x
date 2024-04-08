@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.taboola.sdk4example.Const;
+import com.taboola.sdk4example.FlagsConst;
 import com.taboola.sdk4example.R;
 import com.taboola.sdk4example.tabs.BaseTaboolaFragment;
 import com.taboola.android.TBLClassicPage;
@@ -61,9 +63,9 @@ public class FeedLazyLoadInsideRecyclerViewFragment extends BaseTaboolaFragment 
 
     static TBLClassicUnit createTaboolaWidget(Context context, boolean infiniteWidget) {
         TBLClassicPage tblClassicPage =
-                Taboola.getClassicPage("https://blog.taboola.com", "article");
+                Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
 
-        TBLClassicUnit tblClassicUnit = tblClassicPage.build(context,"Feed without video", "thumbs-feed-01", TBL_PLACEMENT_TYPE.FEED, new TBLClassicListener() {
+        TBLClassicUnit tblClassicUnit = tblClassicPage.build(context, Const.FEED_PLACEMENT_NAME, Const.FEED_MODE, TBL_PLACEMENT_TYPE.FEED, new TBLClassicListener() {
             @Override
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
@@ -100,8 +102,8 @@ public class FeedLazyLoadInsideRecyclerViewFragment extends BaseTaboolaFragment 
 
             //used for enable horizontal scroll
             HashMap<String, String> extraProperties = new HashMap<>();
-            extraProperties.put("enableHorizontalScroll", "true");
-            extraProperties.put("useOnlineTemplate", "true");
+            extraProperties.put(FlagsConst.ENABLE_HORIZONTAL_SCROLL, "true");
+            extraProperties.put(FlagsConst.USE_ONLINE_TEMPLATE, "true");
             tblClassicUnit.setUnitExtraProperties(extraProperties);
             mInfiniteTaboolaView.setUnitExtraProperties(extraProperties);
 

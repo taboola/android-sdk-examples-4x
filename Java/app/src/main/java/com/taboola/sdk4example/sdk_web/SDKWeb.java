@@ -69,7 +69,6 @@ public class SDKWeb extends AppCompatActivity {
         settings.setLoadWithOverviewMode(true);
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
-        settings.setAppCacheEnabled(true);
         settings.setUseWideViewPort(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

@@ -22,6 +22,7 @@ import com.taboola.android.tblnative.TBLPlacement;
 import com.taboola.android.tblnative.TBLRecommendationRequestCallback;
 import com.taboola.android.tblnative.TBLRecommendationsResponse;
 import com.taboola.android.tblnative.TBLRequestData;
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 
 import java.util.ArrayList;
@@ -128,10 +129,10 @@ public class FeedFragment extends Fragment {
      */
     private void getTaboolaUnit() {
         // Define a page to control all Unit placements on this screen
-        TBLNativePage nativePage = Taboola.getNativePage("text", "https://blog.taboola.com");
+        TBLNativePage nativePage = Taboola.getNativePage(Const.SOURCE_TYPE, Const.PAGE_URL);
 
         // Define a publisher info with publisher name and api key
-        TBLPublisherInfo tblPublisherInfo = new TBLPublisherInfo("sdk-tester-demo").setApiKey("30dfcf6b094361ccc367bbbef5973bdaa24dbcd6");
+        TBLPublisherInfo tblPublisherInfo = new TBLPublisherInfo(Const.PUBLISHER_NAME).setApiKey(Const.API_KEY);
 
         // Define a fetch request (with desired number of content items in setRecCount())
         TBLRequestData requestData = new TBLRequestData().setRecCount(4);

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 import com.taboola.android.TBLClassicPage;
 import com.taboola.android.TBLClassicUnit;
@@ -32,7 +33,7 @@ public class RecyclerViewPreloadFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-          tblClassicUnit = createTaboolaWidget(inflater.getContext());
+        tblClassicUnit = createTaboolaWidget(inflater.getContext());
 
         return inflater.inflate(R.layout.fragment_rv_sample, container, false);
     }
@@ -40,14 +41,14 @@ public class RecyclerViewPreloadFragment extends Fragment {
     static TBLClassicUnit createTaboolaWidget(Context context) {
 
         TBLClassicPage tblClassicPage =
-                Taboola.getClassicPage( "https://blog.taboola.com", "article");
-        TBLClassicUnit tblClassicUnit = tblClassicPage.build(context,"Mid Article", "alternating-widget-without-video-1x4",
+                Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
+        TBLClassicUnit tblClassicUnit = tblClassicPage.build(context, Const.WIDGET_MIDDLE_PLACEMENT_NAME, Const.WIDGET_BELOW_MODE,
                 TBL_PLACEMENT_TYPE.PAGE_MIDDLE, new TBLClassicListener() {
-            @Override
-            public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
-                return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
-            }
-        });
+                    @Override
+                    public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
+                        return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
+                    }
+                });
         tblClassicUnit.fetchContent();
         return tblClassicUnit;
 

@@ -24,6 +24,7 @@
         <activity android:name="com.taboola.sdk4example.SDKClassicMenuActivity" />
         <activity android:name="com.taboola.sdk4example.sdk_native.SDKNativeMenuActivity" />
         <activity
+            android:exported="true"
             android:name="com.taboola.sdk4example.SplashScreen"
             android:theme="@style/SplashScreen">
             <intent-filter>
@@ -32,7 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.taboola.sdk4example.TaboolaSDKType" />
+        <activity android:name="com.taboola.sdk4example.TaboolaSDKIntegrationTypesActivity" />
     </application>
 
 </manifest>

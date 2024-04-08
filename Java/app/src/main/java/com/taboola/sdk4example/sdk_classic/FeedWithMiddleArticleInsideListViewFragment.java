@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 import com.taboola.android.TBLClassicPage;
 import com.taboola.android.TBLClassicUnit;
@@ -45,7 +46,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TBLClassicPage tblClassicPage =
-                Taboola.getClassicPage("https://blog.taboola.com", "article");
+                Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
 
         TBLClassicUnit tblClassicUnitMiddle = createTaboolaWidget(tblClassicPage);
         TBLClassicUnit tblClassicUnitBottom = createTaboolaFeed(view.getContext(), tblClassicPage);
@@ -54,22 +55,21 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
         listView.setAdapter(new ListViewAdapter(tblClassicUnitMiddle, tblClassicUnitBottom));
     }
 
-
-
     public TBLClassicUnit createTaboolaWidget(TBLClassicPage tblClassicPage) {
 
-        TBLClassicUnit tblClassicUnit = tblClassicPage.build(getContext(),"Mid Article", "alternating-widget-without-video-1x1",
+        TBLClassicUnit tblClassicUnit = tblClassicPage.build(getContext(), Const.WIDGET_MIDDLE_PLACEMENT_NAME, Const.WIDGET_MIDDLE_MODE,
                 TBL_PLACEMENT_TYPE.PAGE_MIDDLE, new TBLClassicListener() {
-            @Override
-            public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
-                return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
-            }
-            @Override
-            public void onAdReceiveSuccess() {
-                super.onAdReceiveSuccess();
-                Log.d(TAG,"onAdReceiveSuccess");
-            }
-        });
+                    @Override
+                    public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
+                        return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
+                    }
+
+                    @Override
+                    public void onAdReceiveSuccess() {
+                        super.onAdReceiveSuccess();
+                        Log.d(TAG, "onAdReceiveSuccess");
+                    }
+                });
         tblClassicUnit.fetchContent();
         return tblClassicUnit;
 
@@ -81,10 +81,11 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
             }
+
             @Override
             public void onAdReceiveSuccess() {
                 super.onAdReceiveSuccess();
-                Log.d(TAG,"onAdReceiveSuccess");
+                Log.d(TAG, "onAdReceiveSuccess");
             }
         });
         tblClassicUnit.fetchContent();
@@ -95,7 +96,7 @@ public class FeedWithMiddleArticleInsideListViewFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG,"onDestroy");
+        Log.d(TAG, "onDestroy");
     }
 
 

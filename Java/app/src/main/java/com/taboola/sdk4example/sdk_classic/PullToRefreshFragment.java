@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 import com.taboola.android.TBLClassicPage;
 import com.taboola.android.TBLClassicUnit;
@@ -24,13 +25,13 @@ public class PullToRefreshFragment extends Fragment implements SwipeRefreshLayou
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         View view = inflater.inflate(R.layout.fragment_pull_to_refresh, container, false);
+        View view = inflater.inflate(R.layout.fragment_pull_to_refresh, container, false);
         tblClassicUnit = view.findViewById(R.id.taboola_view);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        TBLClassicPage tblClassicPage=Taboola.getClassicPage("https://blog.taboola.com", "article");
-        tblClassicPage.addUnitToPage(tblClassicUnit, "Below Article", "alternating-widget-without-video-1x4", TBL_PLACEMENT_TYPE.FEED, new TBLClassicListener() {
+        TBLClassicPage tblClassicPage = Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
+        tblClassicPage.addUnitToPage(tblClassicUnit, Const.WIDGET_BELOW_PLACEMENT_NAME, Const.WIDGET_BELOW_MODE, TBL_PLACEMENT_TYPE.FEED, new TBLClassicListener() {
             @Override
             public void onUpdateContentCompleted() {
                 swipeRefreshLayout.setRefreshing(false);

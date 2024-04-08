@@ -25,6 +25,7 @@ import com.taboola.android.tblnative.TBLRecommendationRequestCallback;
 import com.taboola.android.tblnative.TBLRecommendationsResponse;
 import com.taboola.android.tblnative.TBLRequestData;
 import com.taboola.android.tblnative.TBLTextView;
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 
 public class WidgetFragment extends Fragment {
@@ -63,10 +64,10 @@ public class WidgetFragment extends Fragment {
      */
     private TBLNativeUnit getTaboolaUnit() {
         // Define a page to control all Unit placements on this screen
-        TBLNativePage nativePage = Taboola.getNativePage("text", "https://blog.taboola.com");
+        TBLNativePage nativePage = Taboola.getNativePage(Const.SOURCE_TYPE, Const.PAGE_URL);
 
         // Define a publisher info with publisher name and api key
-        TBLPublisherInfo tblPublisherInfo = new TBLPublisherInfo("sdk-tester-demo").setApiKey("30dfcf6b094361ccc367bbbef5973bdaa24dbcd6");
+        TBLPublisherInfo tblPublisherInfo = new TBLPublisherInfo(Const.PUBLISHER_NAME).setApiKey(Const.API_KEY);
 
         // Fetch content for Unit
         // Note that by passing setRecCount 4 we are asking Taboola to return 4 items

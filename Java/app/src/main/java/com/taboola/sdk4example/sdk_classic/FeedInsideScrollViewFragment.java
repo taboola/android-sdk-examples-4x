@@ -8,7 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
+
+import com.taboola.sdk4example.Const;
+import com.taboola.sdk4example.FlagsConst;
 import com.taboola.sdk4example.R;
 import com.taboola.sdk4example.tabs.BaseTaboolaFragment;
 import com.taboola.android.TBLClassicPage;
@@ -17,13 +21,14 @@ import com.taboola.android.Taboola;
 import com.taboola.android.annotations.TBL_PLACEMENT_TYPE;
 import com.taboola.android.listeners.TBLClassicListener;
 import com.taboola.android.utils.TBLSdkDetailsHelper;
+
 import java.util.HashMap;
 
 
 public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
     private TBLClassicUnit tblClassicUnit;
     private boolean isTaboolaFetched = false;
-    private static String TAG="FeedInsideScrollViewFragment";
+    private static String TAG = "FeedInsideScrollViewFragment";
 
 
     @Override
@@ -40,10 +45,10 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
         // In ScrollView the widget will need to be rendered only when page is selected, no need to fetch if user didn't see taboola view
         // this is the most common use for view pager and you should follow this example
         // unless you use RecyclerView, then you need to follow FeedInsideRecyclerViewFragment example
-        Log.d(TAG,"onPageSelected");
-           if (tblClassicUnit != null) {
-                fetchIfRequired();
-            }
+        Log.d(TAG, "onPageSelected");
+        if (tblClassicUnit != null) {
+            fetchIfRequired();
+        }
     }
 
     private void buildBelowArticleWidget(Context context) {
@@ -58,27 +63,27 @@ public class FeedInsideScrollViewFragment extends BaseTaboolaFragment {
 
         //used for enable horizontal scroll
         HashMap<String, String> extraProperties = new HashMap<>();
-        extraProperties.put("enableHorizontalScroll", "true");
-        extraProperties.put("useOnlineTemplate", "true");
+        extraProperties.put(FlagsConst.ENABLE_HORIZONTAL_SCROLL, "true");
+        extraProperties.put(FlagsConst.USE_ONLINE_TEMPLATE, "true");
 
         tblClassicUnit.getLayoutParams().height = TBLSdkDetailsHelper.getDisplayHeight(context);
 
-        TBLClassicPage tblClassicPage= Taboola.getClassicPage("https://blog.taboola.com", "article");
+        TBLClassicPage tblClassicPage = Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
 
         tblClassicUnit.setUnitExtraProperties(extraProperties);
         TBLClassicListener tblClassicListener;
-        tblClassicListener=new TBLClassicListener() {
+        tblClassicListener = new TBLClassicListener() {
             @Override
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
             }
         };
-        tblClassicPage.addUnitToPage(tblClassicUnit,"Feed without video","thumbs-feed-01", TBL_PLACEMENT_TYPE.FEED,tblClassicListener);
+        tblClassicPage.addUnitToPage(tblClassicUnit, Const.FEED_PLACEMENT_NAME, Const.FEED_MODE, TBL_PLACEMENT_TYPE.FEED, tblClassicListener);
         fetchIfRequired();
     }
 
     private void fetchIfRequired() {
-        Log.d(TAG,"onContentFetch");
+        Log.d(TAG, "onContentFetch");
         if (!isTaboolaFetched) {
             tblClassicUnit.fetchContent();
             isTaboolaFetched = true;

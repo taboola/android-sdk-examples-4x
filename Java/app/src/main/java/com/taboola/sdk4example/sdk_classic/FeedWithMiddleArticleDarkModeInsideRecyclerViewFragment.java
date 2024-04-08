@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 import com.taboola.android.TBLClassicPage;
 import com.taboola.android.TBLClassicUnit;
@@ -46,7 +47,7 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
                              Bundle savedInstanceState) {
 
         TBLClassicPage tblClassicPage =
-                Taboola.getClassicPage("https://blog.taboola.com", "article");
+                Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
 
         //set dark mode according to the device theme setting
         setDarkModeFlag();
@@ -69,19 +70,21 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
     }
 
     public TBLClassicUnit createTaboolaWidget(TBLClassicPage tblClassicPage) {
-        TBLClassicUnit tblClassicUnit = tblClassicPage.build(getContext(),"Mid Article", "alternating-widget-1x2", TBL_PLACEMENT_TYPE.PAGE_MIDDLE, new TBLClassicListener() {
+        TBLClassicUnit tblClassicUnit = tblClassicPage.build(getContext(), Const.WIDGET_MIDDLE_PLACEMENT_NAME, Const.WIDGET_MIDDLE_MODE_1X2, TBL_PLACEMENT_TYPE.PAGE_MIDDLE, new TBLClassicListener() {
             @Override
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData);
             }
+
             @Override
             public void onAdReceiveSuccess() {
                 super.onAdReceiveSuccess();
-                Log.d(TAG,"onAdReceiveSuccess");
+                Log.d(TAG, "onAdReceiveSuccess");
             }
+
             @Override
             public void onAdReceiveFail(String error) {
-                Log.d(TAG,"onAdReceiveFailed"+error);
+                Log.d(TAG, "onAdReceiveFailed" + error);
                 switch (error) {
                     case "NO_ITEMS":
                         Log.d(TAG, "Taboola server returned a valid response, but without any items");
@@ -99,10 +102,11 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
                         Log.d(TAG, "UNKNOWN_ERROR");
                 }
             }
+
             @Override
             public void onResize(int height) {
                 super.onResize(height);
-                Log.d(TAG, "taboolaViewResized"+height);
+                Log.d(TAG, "taboolaViewResized" + height);
             }
         });
 
@@ -121,7 +125,7 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
             @Override
             public void onAdReceiveSuccess() {
                 super.onAdReceiveSuccess();
-                Log.d(TAG,"onAdReceiveSuccess");
+                Log.d(TAG, "onAdReceiveSuccess");
             }
         });
 
@@ -135,7 +139,7 @@ public class FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment extends Fra
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG,"onDestroy");
+        Log.d(TAG, "onDestroy");
     }
 
     static class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
