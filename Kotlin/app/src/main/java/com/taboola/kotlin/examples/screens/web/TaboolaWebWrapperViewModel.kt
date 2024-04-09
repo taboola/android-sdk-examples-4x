@@ -2,6 +2,7 @@ package com.taboola.kotlin.examples.screens.web
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.webkit.WebView
 import androidx.lifecycle.ViewModel
 import com.taboola.android.Taboola
@@ -31,7 +32,7 @@ class TaboolaWebWrapperViewModel : ViewModel() {
                 isOrganic: Boolean,
                 customData: String?
             ): Boolean {
-                println("Taboola | onItemClick | isOrganic = $isOrganic")
+                Log.d(TAG,"Taboola | onItemClick | isOrganic = $isOrganic")
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
             }
         })
@@ -55,7 +56,7 @@ class TaboolaWebWrapperViewModel : ViewModel() {
                     .replace(MODE_PLACE_HOLDER, properties.mode)
             webView.loadDataWithBaseURL(BASE_URL, htmlContent, "text/html", "UTF-8", "")
         } catch (e: Exception) {
-            println("Failed to read asset file: ${e.localizedMessage}")
+            Log.d(TAG,"Failed to read asset file: ${e.localizedMessage}")
             e.printStackTrace()
         }
     }
@@ -78,8 +79,12 @@ class TaboolaWebWrapperViewModel : ViewModel() {
                     .replace(MODE_PLACE_HOLDER, properties.mode)
             webView.loadDataWithBaseURL(BASE_URL, htmlContent, "text/html", "UTF-8", "")
         } catch (e: Exception) {
-            println("Failed to read asset file: ${e.localizedMessage}")
+            Log.d(TAG,"Failed to read asset file: ${e.localizedMessage}")
             e.printStackTrace()
         }
+    }
+
+    companion object {
+        val TAG: String = TaboolaWebWrapperViewModel::class.java.simpleName
     }
 }

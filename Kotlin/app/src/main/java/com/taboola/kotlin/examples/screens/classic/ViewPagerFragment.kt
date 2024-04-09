@@ -17,7 +17,11 @@ private const val NUM_PAGES = 2
 class ViewPagerFragment : Fragment() {
     private lateinit var viewPager: ViewPager2
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val root = inflater.inflate(R.layout.fragment_classic_viewpager, container, false)
 
         // Instantiate a ViewPager2 and a PagerAdapter.
@@ -33,16 +37,22 @@ class ViewPagerFragment : Fragment() {
     /**
      * A simple pager adapter. Notice, for this Sample code it just shows 2 of the same page.
      */
-    private inner class ScreenSlidePagerAdapter(hostFragment: Fragment) : FragmentStateAdapter(hostFragment) {
+    private inner class ScreenSlidePagerAdapter(hostFragment: Fragment) :
+        FragmentStateAdapter(hostFragment) {
         override fun getItemCount(): Int = NUM_PAGES
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> ProgrammaticWidgetFragment()
-                1 -> FeedFragment()
+                WIDGET -> ProgrammaticWidgetFragment()
+                FEED -> FeedFragment()
                 else -> XmlWidgetFragment()
             }
         }
+    }
+
+    companion object {
+        const val WIDGET = 0
+        const val FEED = 1
     }
 
 }

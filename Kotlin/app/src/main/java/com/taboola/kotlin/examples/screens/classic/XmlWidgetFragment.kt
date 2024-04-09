@@ -1,6 +1,7 @@
 package com.taboola.kotlin.examples.screens.classic
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.taboola.android.annotations.TBL_PLACEMENT_TYPE
 import com.taboola.android.listeners.TBLClassicListener
 import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.R
+import com.taboola.kotlin.examples.screens.native.FeedFragment
 
 class XmlWidgetFragment : Fragment() {
 
@@ -29,12 +31,12 @@ class XmlWidgetFragment : Fragment() {
         taboolaPage.addUnitToPage(classicUnit, properties.placementName, properties.mode, TBL_PLACEMENT_TYPE.PAGE_BOTTOM, object: TBLClassicListener(){
             override fun onAdReceiveSuccess() {
                 super.onAdReceiveSuccess()
-                println("Taboola | onAdReceiveSuccess")
+                Log.d(TAG,"Taboola | onAdReceiveSuccess")
             }
 
             override fun onAdReceiveFail(error: String?) {
                 super.onAdReceiveFail(error)
-                println("Taboola | onAdReceiveFail: $error")
+                Log.d(TAG,"Taboola | onAdReceiveFail: $error")
             }
         })
 
@@ -42,6 +44,10 @@ class XmlWidgetFragment : Fragment() {
         classicUnit.fetchContent()
 
         return root
+    }
+
+    companion object {
+        val TAG: String = XmlWidgetFragment::class.java.simpleName
     }
 }
 

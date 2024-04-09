@@ -2,12 +2,12 @@ package com.taboola.kotlin.examples.screens.web
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
-import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
 import com.taboola.android.Taboola
 import com.taboola.android.listeners.TBLWebListener
 import com.taboola.android.tblweb.TBLWebUnit
@@ -45,7 +45,7 @@ class WebContinuousScroll : Fragment() {
 
         return Taboola.getWebPage().build(webView, object: TBLWebListener(){
             override fun onItemClick(placementName: String?, itemId: String?, clickUrl: String?, isOrganic: Boolean, customData: String?): Boolean {
-                println("Taboola | onItemClick | isOrganic = $isOrganic")
+                Log.d(TAG,"Taboola | onItemClick | isOrganic = $isOrganic")
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
             }
         })
@@ -63,8 +63,12 @@ class WebContinuousScroll : Fragment() {
             htmlContent = htmlContent.replace("<MODE>", properties.mode)
             webView.loadDataWithBaseURL(BASE_URL, htmlContent, "text/html", "UTF-8", "")
         } catch (e: Exception) {
-            println("Failed to read asset file: ${e.localizedMessage}")
+            Log.d(TAG,"Failed to read asset file: ${e.localizedMessage}")
             e.printStackTrace()
         }
+    }
+
+    companion object {
+        val TAG: String = WebContinuousScroll::class.java.simpleName
     }
 }

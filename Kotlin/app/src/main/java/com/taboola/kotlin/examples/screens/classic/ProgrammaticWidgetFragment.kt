@@ -1,6 +1,7 @@
 package com.taboola.kotlin.examples.screens.classic
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,16 +45,20 @@ class ProgrammaticWidgetFragment : Fragment() {
         val classicUnit: TBLClassicUnit = classicPage.build(context, properties.placementName, properties.mode, TBL_PLACEMENT_TYPE.PAGE_BOTTOM, object: TBLClassicListener(){
             override fun onAdReceiveSuccess() {
                 super.onAdReceiveSuccess()
-                println("Taboola | onAdReceiveSuccess")
+                Log.d(TAG,"Taboola | onAdReceiveSuccess")
             }
 
             override fun onAdReceiveFail(error: String?) {
                 super.onAdReceiveFail(error)
-                println("Taboola | onAdReceiveFail: $error")
+                Log.d(TAG,"Taboola | onAdReceiveFail: $error")
             }
         })
 
         return classicUnit
+    }
+
+    companion object {
+        val TAG: String = ProgrammaticWidgetFragment::class.java.simpleName
     }
 }
 

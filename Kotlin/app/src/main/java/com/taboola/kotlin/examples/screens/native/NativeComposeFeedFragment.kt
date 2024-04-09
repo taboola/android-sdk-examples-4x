@@ -43,7 +43,7 @@ class NativeComposeFeedFragment : Fragment() {
                     }
                 }
             }
-            listState.OnBottomReached(buffer = 2) {
+            listState.OnBottomReached(positionsNumberBuffer = 2) {
                 taboolaNativeFeedWrapperViewModel.fetchRecommendation(requireContext());
             }
         }
@@ -67,18 +67,20 @@ class NativeComposeFeedFragment : Fragment() {
 
     @Composable
     fun LazyListState.OnBottomReached(
-        buffer : Int = 0,
+        positionsNumberBuffer: Int = 0,
         loadMore: () -> Unit
     ) {
 
-        require(buffer >= 0) { "buffer cannot be negative, but was $buffer" }
+        require(positionsNumberBuffer >= 0) { "buffer cannot be negative, but was $positionsNumberBuffer" }
 
         val shouldLoadMore = remember {
             derivedStateOf {
                 val lastVisibleItem = layoutInfo.visibleItemsInfo.lastOrNull()
                     ?: return@derivedStateOf true
-
-                lastVisibleItem.index >= layoutInfo.totalItemsCount - 1 - buffer
+                // checking if we reached the position which should invoke load more items
+                // if the positionsNumberBuffer is 0 it means when reaching the last position load more should be called
+                // if you want to call should load more before reaching the last position provide value to positionsNumberBuffer
+                lastVisibleItem.index >= layoutInfo.totalItemsCount - 1 - positionsNumberBuffer
             }
         }
 

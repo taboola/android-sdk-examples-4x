@@ -1,6 +1,7 @@
 package com.taboola.kotlin.examples.screens.native
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,14 +70,14 @@ class FeedFragment : Fragment() {
     private fun fetchRecommendations() {
         mNativeUnit?.fetchRecommendations(object : TBLRecommendationRequestCallback {
             override fun onRecommendationsFetched(recommendationsResponse: TBLRecommendationsResponse?) {
-                println("Taboola | fetchInitialContent | onRecommendationsFetched")
+                Log.d(TAG, "Taboola | fetchInitialContent | onRecommendationsFetched")
 
                 // Send content to RecyclerView Adapter
                 addRecommendationToFeed(recommendationsResponse)
             }
 
             override fun onRecommendationsFailed(throwable: Throwable?) {
-                println("Taboola | onRecommendationsFailed: ${throwable?.message}")
+                Log.d(TAG, "Taboola | onRecommendationsFailed: ${throwable?.message}")
             }
         })
     }
@@ -92,9 +93,9 @@ class FeedFragment : Fragment() {
             mData.addAll(placement.items)
 
             // Update data in RecyclerView adapter
-            val itemCount = mRecyclerView?.adapter?.itemCount
-            if (itemCount != null) {
-                mRecyclerView?.adapter?.notifyItemRangeInserted(itemCount, placement.items.size)
+            mRecyclerView?.adapter?.let { adapter ->
+                val itemCount = adapter.itemCount
+                adapter.notifyItemRangeInserted(itemCount, placement.items.size)
             }
         }
     }
@@ -109,24 +110,39 @@ class FeedFragment : Fragment() {
             Taboola.getNativePage(properties.sourceType, properties.pageUrl)
 
         // Define a publisher info with publisher name and api key
-        val tblPublisherInfo = TBLPublisherInfo(PublisherInfo.PUBLISHER).setApiKey(PublisherInfo.API_KEY)
+        val tblPublisherInfo =
+            TBLPublisherInfo(PublisherInfo.PUBLISHER).setApiKey(PublisherInfo.API_KEY)
 
         // Define a fetch request (with desired number of content items in setRecCount())
         val requestData = TBLRequestData().setRecCount(10)
 
         // Define a single Unit to display
         mNativeUnit =
-            nativePage.build(properties.placementName, tblPublisherInfo, requestData, object : TBLNativeListener() {
-                override fun onItemClick(
-                    placementName: String?,
-                    itemId: String?,
-                    clickUrl: String?,
-                    isOrganic: Boolean,
-                    customData: String?
-                ): Boolean {
-                    println("Taboola | onItemClick | isOrganic = $isOrganic")
-                    return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
-                }
-            })
+            nativePage.build(
+                properties.placementName,
+                tblPublisherInfo,
+                requestData,
+                object : TBLNativeListener() {
+                    override fun onItemClick(
+                        placementName: String?,
+                        itemId: String?,
+                        clickUrl: String?,
+                        isOrganic: Boolean,
+                        customData: String?
+                    ): Boolean {
+                        Log.d(TAG, "Taboola | onItemClick | isOrganic = $isOrganic")
+                        return super.onItemClick(
+                            placementName,
+                            itemId,
+                            clickUrl,
+                            isOrganic,
+                            customData
+                        )
+                    }
+                })
+    }
+
+    companion object {
+        val TAG: String = FeedFragment::class.java.simpleName
     }
 }

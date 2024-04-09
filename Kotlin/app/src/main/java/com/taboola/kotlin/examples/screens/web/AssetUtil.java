@@ -6,7 +6,6 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Logger;
 
 public class AssetUtil {
     private static final String TAG = AssetUtil.class.getSimpleName();

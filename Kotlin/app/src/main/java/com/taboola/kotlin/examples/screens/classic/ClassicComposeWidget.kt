@@ -2,6 +2,7 @@ package com.taboola.kotlin.examples.screens.classic
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,33 +18,6 @@ import com.taboola.kotlin.examples.PlacementInfo
 
 class ClassicComposeWidget : Fragment() {
 
-    /**
-     * Define a Page that represents this screen, get a Unit from it, add it to screen and fetch its content
-     * Notice: A Unit of unlimited items, called "Feed" in Taboola, can be set in TBL_PLACEMENT_TYPE.PAGE_BOTTOM only.
-     */
-    fun createTaboolaWidget(context: Context?): TBLClassicUnit {
-
-        //Create TBLClassicPage
-        val tblClassicPage = Taboola.getClassicPage("https://blog.taboola.com", "article")
-
-        //Choose widget properties (placementName, Mode, pageUrl..etc)
-        val properties: PlacementInfo.WidgetProperties = PlacementInfo.widgetProperties()
-
-        //Define a single Unit to display
-        val tblClassicUnit: TBLClassicUnit = tblClassicPage.build(context, properties.placementName , properties.mode, TBL_PLACEMENT_TYPE.PAGE_BOTTOM, object: TBLClassicListener(){
-            override fun onAdReceiveSuccess() {
-                super.onAdReceiveSuccess()
-                println("Taboola | onAdReceiveSuccess")
-            }
-
-            override fun onAdReceiveFail(error: String?) {
-                super.onAdReceiveFail(error)
-                println("Taboola | onAdReceiveFail: $error")
-            }
-        })
-        return tblClassicUnit
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,9 +29,45 @@ class ClassicComposeWidget : Fragment() {
         tblClassicUnit.fetchContent()
 
         setContent {
-                //Add TBLClassicUnit to the UI (to layout)
-                classicIntegration(tblClassicUnit =  tblClassicUnit)
+            //Add TBLClassicUnit to the UI (to layout)
+            classicIntegration(tblClassicUnit = tblClassicUnit)
         }
+    }
+
+    /**
+     * Define a Page that represents this screen, get a Unit from it, add it to screen and fetch its content
+     * Notice: A Unit of unlimited items, called "Feed" in Taboola, can be set in TBL_PLACEMENT_TYPE.PAGE_BOTTOM only.
+     */
+    fun createTaboolaWidget(context: Context?): TBLClassicUnit {
+
+        //Choose widget properties (placementName, Mode, pageUrl..etc)
+        val properties: PlacementInfo.WidgetProperties = PlacementInfo.widgetProperties()
+
+        //Create TBLClassicPage
+        val tblClassicPage = Taboola.getClassicPage(properties.pageUrl, properties.pageType)
+
+        //Define a single Unit to display
+        val tblClassicUnit: TBLClassicUnit = tblClassicPage.build(
+            context,
+            properties.placementName,
+            properties.mode,
+            TBL_PLACEMENT_TYPE.PAGE_BOTTOM,
+            object : TBLClassicListener() {
+                override fun onAdReceiveSuccess() {
+                    super.onAdReceiveSuccess()
+                    Log.d(TAG,"Taboola | onAdReceiveSuccess")
+                }
+
+                override fun onAdReceiveFail(error: String?) {
+                    super.onAdReceiveFail(error)
+                    Log.d(TAG,"Taboola | onAdReceiveFail: $error")
+                }
+            })
+        return tblClassicUnit
+    }
+
+    companion object {
+        val TAG: String = ClassicComposeWidget::class.java.simpleName
     }
 }
 
@@ -66,7 +76,7 @@ class ClassicComposeWidget : Fragment() {
  * This method will be used in each case in the app when we need to Add TBLClassicUnit (Widget/Feed)
  */
 @Composable
-fun classicIntegration(tblClassicUnit: TBLClassicUnit){
+fun classicIntegration(tblClassicUnit: TBLClassicUnit) {
     AndroidView(factory = {
         tblClassicUnit
     })

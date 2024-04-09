@@ -1,5 +1,6 @@
 package com.taboola.kotlin.examples.screens.native
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -17,20 +18,24 @@ class NativeFeedAdapter(data: List<Any>) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val linearLayout = inflater.inflate(R.layout.feed_taboola_item, parent, false) as LinearLayout
+        val linearLayout =
+            inflater.inflate(R.layout.feed_taboola_item, parent, false) as LinearLayout
         return TaboolaItemViewHolder(linearLayout)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (mData == null) {
-            println("Data is null.")
+            Log.d(TAG, "Data is null.")
             return
         }
 
         val item = mData!![position] as TBLRecommendationItem
         val adContainer = (holder as TaboolaItemViewHolder).mAdContainer
         val context = adContainer.context
-        val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         val thumbnailView = item.getThumbnailView(context)
         val titleView = item.getTitleView(context)
         val brandingView = item.getBrandingView(context)
@@ -45,13 +50,9 @@ class NativeFeedAdapter(data: List<Any>) : RecyclerView.Adapter<ViewHolder>() {
         }
     }
 
-
     override fun getItemCount(): Int {
-        if (mData == null) {
-            return 0
-        }
-
-        return mData!!.size
+        val data = mData ?: return 0
+        return data.size
     }
 
     override fun onViewRecycled(holder: ViewHolder) {
@@ -62,4 +63,8 @@ class NativeFeedAdapter(data: List<Any>) : RecyclerView.Adapter<ViewHolder>() {
     }
 
     internal class TaboolaItemViewHolder(var mAdContainer: LinearLayout) : ViewHolder(mAdContainer)
+
+    companion object {
+        val TAG: String = NativeFeedAdapter::class.java.simpleName
+    }
 }

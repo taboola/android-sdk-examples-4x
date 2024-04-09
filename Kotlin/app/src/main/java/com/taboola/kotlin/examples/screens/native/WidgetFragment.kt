@@ -1,6 +1,7 @@
 package com.taboola.kotlin.examples.screens.native
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.taboola.kotlin.examples.PublisherInfo
 import com.taboola.kotlin.examples.R
 
 class WidgetFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,14 +34,14 @@ class WidgetFragment : Fragment() {
         // Fetch content for Unit
         nativeUnit.fetchRecommendations(object : TBLRecommendationRequestCallback {
             override fun onRecommendationsFetched(recommendationsResponse: TBLRecommendationsResponse?) {
-                println("Taboola | onRecommendationsFetched")
+                Log.d(TAG, "Taboola | onRecommendationsFetched")
 
                 // Add Unit content to layout
                 displayContent(contentLayout, recommendationsResponse, placementProperties)
             }
 
             override fun onRecommendationsFailed(throwable: Throwable?) {
-                println("Taboola | onRecommendationsFailed: ${throwable?.message}")
+                Log.d(TAG, "Taboola | onRecommendationsFailed: ${throwable?.message}")
             }
         })
 
@@ -56,7 +58,7 @@ class WidgetFragment : Fragment() {
         placementProperties: PlacementInfo.WidgetProperties
     ) {
         if (recommendationsResponse == null) {
-            println("Error: No recommendations returned from server.")
+            Log.d(TAG, "Error: No recommendations returned from server.")
             return
         }
 
@@ -66,7 +68,7 @@ class WidgetFragment : Fragment() {
             recommendationsResponse.placementsMap[placementProperties.placementName]?.items?.get(0)
 
         if (item == null) {
-            println("Error: No such item returned from server.")
+            Log.d(TAG, "Error: No such item returned from server.")
             return
         }
 
@@ -79,7 +81,7 @@ class WidgetFragment : Fragment() {
             contentLayout.addView(thumbnailView)
             contentLayout.addView(titleView)
         } catch (exception: IllegalStateException) {
-            println("Fragment Context no longer valid, not rendering Taboola UI.")
+            Log.d(TAG, "Fragment Context no longer valid, not rendering Taboola UI.")
         }
     }
 
@@ -93,7 +95,8 @@ class WidgetFragment : Fragment() {
             Taboola.getNativePage(properties.sourceType, properties.pageUrl)
 
         // Define a publisher info with publisher name and api key
-        val tblPublisherInfo = TBLPublisherInfo(PublisherInfo.PUBLISHER).setApiKey(PublisherInfo.API_KEY)
+        val tblPublisherInfo =
+            TBLPublisherInfo(PublisherInfo.PUBLISHER).setApiKey(PublisherInfo.API_KEY)
 
         // Define a fetch request (with desired number of content items in setRecCount())
         val requestData = TBLRequestData().setRecCount(1)
@@ -111,11 +114,15 @@ class WidgetFragment : Fragment() {
                     isOrganic: Boolean,
                     customData: String?
                 ): Boolean {
-                    println("Taboola | onItemClick | isOrganic = $isOrganic")
+                    Log.d(TAG, "Taboola | onItemClick | isOrganic = $isOrganic")
                     return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
                 }
             })
 
         return nativeUnit
+    }
+
+    companion object {
+        val TAG:String = WidgetFragment::class.java.simpleName
     }
 }

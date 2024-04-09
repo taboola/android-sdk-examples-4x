@@ -17,7 +17,7 @@ import com.taboola.kotlin.examples.PlacementInfo
 class WebComposeFeedFragment : Fragment() {
     //Create taboolaWebWrapperViewModel instance
     //Inside the WebView apply scope we will add Taboola code to use web integration
-    val taboolaWebWrapperViewModel = TaboolaWebWrapperViewModel()
+    private val taboolaWebWrapperViewModel = TaboolaWebWrapperViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,15 +41,16 @@ fun CustomerWebView(
 ) {
     //This is the publisher code which displays a WebView on the screen
     AndroidView(factory = { context ->
-        WebView(context).apply {
+        WebView(context).apply outer@{
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
 
-
-            taboolaWebWrapperViewModel.setupWebViewForTaboola(this)
-            taboolaWebWrapperViewModel.loadWebViewContentFeed(this, placementInfo, context)
+            taboolaWebWrapperViewModel.apply {
+                setupWebViewForTaboola(this@outer)
+                loadWebViewContentFeed(this@outer, placementInfo, context)
+            }
         }
     })
 }

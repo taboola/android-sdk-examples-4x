@@ -1,6 +1,7 @@
 package com.taboola.kotlin.examples.screens.native
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,7 +9,14 @@ import androidx.lifecycle.ViewModel
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
 import com.taboola.android.listeners.TBLNativeListener
-import com.taboola.android.tblnative.*
+import com.taboola.android.tblnative.TBLImageView
+import com.taboola.android.tblnative.TBLNativePage
+import com.taboola.android.tblnative.TBLNativeUnit
+import com.taboola.android.tblnative.TBLRecommendationItem
+import com.taboola.android.tblnative.TBLRecommendationRequestCallback
+import com.taboola.android.tblnative.TBLRecommendationsResponse
+import com.taboola.android.tblnative.TBLRequestData
+import com.taboola.android.tblnative.TBLTextView
 import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.PublisherInfo
 
@@ -53,7 +61,7 @@ class TaboolaNativeWidgetWrapperViewModel : ViewModel() {
                     isOrganic: Boolean,
                     customData: String?
                 ): Boolean {
-                    println("Taboola | onItemClick | isOrganic = $isOrganic")
+                    Log.d(TAG, "Taboola | onItemClick | isOrganic = $isOrganic")
                     return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
                 }
             })
@@ -65,11 +73,11 @@ class TaboolaNativeWidgetWrapperViewModel : ViewModel() {
 
         tblNativeUnit.fetchRecommendations(object : TBLRecommendationRequestCallback {
             override fun onRecommendationsFetched(recommendationsResponse: TBLRecommendationsResponse?) {
-                println("Taboola | onRecommendationsFetched")
+                Log.d(TAG, "Taboola | onRecommendationsFetched")
 
                 // Add Unit content to layout
                 if (recommendationsResponse == null) {
-                    println("Error: No recommendations returned from server.")
+                    Log.d(TAG,"Error: No recommendations returned from server.")
                     return
                 }
 
@@ -79,7 +87,7 @@ class TaboolaNativeWidgetWrapperViewModel : ViewModel() {
                     )
 
                 if (item == null) {
-                    println("Error: No such item returned from server.")
+                    Log.d(TAG, "Error: No such item returned from server.")
                     return
                 }
 
@@ -91,13 +99,17 @@ class TaboolaNativeWidgetWrapperViewModel : ViewModel() {
                     image = thumbnailView
                     title = titleView
                 } catch (exception: IllegalStateException) {
-                    println("Fragment Context no longer valid, not rendering Taboola UI.")
+                    Log.d(TAG, "Fragment Context no longer valid, not rendering Taboola UI.")
                 }
             }
 
             override fun onRecommendationsFailed(throwable: Throwable?) {
-                println("Taboola | onRecommendationsFailed: ${throwable?.message}")
+                Log.d(TAG, "Taboola | onRecommendationsFailed: ${throwable?.message}")
             }
         })
+    }
+
+    companion object {
+        val TAG: String = TaboolaNativeWidgetWrapperViewModel::class.java.simpleName
     }
 }

@@ -1,6 +1,7 @@
 package com.taboola.kotlin.examples.screens.classic
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,10 +29,8 @@ class ClassicComposeFeed : Fragment() {
         setContent {
             // Create and return a Taboola Unit
             val tblClassicUnit = getTaboolaUnit(PlacementInfo.classicFeedProperties())
-            if (tblClassicUnit != null) {
-                ListListScopeSample(tblClassicUnit = tblClassicUnit)
-                tblClassicUnit.fetchContent()
-            }
+            ListScopeSample(tblClassicUnit = tblClassicUnit)
+            tblClassicUnit.fetchContent()
         }
     }
 
@@ -39,38 +38,48 @@ class ClassicComposeFeed : Fragment() {
      * Define a Page that represents this screen, get a Unit from it, add it to screen and fetch its content
      * Notice: A Unit of limited items, called "Widget" in Taboola, can be set in TBL_PLACEMENT_TYPE.PAGE_BOTTOM or TBL_PLACEMENT_TYPE.PAGE_MIDDLE
      */
-    private fun getTaboolaUnit(properties: PlacementInfo.ClassicFeedProperties) : TBLClassicUnit {
+    private fun getTaboolaUnit(properties: PlacementInfo.ClassicFeedProperties): TBLClassicUnit {
         // Define a page to control all Unit placements on this screen
-        val classicPage: TBLClassicPage = Taboola.getClassicPage(properties.pageUrl, properties.pageType)
+        val classicPage: TBLClassicPage =
+            Taboola.getClassicPage(properties.pageUrl, properties.pageType)
 
         // Define a single Unit to display
-        val classicUnit: TBLClassicUnit = classicPage.build(context, properties.placementName, properties.mode, TBL_PLACEMENT_TYPE.PAGE_BOTTOM, object: TBLClassicListener(){
-            override fun onAdReceiveSuccess() {
-                super.onAdReceiveSuccess()
-                println("Taboola | onAdReceiveSuccess")
-            }
+        val classicUnit: TBLClassicUnit = classicPage.build(
+            context,
+            properties.placementName,
+            properties.mode,
+            TBL_PLACEMENT_TYPE.PAGE_BOTTOM,
+            object : TBLClassicListener() {
+                override fun onAdReceiveSuccess() {
+                    super.onAdReceiveSuccess()
+                    Log.d(TAG, "Taboola | onAdReceiveSuccess")
+                }
 
-            override fun onAdReceiveFail(error: String?) {
-                super.onAdReceiveFail(error)
-                println("Taboola | onAdReceiveFail: $error")
-            }
-        })
+                override fun onAdReceiveFail(error: String?) {
+                    super.onAdReceiveFail(error)
+                    Log.d(TAG, "Taboola | onAdReceiveFail: $error")
+                }
+            })
         return classicUnit
+    }
+
+    companion object {
+        val TAG: String = ClassicComposeFeed::class.java.simpleName
     }
 }
 
 
 @Composable
-fun ListListScopeSample(tblClassicUnit: TBLClassicUnit){
+fun ListScopeSample(tblClassicUnit: TBLClassicUnit) {
     LazyColumn {
 
         // Add item
         item() {
-            Text(text = stringResource(id = R.string.lorem_ipsum_long) )
+            Text(text = stringResource(id = R.string.lorem_ipsum_long))
         }
 
         // Add another single item (Taboola Feed)
-        item(){
+        item() {
             classicIntegration(tblClassicUnit = tblClassicUnit)
         }
     }

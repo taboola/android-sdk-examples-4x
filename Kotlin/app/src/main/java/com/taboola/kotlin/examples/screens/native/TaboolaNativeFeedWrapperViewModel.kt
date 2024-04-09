@@ -1,12 +1,19 @@
 package com.taboola.kotlin.examples.screens.native
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
 import com.taboola.android.listeners.TBLNativeListener
-import com.taboola.android.tblnative.*
+import com.taboola.android.tblnative.TBLImageView
+import com.taboola.android.tblnative.TBLNativePage
+import com.taboola.android.tblnative.TBLNativeUnit
+import com.taboola.android.tblnative.TBLRecommendationRequestCallback
+import com.taboola.android.tblnative.TBLRecommendationsResponse
+import com.taboola.android.tblnative.TBLRequestData
+import com.taboola.android.tblnative.TBLTextView
 import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.PublisherInfo
 
@@ -49,7 +56,7 @@ class TaboolaNativeFeedWrapperViewModel : ViewModel() {
                     isOrganic: Boolean,
                     customData: String?
                 ): Boolean {
-                    println("Taboola | onItemClick | isOrganic = $isOrganic")
+                    Log.d(TAG, "Taboola | onItemClick | isOrganic = $isOrganic")
                     return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
                 }
             })
@@ -85,7 +92,7 @@ class TaboolaNativeFeedWrapperViewModel : ViewModel() {
                         }
 
                     } catch (exception: IllegalStateException) {
-                        println("Fragment Context no longer valid, not rendering Taboola UI.")
+                        Log.d(TAG, "Fragment Context no longer valid, not rendering Taboola UI.")
                     }
                 }
 
@@ -93,9 +100,13 @@ class TaboolaNativeFeedWrapperViewModel : ViewModel() {
             }
 
             override fun onRecommendationsFailed(throwable: Throwable?) {
-                println("Taboola | onRecommendationsFailed: ${throwable?.message}")
+                Log.d(TAG, "Taboola | onRecommendationsFailed: ${throwable?.message}")
             }
         })
+    }
+
+    companion object {
+        val TAG: String = TaboolaNativeFeedWrapperViewModel::class.java.simpleName
     }
 }
 

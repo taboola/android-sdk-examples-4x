@@ -2,6 +2,7 @@ package com.taboola.kotlin.examples.screens.web
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +16,12 @@ import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.R
 
 class FeedFragment : Fragment() {
-    private val BASE_URL = "https://example.com"
-    private val HTML_CONTENT_FILE_TITLE = "sampleContentPage.html"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val root = inflater.inflate(R.layout.fragment_web, container, false)
         val webView: WebView = root.findViewById(R.id.customer_webview)
 
@@ -38,13 +41,19 @@ class FeedFragment : Fragment() {
      * Notice: Taboola requires JavaScript to be enabled in the WebView to work.
      */
     @SuppressLint("SetJavaScriptEnabled")
-    private fun setupWebViewForTaboola(webView: WebView) : TBLWebUnit {
+    private fun setupWebViewForTaboola(webView: WebView): TBLWebUnit {
         //If not already set in your WebView
         webView.settings.javaScriptEnabled = true
 
-        return Taboola.getWebPage().build(webView, object: TBLWebListener(){
-            override fun onItemClick(placementName: String?, itemId: String?, clickUrl: String?, isOrganic: Boolean, customData: String?): Boolean {
-                println("Taboola | onItemClick | isOrganic = $isOrganic")
+        return Taboola.getWebPage().build(webView, object : TBLWebListener() {
+            override fun onItemClick(
+                placementName: String?,
+                itemId: String?,
+                clickUrl: String?,
+                isOrganic: Boolean,
+                customData: String?
+            ): Boolean {
+                Log.d(TAG, "Taboola | onItemClick | isOrganic = $isOrganic")
                 return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
             }
         })
@@ -62,8 +71,15 @@ class FeedFragment : Fragment() {
             htmlContent = htmlContent.replace("<MODE>", properties.mode)
             webView.loadDataWithBaseURL(BASE_URL, htmlContent, "text/html", "UTF-8", "")
         } catch (e: Exception) {
-            println("Failed to read asset file: ${e.localizedMessage}")
+            Log.d(TAG, "Failed to read asset file: ${e.localizedMessage}")
             e.printStackTrace()
         }
+    }
+
+    companion object {
+        val TAG: String = FeedFragment::class.java.simpleName
+        private const val BASE_URL = "https://example.com"
+        private const val HTML_CONTENT_FILE_TITLE = "sampleContentPage.html"
+
     }
 }
