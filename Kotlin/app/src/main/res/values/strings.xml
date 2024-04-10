@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">TaboolaSdkExamples</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--Screens-->
+    <string name="classic_feed_without_scrollswitch">Classic Feed without scrollSwitch</string>
+    <string name="classic_widget">Classic Widget</string>
+    <string name="nav_classic_compose_feed">Classic Widget - Compose</string>
+    <string name="nav_classic_compose_feed_lazycolumn">Classic Feed - Compose LazyColumn</string>
+    <string name="classic_feed">Classic Feed</string>
+    <string name="classic_widget_xml">Classic Xml Widget</string>
+    <string name="classic_viewpager">Classic View Pager</string>
+    <string name="web_widget">Web Widget</string>
+    <string name="web_compose_widget">Web Widget - Compose</string>
+    <string name="web_compose_feed">Web Feed - Compose</string>
+    <string name="web_feed">Web Feed</string>
+    <string name="web_continuous_scroll">Web Continuous Scroll</string>
+    <string name="native_widget">Native Widget</string>
+    <string name="native_feed">Native Feed</string>
+    <string name="native_widget_compose">Native widget Compose</string>
+    <string name="native_feed_compose">Native feed Compose</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi faucibus, est in tempor aliquet, ligula nibh semper erat, sed consectetur ante purus sit amet nisl.</string>
+    <string name="lorem_ipsum_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi faucibus, est in tempor aliquet, ligula nibh semper erat, sed consectetur ante purus sit amet nisl. Aliquam felis elit, mollis id auctor vitae, iaculis vitae mi. Fusce sed arcu lectus. Morbi ligula ipsum, egestas et efficitur quis, interdum nec felis. Quisque tempus pulvinar nisl pulvinar lacinia. Curabitur tortor eros, aliquet at ante at, commodo facilisis dui. Nulla a erat risus. Nunc sollicitudin, justo id porttitor vehicula, libero urna condimentum velit, quis efficitur ipsum arcu sed nisl. Praesent hendrerit eros eget lorem tempus venenatis. Proin ut erat purus. Nullam ut nunc id.</string>
+    <string name="title_activity_classic_integration_compose_feed">ClassicIntegrationComposeFeed
+    </string>
+    <string name="title_activity_compose_classic_recycler_view">ComposeClassicRecyclerView</string>
+
+</resources>

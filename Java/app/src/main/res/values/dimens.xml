@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--feeds-->
+    <dimen name="height_feed_article_short">112dp</dimen>
+    <dimen name="width_feed_article_short_thumbnail">106dp</dimen>
+    <dimen name="height_feed_article_short_thumbnail">83dp</dimen>
+
+    <dimen name="height_feed_article_long_thumbnail">186dp</dimen>
+    <dimen name="height_taboola_feed_article_long_thumbnail">289dp</dimen>
+    <dimen name="summary_page_thumbnail_height">260dp</dimen>
+</resources>

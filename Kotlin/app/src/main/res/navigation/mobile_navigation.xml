@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_web_widget">
+
+    <fragment
+        android:id="@+id/nav_classic_widget"
+        android:name="com.taboola.kotlin.examples.screens.classic.ProgrammaticWidgetFragment"
+        android:label="@string/classic_widget"
+        tools:layout="@layout/fragment_classic_programatic" />
+
+    <fragment
+        android:id="@+id/nav_classic_feed"
+        android:name="com.taboola.kotlin.examples.screens.classic.FeedFragment"
+        android:label="@string/classic_feed"
+        tools:layout="@layout/fragment_classic_programatic" />
+
+    <fragment
+        android:id="@+id/nav_classic_widget_xml"
+        android:name="com.taboola.kotlin.examples.screens.classic.XmlWidgetFragment"
+        android:label="@string/classic_widget_xml"
+        tools:layout="@layout/fragment_classic_xml" />
+
+    <fragment
+        android:id="@+id/nav_classic_viewpager"
+        android:name="com.taboola.kotlin.examples.screens.classic.ViewPagerFragment"
+        android:label="@string/classic_viewpager"
+        tools:layout="@layout/fragment_classic_viewpager" />
+
+    <fragment
+        android:id="@+id/nav_classic_compose_feed"
+        android:name="com.taboola.kotlin.examples.screens.classic.ClassicComposeWidget"
+        android:label="@string/nav_classic_compose_feed"
+         />
+
+    <fragment
+        android:id="@+id/nav_classic_compose_feed_recyclerView"
+        android:name="com.taboola.kotlin.examples.screens.classic.ClassicComposeFeed"
+        android:label="@string/nav_classic_compose_feed_lazycolumn"
+        />
+
+
+    <fragment
+        android:id="@+id/nav_web_widget"
+        android:name="com.taboola.kotlin.examples.screens.web.WidgetFragment"
+        android:label="@string/web_widget"
+        tools:layout="@layout/fragment_web" />
+
+    <fragment
+        android:id="@+id/nav_web_feed"
+        android:name="com.taboola.kotlin.examples.screens.web.FeedFragment"
+        android:label="@string/web_feed"
+        tools:layout="@layout/fragment_web" />
+
+    <fragment
+        android:id="@+id/nav_web_compose_widget"
+        android:name="com.taboola.kotlin.examples.screens.web.WebComposeFragment"
+        android:label="@string/web_compose_widget"
+        />
+
+    <fragment
+        android:id="@+id/nav_web_compose_feed"
+        android:name="com.taboola.kotlin.examples.screens.web.WebComposeFeedFragment"
+        android:label="@string/web_compose_feed"
+        />
+
+    <fragment
+        android:id="@+id/nav_web_continuous_scroll"
+        android:name="com.taboola.kotlin.examples.screens.web.WebContinuousScroll"
+        android:label="@string/web_continuous_scroll"
+        />
+
+    <fragment
+        android:id="@+id/nav_native_widget"
+        android:name="com.taboola.kotlin.examples.screens.native.WidgetFragment"
+        android:label="@string/native_widget"
+        tools:layout="@layout/fragment_native" />
+
+    <fragment
+        android:id="@+id/nav_native_feed"
+        android:name="com.taboola.kotlin.examples.screens.native.FeedFragment"
+        android:label="@string/native_feed"
+        tools:layout="@layout/fragment_native_feed" />
+
+    <fragment
+        android:id="@+id/nav_native_widget_compose"
+        android:name="com.taboola.kotlin.examples.screens.native.NativeComposeWidgetFragment"
+        android:label="@string/native_widget_compose"
+        />
+
+    <fragment
+        android:id="@+id/nav_native_feed_compose"
+        android:name="com.taboola.kotlin.examples.screens.native.NativeComposeFeedFragment"
+        android:label="@string/native_feed_compose"
+        />
+</navigation>

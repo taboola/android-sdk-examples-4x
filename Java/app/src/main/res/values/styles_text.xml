@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CategoryTitleText">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">-2dp</item>
+    </style>
+
+    <style name="TitleText">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+    <style name="TitleText.Medium" parent="TitleText">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TitleText.Normal" parent="TitleText">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="TitleText.Small" parent="TitleText">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="SecondaryText">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+</resources>
