@@ -23,4 +23,9 @@ public class Const {
     public static final String FEED_PLACEMENT_NAME =  "Feed without video";
     public static final String FEED_MODE =  "thumbs-feed-01";
     public static final String DARK_MODE = "darkMode";
+
+    //Meta widget 1x1
+    public static final String META_WIDGET_PLACEMENT_NAME = "Below Article Thumbnails";
+    public static final String META_WIDGET_MODE = "meta-widget-1x1";
+
 }
