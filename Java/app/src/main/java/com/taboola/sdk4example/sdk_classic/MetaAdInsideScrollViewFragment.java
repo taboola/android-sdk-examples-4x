@@ -30,8 +30,8 @@ public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
     private NativeAdLayout adContainerTop;
 
     private static final String META_PUBLISHER_NAME = "sdk-tester-meta";
-    private static final String AUDIENCE_NETWORK_APP_ID = "1152037612531993";
-    private static final String AUDIENCE_NETWORK_PLACEMENT_ID = "1152037612531993_1152039099198511";
+    private static final String AUDIENCE_NETWORK_APP_ID = "1097593608162039";
+    private static final String AUDIENCE_NETWORK_PLACEMENT_ID = "1097593608162039_1097982098123190";
     private static final String AUDIENCE_NETWORK_APPLICATION_ID_KEY = "audienceNetworkApplicationId";
     private static final String AUDIENCE_NETWORK_PLACEMENT_ID_KEY = "audienceNetworkPlacementId";
     private static final String ENABLE_META_DEMAND_DEBUG_KEY = "enableMetaDemandDebug";
