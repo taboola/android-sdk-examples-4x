@@ -32,14 +32,24 @@
     <fragment
         android:id="@+id/nav_classic_compose_feed"
         android:name="com.taboola.kotlin.examples.screens.classic.ClassicComposeWidget"
-        android:label="@string/nav_classic_compose_feed"
-         />
+        android:label="@string/nav_classic_compose_feed" />
 
     <fragment
         android:id="@+id/nav_classic_compose_feed_recyclerView"
         android:name="com.taboola.kotlin.examples.screens.classic.ClassicComposeFeed"
-        android:label="@string/nav_classic_compose_feed_lazycolumn"
-        />
+        android:label="@string/nav_classic_compose_feed_lazycolumn" />
+
+    <fragment
+        android:id="@+id/nav_meta_ad_inside_scrollView"
+        android:name="com.taboola.kotlin.examples.screens.classic.MetaAdInsideScrollViewFragment"
+        android:label="@string/nav_meta_ad_inside_scroll_view"
+        tools:layout="@layout/fragment_meta_ad_inside_sv" />
+
+    <fragment
+        android:id="@+id/nav_tbl_classic_meta_unit"
+        android:name="com.taboola.kotlin.examples.screens.classic.MetaClassicUnitFragment"
+        android:label="@string/nav_tbl_classic_meta_unit"
+        tools:layout="@layout/fragment_meta_ad_inside_sv" />
 
 
     <fragment
@@ -57,20 +67,17 @@
     <fragment
         android:id="@+id/nav_web_compose_widget"
         android:name="com.taboola.kotlin.examples.screens.web.WebComposeFragment"
-        android:label="@string/web_compose_widget"
-        />
+        android:label="@string/web_compose_widget" />
 
     <fragment
         android:id="@+id/nav_web_compose_feed"
         android:name="com.taboola.kotlin.examples.screens.web.WebComposeFeedFragment"
-        android:label="@string/web_compose_feed"
-        />
+        android:label="@string/web_compose_feed" />
 
     <fragment
         android:id="@+id/nav_web_continuous_scroll"
         android:name="com.taboola.kotlin.examples.screens.web.WebContinuousScroll"
-        android:label="@string/web_continuous_scroll"
-        />
+        android:label="@string/web_continuous_scroll" />
 
     <fragment
         android:id="@+id/nav_native_widget"
@@ -87,12 +94,10 @@
     <fragment
         android:id="@+id/nav_native_widget_compose"
         android:name="com.taboola.kotlin.examples.screens.native.NativeComposeWidgetFragment"
-        android:label="@string/native_widget_compose"
-        />
+        android:label="@string/native_widget_compose" />
 
     <fragment
         android:id="@+id/nav_native_feed_compose"
         android:name="com.taboola.kotlin.examples.screens.native.NativeComposeFeedFragment"
-        android:label="@string/native_feed_compose"
-        />
+        android:label="@string/native_feed_compose" />
 </navigation>

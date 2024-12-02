@@ -15,7 +15,7 @@ import androidx.appcompat.widget.Toolbar
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private val applicationScreens = setOf(R.id.nav_classic_widget, R.id.nav_classic_widget_xml, R.id.nav_classic_feed, R.id.nav_classic_viewpager, R.id.nav_web_widget, R.id.nav_web_feed, R.id.nav_native_widget, R.id.nav_native_feed)
+    private val applicationScreens = setOf(R.id.nav_classic_widget, R.id.nav_classic_widget_xml, R.id.nav_classic_feed, R.id.nav_classic_viewpager, R.id.nav_web_widget, R.id.nav_web_feed, R.id.nav_native_widget, R.id.nav_native_feed, R.id.nav_meta_ad_inside_scrollView)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
