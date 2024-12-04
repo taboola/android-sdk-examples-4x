@@ -22,12 +22,7 @@
         <item
             android:id="@+id/nav_classic_compose_feed_recyclerView"
             android:title="@string/nav_classic_compose_feed_lazycolumn" />
-        <item
-            android:id="@+id/nav_meta_ad_inside_scrollView"
-            android:title="@string/nav_meta_ad_inside_scroll_view" />
-        <item
-            android:id="@+id/nav_tbl_classic_meta_unit"
-            android:title="@string/nav_tbl_classic_meta_unit" />
+
         <item
             android:id="@+id/nav_web_widget"
             android:title="@string/web_widget" />
