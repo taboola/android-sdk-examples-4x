@@ -27,4 +27,8 @@ public class Const {
     //Meta widget 1x1
     public static final String META_WIDGET_PLACEMENT_NAME = "Below Article Thumbnails";
     public static final String META_WIDGET_MODE = "meta-widget-1x1";
+
+    //Meta Feed
+    public static final String META_FEED_PLACEMENT_NAME = "Feed without video";
+    public static final String META_FEED_MODE = "alternating-thumbnails-a";
 }

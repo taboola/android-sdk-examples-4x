@@ -17,6 +17,7 @@ import com.taboola.sdk4example.sdk_classic.FeedWithMiddleArticleInsideListViewFr
 import com.taboola.sdk4example.sdk_classic.FeedWithMiddleArticleInsideRecyclerViewFragment;
 import com.taboola.sdk4example.sdk_classic.FeedWithMiddleArticleInsideScrollViewFragment;
 import com.taboola.sdk4example.sdk_classic.MetaAdInsideScrollViewFragment;
+import com.taboola.sdk4example.sdk_classic.MetaClassicUnitFragment;
 import com.taboola.sdk4example.sdk_classic.OCClickHandlerFragment;
 import com.taboola.sdk4example.sdk_classic.PullToRefreshFragment;
 import com.taboola.sdk4example.sdk_classic.RecyclerViewPreloadFragment;
@@ -66,6 +67,7 @@ public class SDKClassicMenuFragment extends Fragment implements View.OnClickList
         addButton(getString(R.string.std_feed_lazy_loading_rv), R.id.std_feed_lazy_loading_rv, viewGroup);
         addButton(getString(R.string.std_mid_article_with_feed_dark_mode_rv), R.id.std_mid_article_with_feed_dark_mode_rv, viewGroup);
         addButton(getString(R.string.std_meta), R.id.std_meta, viewGroup);
+        addButton(getString(R.string.std_meta_classic_unit), R.id.std_meta_classic_unit, viewGroup);
     }
 
 
@@ -108,7 +110,9 @@ public class SDKClassicMenuFragment extends Fragment implements View.OnClickList
             case R.id.std_meta:
                 fragmentToOpen = new MetaAdInsideScrollViewFragment();
                 break;
-
+            case R.id.std_meta_classic_unit:
+                fragmentToOpen = new MetaClassicUnitFragment();
+                break;
         }
 
         if (fragmentToOpen != null) {
