@@ -56,12 +56,12 @@ public class MetaClassicUnitFragment extends BaseTaboolaFragment {
             put(ENABLE_META_DEMAND_DEBUG_KEY, "true");
         }});
 
-        setupAndLoadTaboolaAdAndFeed(mAdContainerTop);
+        setupAndLoadTaboolaAd(mAdContainerTop);
         return mRootView;
     }
 
 
-    private void setupAndLoadTaboolaAdAndFeed(NativeAdLayout adContainer) {
+    private void setupAndLoadTaboolaAd(NativeAdLayout adContainer) {
         TBLClassicPage tblClassicPage = Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
         MetaPlacementProperties metaPlacementProperties = new MetaPlacementProperties(META_WIDGET_PLACEMENT_NAME, META_WIDGET_MODE);
         TBLMetaClassicUnit tblMetaClassicUnit = tblClassicPage.buildWithMeta(getContext(), META_FEED_PLACEMENT_NAME, META_FEED_MODE, TBL_PLACEMENT_TYPE.PAGE_MIDDLE, metaPlacementProperties, new TBLClassicListener() {

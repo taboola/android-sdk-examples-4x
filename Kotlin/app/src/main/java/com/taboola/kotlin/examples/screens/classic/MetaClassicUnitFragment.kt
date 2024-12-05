@@ -34,12 +34,12 @@ class MetaClassicUnitFragment : Fragment() {
                 put(MetaConst.ENABLE_META_DEMAND_DEBUG_KEY, "true")
             }
         })
-        adContainerTop?.let { setupAndLoadTaboolaAdAndFeed(it) }
+        adContainerTop?.let { setupAndLoadTaboolaAd(it) }
         return rootView
     }
 
 
-    private fun setupAndLoadTaboolaAdAndFeed(adContainer: NativeAdLayout) {
+    private fun setupAndLoadTaboolaAd(adContainer: NativeAdLayout) {
         val widgetProperties = PlacementInfo.metaWidgetProperties()
         val feedProperties = PlacementInfo.metaFeedProperties()
         val tblClassicPage = Taboola.getClassicPage(feedProperties.pageUrl, feedProperties.pageType)
