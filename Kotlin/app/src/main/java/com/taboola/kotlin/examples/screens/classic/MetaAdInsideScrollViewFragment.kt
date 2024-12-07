@@ -1,6 +1,7 @@
 package com.taboola.kotlin.examples.screens.classic
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +51,28 @@ class MetaAdInsideScrollViewFragment : Fragment() {
             widgetProperties.placementName,
             widgetProperties.mode,
             TBL_PLACEMENT_TYPE.PAGE_MIDDLE,
-            object : TBLClassicListener() {})
+            object : TBLClassicListener() {
+                override fun onItemClick(
+                    placementName: String?,
+                    itemId: String?,
+                    clickUrl: String?,
+                    isOrganic: Boolean,
+                    customData: String?
+                ): Boolean {
+                    Log.d(TAG, "onItemClick")
+                    return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
+                }
+
+                override fun onAdReceiveSuccess() {
+                    super.onAdReceiveSuccess()
+                    Log.d(TAG, "onAdReceiveSuccess")
+                }
+
+                override fun onAdReceiveFail(error: String?) {
+                    super.onAdReceiveFail(error)
+                    Log.d(TAG, "onAdReceiveFail $error")
+                }
+            })
         tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_TYPE)
         tblClassicUnit.setUnitExtraProperties(object : java.util.HashMap<String?, String?>() {
             init {
@@ -63,5 +85,9 @@ class MetaAdInsideScrollViewFragment : Fragment() {
         tblClassicUnit.setNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
         adContainer.addView(tblClassicUnit)
         tblClassicUnit.fetchContent()
+    }
+
+    companion object {
+        private val TAG = MetaAdInsideScrollViewFragment::class.java.simpleName
     }
 }

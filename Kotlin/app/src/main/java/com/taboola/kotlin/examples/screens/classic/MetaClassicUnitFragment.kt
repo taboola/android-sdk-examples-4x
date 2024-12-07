@@ -1,6 +1,7 @@
 package com.taboola.kotlin.examples.screens.classic
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,10 @@ class MetaClassicUnitFragment : Fragment() {
         adContainerTop = rootView!!.findViewById<NativeAdLayout>(R.id.native_ad_container_top)
         Taboola.setGlobalExtraProperties(object : HashMap<String?, String?>() {
             init {
-                put(MetaConst.AUDIENCE_NETWORK_APPLICATION_ID_KEY, MetaConst.AUDIENCE_NETWORK_APP_ID)
+                put(
+                    MetaConst.AUDIENCE_NETWORK_APPLICATION_ID_KEY,
+                    MetaConst.AUDIENCE_NETWORK_APP_ID
+                )
                 put(MetaConst.ENABLE_META_DEMAND_DEBUG_KEY, "true")
             }
         })
@@ -51,16 +55,49 @@ class MetaClassicUnitFragment : Fragment() {
             feedProperties.mode,
             TBL_PLACEMENT_TYPE.PAGE_MIDDLE,
             metaPlacementProperties,
-            object : TBLClassicListener() {})
+            object : TBLClassicListener() {
+                override fun onItemClick(
+                    placementName: String?,
+                    itemId: String?,
+                    clickUrl: String?,
+                    isOrganic: Boolean,
+                    customData: String?
+                ): Boolean {
+                    Log.d(TAG, "onItemClick")
+                    return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
+                }
+
+                override fun onAdReceiveSuccess() {
+                    super.onAdReceiveSuccess()
+                    Log.d(TAG, "onAdReceiveSuccess")
+                }
+
+                override fun onAdReceiveFail(error: String?) {
+                    super.onAdReceiveFail(error)
+                    Log.d(TAG, "onAdReceiveFail $error")
+                }
+
+                override fun onResize(height: Int) {
+                    super.onResize(height)
+                    Log.d(TAG, "onResize $height")
+                }
+            })
         tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_TYPE)
         tblMetaClassicUnit.setUnitExtraProperties(object : HashMap<String?, String?>() {
             init {
-                put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID)
+                put(
+                    MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY,
+                    MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID
+                )
             }
         })
         tblMetaClassicUnit.setMetaNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
         adContainer.addView(tblMetaClassicUnit)
         tblMetaClassicUnit.fetchContent()
+    }
+
+    companion object {
+        private val TAG = MetaClassicUnitFragment::class.java.simpleName
     }
 }
 
