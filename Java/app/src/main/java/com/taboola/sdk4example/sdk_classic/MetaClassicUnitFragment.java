@@ -1,5 +1,7 @@
 package com.taboola.sdk4example.sdk_classic;
 
+import static com.taboola.sdk4example.Const.META_FEED_MODE;
+import static com.taboola.sdk4example.Const.META_FEED_PLACEMENT_NAME;
 import static com.taboola.sdk4example.Const.META_WIDGET_MODE;
 import static com.taboola.sdk4example.Const.META_WIDGET_PLACEMENT_NAME;
 
@@ -12,8 +14,9 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 
 import com.facebook.ads.NativeAdLayout;
+import com.taboola.android.MetaPlacementProperties;
 import com.taboola.android.TBLClassicPage;
-import com.taboola.android.TBLClassicUnit;
+import com.taboola.android.TBLMetaClassicUnit;
 import com.taboola.android.TBLPublisherInfo;
 import com.taboola.android.Taboola;
 import com.taboola.android.annotations.TBL_PLACEMENT_TYPE;
@@ -25,14 +28,12 @@ import com.taboola.sdk4example.tabs.BaseTaboolaFragment;
 
 import java.util.HashMap;
 
-
-public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
+public class MetaClassicUnitFragment extends BaseTaboolaFragment {
 
     private View mRootView;
     private NativeAdLayout mAdContainerTop;
 
-    private static final String TAG = MetaAdInsideScrollViewFragment.class.getSimpleName();
-
+    private static final String TAG = MetaClassicUnitFragment.class.getSimpleName();
 
     @Nullable
     @Override
@@ -40,7 +41,7 @@ public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         Taboola.init(new TBLPublisherInfo(MetaConst.META_PUBLISHER_NAME));
-        mRootView = inflater.inflate(R.layout.fragment_meta_ad_inside_sv, null);
+        mRootView = inflater.inflate(R.layout.fragment_meta_ad_classic_unit, null);
         mAdContainerTop = mRootView.findViewById(R.id.native_ad_container_top);
 
         Taboola.setGlobalExtraProperties(new HashMap<String, String>() {{
@@ -55,7 +56,8 @@ public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
 
     private void setupAndLoadTaboolaAd(NativeAdLayout adContainer) {
         TBLClassicPage tblClassicPage = Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
-        TBLClassicUnit tblClassicUnit = tblClassicPage.build(getContext(), META_WIDGET_PLACEMENT_NAME, META_WIDGET_MODE, TBL_PLACEMENT_TYPE.PAGE_MIDDLE, new TBLClassicListener() {
+        MetaPlacementProperties metaPlacementProperties = new MetaPlacementProperties(META_WIDGET_PLACEMENT_NAME, META_WIDGET_MODE);
+        TBLMetaClassicUnit tblMetaClassicUnit = tblClassicPage.buildWithMeta(getContext(), META_FEED_PLACEMENT_NAME, META_FEED_MODE, TBL_PLACEMENT_TYPE.PAGE_MIDDLE, metaPlacementProperties, new TBLClassicListener() {
             @Override
             public boolean onItemClick(String placementName, String itemId, String clickUrl, boolean isOrganic, String customData) {
                 Log.d(TAG, "onItemClick");
@@ -73,17 +75,21 @@ public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
                 super.onAdReceiveFail(error);
                 Log.d(TAG, "onAdReceiveFail " + error);
             }
+
+            @Override
+            public void onResize(int height) {
+                super.onResize(height);
+                Log.d(TAG, "onResize");
+            }
         });
-        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_TYPE);
-        tblClassicUnit.setUnitExtraProperties(new HashMap<String, String>() {{
+        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_TYPE);
+        tblMetaClassicUnit.setUnitExtraProperties(new HashMap<String, String>() {{
             put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID);
         }});
 
-        tblClassicUnit.setNativeUI(MetaConst.DEFAULT_LAYOUT_KEY);
-
-        adContainer.addView(tblClassicUnit);
-        tblClassicUnit.fetchContent();
+        tblMetaClassicUnit.setMetaNativeUI(MetaConst.DEFAULT_LAYOUT_KEY);
+        adContainer.addView(tblMetaClassicUnit);
+        tblMetaClassicUnit.fetchContent();
     }
-
 
 }

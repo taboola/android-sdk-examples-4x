@@ -19,6 +19,7 @@
     <item name="std_feed_lazy_loading_rv" type="id" />
     <item name="std_mid_article_with_feed_dark_mode_rv" type="id" />
     <item name="std_meta" type="id" />
+    <item name="std_meta_classic_unit" type="id" />
     <item name="native_widget" type="id" />
     <item name="native_feed" type="id" />
 

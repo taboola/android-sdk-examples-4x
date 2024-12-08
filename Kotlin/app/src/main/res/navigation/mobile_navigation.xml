@@ -39,6 +39,17 @@
         android:name="com.taboola.kotlin.examples.screens.classic.ClassicComposeFeed"
         android:label="@string/nav_classic_compose_feed_lazycolumn" />
 
+    <fragment
+        android:id="@+id/nav_meta_ad_inside_scrollView"
+        android:name="com.taboola.kotlin.examples.screens.classic.MetaAdInsideScrollViewFragment"
+        android:label="@string/nav_meta_ad_inside_scroll_view"
+        tools:layout="@layout/fragment_meta_ad_inside_sv" />
+
+    <fragment
+        android:id="@+id/nav_tbl_classic_meta_unit"
+        android:name="com.taboola.kotlin.examples.screens.classic.MetaClassicUnitFragment"
+        android:label="@string/nav_tbl_classic_meta_unit"
+        tools:layout="@layout/fragment_meta_ad_inside_sv" />
 
     <fragment
         android:id="@+id/nav_web_widget"
