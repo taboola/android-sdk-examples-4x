@@ -74,14 +74,7 @@ class MetaAdInsideScrollViewFragment : Fragment() {
                 }
             })
         tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_TYPE)
-        tblClassicUnit.setUnitExtraProperties(object : java.util.HashMap<String?, String?>() {
-            init {
-                put(
-                    MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY,
-                    MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID
-                )
-            }
-        })
+        tblClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID))
         tblClassicUnit.setNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
         adContainer.addView(tblClassicUnit)
         tblClassicUnit.fetchContent()

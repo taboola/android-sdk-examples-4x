@@ -83,14 +83,7 @@ class MetaClassicUnitFragment : Fragment() {
                 }
             })
         tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_TYPE)
-        tblMetaClassicUnit.setUnitExtraProperties(object : HashMap<String?, String?>() {
-            init {
-                put(
-                    MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY,
-                    MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID
-                )
-            }
-        })
+        tblMetaClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID))
         tblMetaClassicUnit.setMetaNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
         adContainer.addView(tblMetaClassicUnit)
         tblMetaClassicUnit.fetchContent()
