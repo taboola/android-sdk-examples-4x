@@ -10,7 +10,7 @@ class MetaConst {
         const val AUDIENCE_NETWORK_PLACEMENT_ID_KEY = "audienceNetworkPlacementId"
         const val ENABLE_META_DEMAND_DEBUG_KEY = "enableMetaDemandDebug"
         const val DEFAULT_LAYOUT_KEY = "default"
-        const val TEST_LAYOUT_TYPE = "image_link"
+        const val TEST_LAYOUT_AD_TYPE = "image_link"
         const val TEST_LAYOUT_CAROUSEL_TYPE = "carousel"
     }
 }

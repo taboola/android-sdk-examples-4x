@@ -10,6 +10,6 @@ public class MetaConst {
     public static final String AUDIENCE_NETWORK_PLACEMENT_ID_KEY = "audienceNetworkPlacementId";
     public static final String ENABLE_META_DEMAND_DEBUG_KEY = "enableMetaDemandDebug";
     public static final String DEFAULT_LAYOUT_KEY = "default";
-    public static final String TEST_LAYOUT_TYPE = "image_link";
+    public static final String TEST_LAYOUT_AD_TYPE = "image_link";
     public static final String TEST_LAYOUT_CAROUSEL_TYPE = "carousel";
 }

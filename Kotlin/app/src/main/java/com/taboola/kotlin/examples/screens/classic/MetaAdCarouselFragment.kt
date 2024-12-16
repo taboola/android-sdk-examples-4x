@@ -16,8 +16,6 @@ import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.R
 
 class MetaAdCarouselFragment : Fragment() {
-    private var rootView: View? = null
-    private var adContainerTop: NativeAdLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,8 +23,8 @@ class MetaAdCarouselFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Taboola.init(TBLPublisherInfo(MetaConst.META_PUBLISHER_NAME))
-        rootView = inflater.inflate(R.layout.fragment_meta_ad_inside_sv, null)
-        adContainerTop = rootView!!.findViewById(R.id.native_ad_container_top)
+        val rootView = inflater.inflate(R.layout.fragment_meta_ad_inside_sv, null)
+        val adContainerTop: NativeAdLayout = rootView.findViewById(R.id.native_ad_container_top)
         Taboola.setGlobalExtraProperties(object : HashMap<String?, String?>() {
             init {
                 put(
@@ -36,7 +34,7 @@ class MetaAdCarouselFragment : Fragment() {
                 put(MetaConst.ENABLE_META_DEMAND_DEBUG_KEY, "true")
             }
         })
-        adContainerTop?.let { setupAndLoadTaboolaAd(it) }
+        setupAndLoadTaboolaAd(adContainerTop)
         return rootView
     }
 
