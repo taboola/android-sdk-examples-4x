@@ -28,9 +28,6 @@ import java.util.HashMap;
 
 public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
 
-    private View mRootView;
-    private NativeAdLayout mAdContainerTop;
-
     private static final String TAG = MetaAdInsideScrollViewFragment.class.getSimpleName();
 
 
@@ -40,16 +37,16 @@ public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         Taboola.init(new TBLPublisherInfo(MetaConst.META_PUBLISHER_NAME));
-        mRootView = inflater.inflate(R.layout.fragment_meta_ad_inside_sv, null);
-        mAdContainerTop = mRootView.findViewById(R.id.native_ad_container_top);
+        View rootView = inflater.inflate(R.layout.fragment_meta_ad_inside_sv, null);
+        NativeAdLayout adContainerTop = rootView.findViewById(R.id.native_ad_container_top);
 
         Taboola.setGlobalExtraProperties(new HashMap<String, String>() {{
             put(MetaConst.AUDIENCE_NETWORK_APPLICATION_ID_KEY, MetaConst.AUDIENCE_NETWORK_APP_ID);
             put(MetaConst.ENABLE_META_DEMAND_DEBUG_KEY, "true");
         }});
 
-        setupAndLoadTaboolaAd(mAdContainerTop);
-        return mRootView;
+        setupAndLoadTaboolaAd(adContainerTop);
+        return rootView;
     }
 
 

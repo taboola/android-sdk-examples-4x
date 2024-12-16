@@ -29,6 +29,9 @@
             android:id="@+id/nav_tbl_classic_meta_unit"
             android:title="@string/nav_tbl_classic_meta_unit" />
         <item
+            android:id="@+id/nav_meta_ad_carousel"
+            android:title="@string/nav_meta_ad_carousel" />
+        <item
             android:id="@+id/nav_web_widget"
             android:title="@string/web_widget" />
         <item

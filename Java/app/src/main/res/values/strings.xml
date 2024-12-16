@@ -108,6 +108,7 @@ These will help you remember what the consumer really wants to engage with and w
     <string name="std_mid_article_with_feed_dark_mode_rv">Feed with Dark Mode (RecyclerView)</string>
     <string name="std_meta">Meta Ad Inside ScrollView Fragment</string>
     <string name="std_meta_classic_unit">Meta Ad Above Feed Fragment</string>
+    <string name="std_meta_carousel">Meta Ad Carousel Fragment</string>
     <string name="native_widget">Native Widget</string>
     <string name="native_feed">Native Feed</string>
     <!-- TODO: Remove or change this placeholder text -->
