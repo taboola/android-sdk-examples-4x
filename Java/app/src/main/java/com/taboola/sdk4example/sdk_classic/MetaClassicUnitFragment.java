@@ -79,7 +79,7 @@ public class MetaClassicUnitFragment extends BaseTaboolaFragment {
                 Log.d(TAG, "onResize");
             }
         });
-        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_AD_TYPE);
+        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE);
         tblMetaClassicUnit.setUnitExtraProperties(new HashMap<String, String>() {{
             put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID);
         }});

@@ -70,7 +70,7 @@ class MetaAdInsideScrollViewFragment : Fragment() {
                     Log.d(TAG, "onAdReceiveFail $error")
                 }
             })
-        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_AD_TYPE)
+        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE)
         tblClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID))
         tblClassicUnit.setNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
         adContainer.addView(tblClassicUnit)

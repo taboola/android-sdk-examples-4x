@@ -80,7 +80,7 @@ class MetaClassicUnitFragment : Fragment() {
                     Log.d(TAG, "onResize $height")
                 }
             })
-        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_AD_TYPE)
+        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE)
         tblMetaClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID))
         tblMetaClassicUnit.setMetaNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
         adContainer.addView(tblMetaClassicUnit)

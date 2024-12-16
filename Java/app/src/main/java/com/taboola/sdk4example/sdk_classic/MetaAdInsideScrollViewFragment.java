@@ -71,7 +71,7 @@ public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
                 Log.d(TAG, "onAdReceiveFail " + error);
             }
         });
-        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_AD_TYPE);
+        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE);
         tblClassicUnit.setUnitExtraProperties(new HashMap<String, String>() {{
             put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID);
         }});
