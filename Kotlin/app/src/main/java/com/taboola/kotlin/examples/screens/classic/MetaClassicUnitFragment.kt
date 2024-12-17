@@ -18,17 +18,15 @@ import com.taboola.kotlin.examples.R
 
 class MetaClassicUnitFragment : Fragment() {
 
-    private var rootView: View? = null
-    private var adContainerTop: NativeAdLayout? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         Taboola.init(TBLPublisherInfo(MetaConst.META_PUBLISHER_NAME))
-        rootView = inflater.inflate(R.layout.fragment_meta_ad_classic_unit, null)
-        adContainerTop = rootView!!.findViewById<NativeAdLayout>(R.id.native_ad_container_top)
+        val rootView = inflater.inflate(R.layout.fragment_meta_ad_classic_unit, null)
+        val adContainerTop: NativeAdLayout =
+            rootView.findViewById(R.id.native_ad_container_top)
         Taboola.setGlobalExtraProperties(object : HashMap<String?, String?>() {
             init {
                 put(
@@ -38,7 +36,7 @@ class MetaClassicUnitFragment : Fragment() {
                 put(MetaConst.ENABLE_META_DEMAND_DEBUG_KEY, "true")
             }
         })
-        adContainerTop?.let { setupAndLoadTaboolaAd(it) }
+        setupAndLoadTaboolaAd(adContainerTop)
         return rootView
     }
 
@@ -82,7 +80,7 @@ class MetaClassicUnitFragment : Fragment() {
                     Log.d(TAG, "onResize $height")
                 }
             })
-        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_TYPE)
+        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE)
         tblMetaClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID))
         tblMetaClassicUnit.setMetaNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
         adContainer.addView(tblMetaClassicUnit)

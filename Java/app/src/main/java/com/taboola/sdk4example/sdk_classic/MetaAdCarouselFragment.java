@@ -25,8 +25,7 @@ import com.taboola.sdk4example.tabs.BaseTaboolaFragment;
 
 import java.util.HashMap;
 
-
-public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
+public class MetaAdCarouselFragment extends BaseTaboolaFragment {
 
     private static final String TAG = MetaAdInsideScrollViewFragment.class.getSimpleName();
 
@@ -71,9 +70,9 @@ public class MetaAdInsideScrollViewFragment extends BaseTaboolaFragment {
                 Log.d(TAG, "onAdReceiveFail " + error);
             }
         });
-        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE);
+        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_CAROUSEL_TYPE);
         tblClassicUnit.setUnitExtraProperties(new HashMap<String, String>() {{
-            put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID);
+            put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_CAROUSEL_PLACEMENT_ID);
         }});
 
         tblClassicUnit.setNativeUI(MetaConst.DEFAULT_LAYOUT_KEY);

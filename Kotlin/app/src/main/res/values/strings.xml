@@ -17,6 +17,7 @@
     <string name="classic_widget_xml">Classic Xml Widget</string>
     <string name="classic_viewpager">Classic View Pager</string>
     <string name="nav_meta_ad_inside_scroll_view">MetaAd inside scroll view</string>
+    <string name="nav_meta_ad_carousel">MetaAd Carousel</string>
     <string name="nav_tbl_classic_meta_unit">MetaAd above feed</string>
     <string name="web_widget">Web Widget</string>
     <string name="web_compose_widget">Web Widget - Compose</string>

@@ -30,9 +30,6 @@ import java.util.HashMap;
 
 public class MetaClassicUnitFragment extends BaseTaboolaFragment {
 
-    private View mRootView;
-    private NativeAdLayout mAdContainerTop;
-
     private static final String TAG = MetaClassicUnitFragment.class.getSimpleName();
 
     @Nullable
@@ -41,16 +38,16 @@ public class MetaClassicUnitFragment extends BaseTaboolaFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         Taboola.init(new TBLPublisherInfo(MetaConst.META_PUBLISHER_NAME));
-        mRootView = inflater.inflate(R.layout.fragment_meta_ad_classic_unit, null);
-        mAdContainerTop = mRootView.findViewById(R.id.native_ad_container_top);
+        View rootView = inflater.inflate(R.layout.fragment_meta_ad_classic_unit, null);
+        NativeAdLayout adContainerTop = rootView.findViewById(R.id.native_ad_container_top);
 
         Taboola.setGlobalExtraProperties(new HashMap<String, String>() {{
             put(MetaConst.AUDIENCE_NETWORK_APPLICATION_ID_KEY, MetaConst.AUDIENCE_NETWORK_APP_ID);
             put(MetaConst.ENABLE_META_DEMAND_DEBUG_KEY, "true");
         }});
 
-        setupAndLoadTaboolaAd(mAdContainerTop);
-        return mRootView;
+        setupAndLoadTaboolaAd(adContainerTop);
+        return rootView;
     }
 
 
@@ -82,7 +79,7 @@ public class MetaClassicUnitFragment extends BaseTaboolaFragment {
                 Log.d(TAG, "onResize");
             }
         });
-        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_TYPE);
+        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE);
         tblMetaClassicUnit.setUnitExtraProperties(new HashMap<String, String>() {{
             put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID);
         }});

@@ -46,6 +46,12 @@
         tools:layout="@layout/fragment_meta_ad_inside_sv" />
 
     <fragment
+        android:id="@+id/nav_meta_ad_carousel"
+        android:name="com.taboola.kotlin.examples.screens.classic.MetaAdCarouselFragment"
+        android:label="@string/nav_meta_ad_carousel"
+        tools:layout="@layout/fragment_meta_ad_inside_sv" />
+
+    <fragment
         android:id="@+id/nav_tbl_classic_meta_unit"
         android:name="com.taboola.kotlin.examples.screens.classic.MetaClassicUnitFragment"
         android:label="@string/nav_tbl_classic_meta_unit"

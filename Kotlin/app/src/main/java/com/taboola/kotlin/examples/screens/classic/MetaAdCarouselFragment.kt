@@ -15,7 +15,7 @@ import com.taboola.kotlin.examples.MetaConst
 import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.R
 
-class MetaAdInsideScrollViewFragment : Fragment() {
+class MetaAdCarouselFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,14 +70,14 @@ class MetaAdInsideScrollViewFragment : Fragment() {
                     Log.d(TAG, "onAdReceiveFail $error")
                 }
             })
-        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE)
-        tblClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID))
+        tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_CAROUSEL_TYPE)
+        tblClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_CAROUSEL_PLACEMENT_ID))
         tblClassicUnit.setNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
         adContainer.addView(tblClassicUnit)
         tblClassicUnit.fetchContent()
     }
 
     companion object {
-        private val TAG = MetaAdInsideScrollViewFragment::class.java.simpleName
+        private val TAG = MetaAdCarouselFragment::class.java.simpleName
     }
 }
