@@ -41,7 +41,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
 
     //Taboola
-    implementation 'com.taboola:android-sdk-beta:meta-unified-1.0.2-615-b6bbebdb0'
+    implementation 'com.taboola:android-sdk-beta:meta-global-beta-1.0.10-638-5287bf970'
 
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 

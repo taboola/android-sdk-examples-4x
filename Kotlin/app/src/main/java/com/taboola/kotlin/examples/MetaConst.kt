@@ -12,5 +12,10 @@ class MetaConst {
         const val DEFAULT_LAYOUT_KEY = "default"
         const val TEST_LAYOUT_IMAGE_LINK_TYPE = "image_link"
         const val TEST_LAYOUT_CAROUSEL_TYPE = "carousel"
+        const val DARK_MODE = "darkMode"
+
+        // UI customizations values
+        const val ELEMENT_TYPE_BRANDING: String = "branding"
+        const val TEXT_FONT_SIZE: Float = 20.0f
     }
 }

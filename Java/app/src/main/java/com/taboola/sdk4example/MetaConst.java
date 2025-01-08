@@ -12,4 +12,7 @@ public class MetaConst {
     public static final String DEFAULT_LAYOUT_KEY = "default";
     public static final String TEST_LAYOUT_IMAGE_LINK_TYPE = "image_link";
     public static final String TEST_LAYOUT_CAROUSEL_TYPE = "carousel";
+    public static final String ELEMENT_TYPE_BRANDING = "branding";
+    public static final String DARK_NODE = "darkMode";
+    public static final int TEXT_FONT_SIZE = 20;
 }

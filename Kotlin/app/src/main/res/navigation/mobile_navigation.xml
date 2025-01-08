@@ -44,6 +44,16 @@
         android:name="com.taboola.kotlin.examples.screens.classic.MetaAdInsideScrollViewFragment"
         android:label="@string/nav_meta_ad_inside_scroll_view"
         tools:layout="@layout/fragment_meta_ad_inside_sv" />
+    <fragment
+        android:id="@+id/nav_meta_ad_UI_customization"
+        android:name="com.taboola.kotlin.examples.screens.classic.MetaAdUICustomizationsFragment"
+        android:label="@string/nav_meta_ad_UI_customization"
+       />
+    <fragment
+        android:id="@+id/nav_meta_tbl_classic_unit_ad_UI_customization"
+        android:name="com.taboola.kotlin.examples.screens.classic.MetaUICustomizationClassicUnitFragment"
+        android:label="@string/nav_meta_tbl_classic_unit_ad_UI_customization"
+       />
 
     <fragment
         android:id="@+id/nav_meta_ad_carousel"
