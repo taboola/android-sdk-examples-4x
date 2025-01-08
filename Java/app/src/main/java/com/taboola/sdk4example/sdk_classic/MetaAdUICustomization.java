@@ -2,7 +2,9 @@ package com.taboola.sdk4example.sdk_classic;
 
 import static com.taboola.sdk4example.Const.META_WIDGET_MODE;
 import static com.taboola.sdk4example.Const.META_WIDGET_PLACEMENT_NAME;
+import static com.taboola.sdk4example.MetaConst.AMOUNT_OF_LINES_BETWEEN_LINES;
 import static com.taboola.sdk4example.MetaConst.ELEMENT_TYPE_BRANDING;
+import static com.taboola.sdk4example.MetaConst.NUMBER_OF_LINES;
 import static com.taboola.sdk4example.MetaConst.TEXT_FONT_SIZE;
 
 import android.graphics.Color;
@@ -88,6 +90,8 @@ public class MetaAdUICustomization extends BaseTaboolaFragment {
                 .setFontSize(TEXT_FONT_SIZE).
                 build();
         TBLUiStyleProperties titleStyleProperties = new TBLTitleStylePropertiesBuilder()
+                .setAmountOfSpaceBetweenLines(AMOUNT_OF_LINES_BETWEEN_LINES)
+                .setLines(NUMBER_OF_LINES)
                 .setFontLightColor(Color.RED)
                 .setFontSize(TEXT_FONT_SIZE)
                 .setFontDarkColor(Color.BLUE)

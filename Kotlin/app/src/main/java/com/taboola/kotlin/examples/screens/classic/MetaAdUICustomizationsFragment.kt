@@ -17,7 +17,9 @@ import com.taboola.android.utils.style_properties.TBLTextStylePropertiesBuilder
 import com.taboola.android.utils.style_properties.TBLTitleStylePropertiesBuilder
 import com.taboola.android.utils.style_properties.TBLCallToActionButtonStylePropertiesBuilder
 import com.taboola.kotlin.examples.MetaConst
+import com.taboola.kotlin.examples.MetaConst.Companion.AMOUNT_OF_SPACE_BETWEEN_ELEMENTS
 import com.taboola.kotlin.examples.MetaConst.Companion.ELEMENT_TYPE_BRANDING
+import com.taboola.kotlin.examples.MetaConst.Companion.NUMBER_OF_LINES
 import com.taboola.kotlin.examples.MetaConst.Companion.TEXT_FONT_SIZE
 import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.R
@@ -74,11 +76,19 @@ class MetaAdUICustomizationsFragment : Fragment() {
             })
         tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE)
         tblClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_CAROUSEL_PLACEMENT_ID))
-        val titleStyleProperties = TBLTitleStylePropertiesBuilder().setFontSize(TEXT_FONT_SIZE)
-            .setFontLightColor(Color.Blue.toArgb()).setFontDarkColor(Color.Red.toArgb()).build()
+        val titleStyleProperties = TBLTitleStylePropertiesBuilder()
+            .setAmountOfSpaceBetweenLines(AMOUNT_OF_SPACE_BETWEEN_ELEMENTS)
+            .setLines(NUMBER_OF_LINES)
+            .setFontSize(TEXT_FONT_SIZE)
+            .setFontLightColor(Color.Blue.toArgb())
+            .setFontDarkColor(Color.Red.toArgb())
+            .build()
         val brandingStyleProperties =
-            TBLTextStylePropertiesBuilder(ELEMENT_TYPE_BRANDING).setFontSize(TEXT_FONT_SIZE)
-                .setFontLightColor(R.color.purple_200).setFontDarkColor(R.color.purple_500).build()
+            TBLTextStylePropertiesBuilder(ELEMENT_TYPE_BRANDING)
+                .setFontSize(TEXT_FONT_SIZE)
+                .setFontLightColor(R.color.purple_200)
+                .setFontDarkColor(R.color.purple_500)
+                .build()
         val callToActionButtonStyleProperties =
             TBLCallToActionButtonStylePropertiesBuilder().setVisibility(true).build()
         tblClassicUnit.setNativeUI(

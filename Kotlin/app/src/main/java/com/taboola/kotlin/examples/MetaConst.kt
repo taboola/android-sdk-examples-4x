@@ -17,5 +17,7 @@ class MetaConst {
         // UI customizations values
         const val ELEMENT_TYPE_BRANDING: String = "branding"
         const val TEXT_FONT_SIZE: Float = 20.0f
+        const val NUMBER_OF_LINES: Int = 2
+        const val AMOUNT_OF_SPACE_BETWEEN_ELEMENTS: Float = 0.5f
     }
 }
