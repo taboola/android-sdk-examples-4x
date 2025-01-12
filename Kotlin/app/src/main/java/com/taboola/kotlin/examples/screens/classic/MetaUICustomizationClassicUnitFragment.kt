@@ -29,7 +29,7 @@ import com.taboola.kotlin.examples.MetaConst.Companion.NUMBER_OF_LINES
 import com.taboola.kotlin.examples.MetaConst.Companion.TEXT_FONT_SIZE
 import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.R
-import com.taboola.kotlin.examples.screens.utils.MetaUtils.Companion.getFullPathToFontFile
+import com.taboola.kotlin.examples.screens.utils.Utils.Companion.getFullPathToFontFile
 
 class MetaUICustomizationClassicUnitFragment : Fragment() {
 
@@ -131,20 +131,20 @@ class MetaUICustomizationClassicUnitFragment : Fragment() {
                 .setTypeface(typefaceArielBold)
                 .build()
 
-        // Create custom style properties for the call to action button
-        val callToActionButtonStyleProperties =
-            TBLCallToActionButtonStylePropertiesBuilder()
-                // Set the visibility of the call to action, the CTA button will be displayed by default if
-                // you want to hide it you need to pass true to the setVisibility method
-                .setVisibility(true)
-                .build()
+//        // Create custom style properties for the call to action button
+//        val callToActionButtonStyleProperties =
+//            TBLCallToActionButtonStylePropertiesBuilder()
+//                // Sets the visibility of the call-to-action (CTA) button.
+//                // The button is visible by default. Pass true to this method to hide it.
+//                .setVisibility(true)
+//                .build()
 
         // Set the custom UI properties to the Meta native Ad
         tblMetaClassicUnit.setMetaNativeUI(
             MetaConst.DEFAULT_LAYOUT_KEY,
             brandingStyleProperties,
             titleStyleProperties,
-            callToActionButtonStyleProperties
+//            callToActionButtonStyleProperties
         )
         adContainer.addView(tblMetaClassicUnit)
         tblMetaClassicUnit.fetchContent()

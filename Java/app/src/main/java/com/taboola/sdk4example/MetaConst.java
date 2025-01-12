@@ -15,8 +15,8 @@ public class MetaConst {
     // UI customization
     public static final String ELEMENT_TYPE_BRANDING = "branding";
     public static final String DARK_NODE = "darkMode";
-    public static final String FONT_TYPEFACE_ARIAL_BOLD = "arial_bold";
+    public static final String TYPEFACE_ARIAL_BOLD = "arial_bold";
     public static final int TEXT_FONT_SIZE = 20;
     public static final int NUMBER_OF_LINES = 2;
-    public static final float AMOUNT_OF_LINES_BETWEEN_LINES = 0.5f;
+    public static final float AMOUNT_OF_SPACE_BETWEEN_LINES = 0.5f;
 }

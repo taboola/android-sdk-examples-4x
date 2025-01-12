@@ -2,14 +2,13 @@ package com.taboola.sdk4example.sdk_classic;
 
 import static com.taboola.sdk4example.Const.META_WIDGET_MODE;
 import static com.taboola.sdk4example.Const.META_WIDGET_PLACEMENT_NAME;
-import static com.taboola.sdk4example.MetaConst.AMOUNT_OF_LINES_BETWEEN_LINES;
+import static com.taboola.sdk4example.MetaConst.AMOUNT_OF_SPACE_BETWEEN_LINES;
 import static com.taboola.sdk4example.MetaConst.ELEMENT_TYPE_BRANDING;
-import static com.taboola.sdk4example.MetaConst.FONT_TYPEFACE_ARIAL_BOLD;
 import static com.taboola.sdk4example.MetaConst.NUMBER_OF_LINES;
 import static com.taboola.sdk4example.MetaConst.TEXT_FONT_SIZE;
-import static com.taboola.sdk4example.MetaUtils.loadFont;
+import static com.taboola.sdk4example.MetaConst.TYPEFACE_ARIAL_BOLD;
+import static com.taboola.sdk4example.utils.Utils.loadFont;
 
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import com.facebook.ads.NativeAdLayout;
 import com.taboola.android.TBLClassicPage;
@@ -89,7 +87,7 @@ public class MetaAdUICustomization extends BaseTaboolaFragment {
         tblClassicUnit.setUnitExtraProperties(new HashMap<String, String>() {{
             put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID);
         }});
-        Typeface font = loadFont(getActivity(), FONT_TYPEFACE_ARIAL_BOLD);
+        Typeface font = loadFont(getActivity(), TYPEFACE_ARIAL_BOLD);
 
         // Create custom style properties for the branding
         TBLUiStyleProperties brandingStyleProperties = new TBLTextStylePropertiesBuilder(ELEMENT_TYPE_BRANDING)
@@ -101,7 +99,7 @@ public class MetaAdUICustomization extends BaseTaboolaFragment {
 
         // Create custom style properties for the title
         TBLUiStyleProperties titleStyleProperties = new TBLTitleStylePropertiesBuilder()
-                .setAmountOfSpaceBetweenLines(AMOUNT_OF_LINES_BETWEEN_LINES)
+                .setAmountOfSpaceBetweenLines(AMOUNT_OF_SPACE_BETWEEN_LINES)
                 .setLines(NUMBER_OF_LINES)
                 .setFontLightColor(Color.RED)
                 .setFontSize(TEXT_FONT_SIZE)
@@ -110,14 +108,16 @@ public class MetaAdUICustomization extends BaseTaboolaFragment {
                 .build();
 
         // Create custom style properties for the call to action button
-        TBLUiStyleProperties ctaStyleProperties = new TBLCallToActionButtonStylePropertiesBuilder()
-                // Set the visibility of the call to action, the CTA button will be displayed by default if
-                // you want to hide it you need to pass true to the setVisibility method
-                .setVisibility(true)
-                .build();
+//        TBLUiStyleProperties ctaStyleProperties = new TBLCallToActionButtonStylePropertiesBuilder()
+//                // Sets the visibility of the call-to-action (CTA) button.
+//                // The button is visible by default. Pass true to this method to hide it.
+//                .setVisibility(true)
+//                .build();
 
         // Set the custom UI properties to the Meta native Ad
-        tblClassicUnit.setNativeUI(MetaConst.DEFAULT_LAYOUT_KEY, brandingStyleProperties, titleStyleProperties, ctaStyleProperties);
+        tblClassicUnit.setNativeUI(MetaConst.DEFAULT_LAYOUT_KEY, brandingStyleProperties, titleStyleProperties
+//                ctaStyleProperties
+        );
         adContainer.addView(tblClassicUnit);
         tblClassicUnit.fetchContent();
     }

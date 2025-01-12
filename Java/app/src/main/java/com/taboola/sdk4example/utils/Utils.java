@@ -1,11 +1,11 @@
-package com.taboola.sdk4example;
+package com.taboola.sdk4example.utils;
 
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 
 import androidx.fragment.app.FragmentActivity;
 
-public class MetaUtils {
+public class Utils {
     private static final String FONTS_PATH = "fonts/";
     private static final String FONT_SUFFIX = ".ttf";
 

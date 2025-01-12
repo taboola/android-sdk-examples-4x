@@ -25,7 +25,7 @@ import com.taboola.kotlin.examples.MetaConst.Companion.NUMBER_OF_LINES
 import com.taboola.kotlin.examples.MetaConst.Companion.TEXT_FONT_SIZE
 import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.R
-import com.taboola.kotlin.examples.screens.utils.MetaUtils.Companion.getFullPathToFontFile
+import com.taboola.kotlin.examples.screens.utils.Utils.Companion.getFullPathToFontFile
 
 class MetaAdUICustomizationsFragment : Fragment() {
     override fun onCreateView(

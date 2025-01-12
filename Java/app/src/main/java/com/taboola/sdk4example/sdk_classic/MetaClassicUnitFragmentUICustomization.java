@@ -4,13 +4,13 @@ import static com.taboola.sdk4example.Const.META_FEED_MODE;
 import static com.taboola.sdk4example.Const.META_FEED_PLACEMENT_NAME;
 import static com.taboola.sdk4example.Const.META_WIDGET_MODE;
 import static com.taboola.sdk4example.Const.META_WIDGET_PLACEMENT_NAME;
-import static com.taboola.sdk4example.MetaConst.AMOUNT_OF_LINES_BETWEEN_LINES;
+import static com.taboola.sdk4example.MetaConst.AMOUNT_OF_SPACE_BETWEEN_LINES;
 import static com.taboola.sdk4example.MetaConst.DARK_NODE;
 import static com.taboola.sdk4example.MetaConst.ELEMENT_TYPE_BRANDING;
-import static com.taboola.sdk4example.MetaConst.FONT_TYPEFACE_ARIAL_BOLD;
 import static com.taboola.sdk4example.MetaConst.NUMBER_OF_LINES;
 import static com.taboola.sdk4example.MetaConst.TEXT_FONT_SIZE;
-import static com.taboola.sdk4example.MetaUtils.loadFont;
+import static com.taboola.sdk4example.MetaConst.TYPEFACE_ARIAL_BOLD;
+import static com.taboola.sdk4example.utils.Utils.loadFont;
 
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -104,7 +104,7 @@ public class MetaClassicUnitFragmentUICustomization extends BaseTaboolaFragment 
             put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID);
         }});
 
-        Typeface font = loadFont(getActivity(), FONT_TYPEFACE_ARIAL_BOLD);
+        Typeface font = loadFont(getActivity(), TYPEFACE_ARIAL_BOLD);
 
         // Create custom style properties for the branding
         TBLUiStyleProperties brandingStyleProperties = new TBLTextStylePropertiesBuilder(ELEMENT_TYPE_BRANDING)
@@ -116,7 +116,7 @@ public class MetaClassicUnitFragmentUICustomization extends BaseTaboolaFragment 
 
         // Create custom style properties for the title
         TBLUiStyleProperties titleStyleProperties = new TBLTitleStylePropertiesBuilder()
-                .setAmountOfSpaceBetweenLines(AMOUNT_OF_LINES_BETWEEN_LINES)
+                .setAmountOfSpaceBetweenLines(AMOUNT_OF_SPACE_BETWEEN_LINES)
                 .setLines(NUMBER_OF_LINES)
                 .setFontLightColor(Color.RED)
                 .setFontSize(TEXT_FONT_SIZE)
