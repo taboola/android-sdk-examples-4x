@@ -104,20 +104,20 @@ class MetaAdUICustomizationsFragment : Fragment() {
                 .setFontDarkColor(R.color.purple_500)
                 .setTypeface(typefaceArielBold)
                 .build()
-        // Create custom style properties for the call to action button
-        val callToActionButtonStyleProperties =
-            TBLCallToActionButtonStylePropertiesBuilder()
-                // Set the visibility of the call to action, the CTA button will be displayed by default if
-                // you want to hide it you need to pass true to the setVisibility method
-                .setVisibility(true)
-                .build()
+//        // Create custom style properties for the call to action button
+//        val callToActionButtonStyleProperties =
+//            TBLCallToActionButtonStylePropertiesBuilder()
+//                // Set the visibility of the call to action, the CTA button will be displayed by default if
+//                // you want to hide it you need to pass false to the setVisibility method
+//                .setVisibility(true)
+//                .build()
 
         // Set the custom UI properties to the Meta native Ad
         tblClassicUnit.setNativeUI(
             MetaConst.DEFAULT_LAYOUT_KEY,
             brandingStyleProperties,
             titleStyleProperties,
-            callToActionButtonStyleProperties
+//            callToActionButtonStyleProperties
         )
         adContainer.addView(tblClassicUnit)
         tblClassicUnit.fetchContent()
