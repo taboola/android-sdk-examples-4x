@@ -135,7 +135,7 @@ class MetaUICustomizationClassicUnitFragment : Fragment() {
 //        val callToActionButtonStyleProperties =
 //            TBLCallToActionButtonStylePropertiesBuilder()
 //                // Sets the visibility of the call-to-action (CTA) button.
-//                // The button is visible by default. Pass false to hide.
+//                // The button is visible by default. for hide the button pass false.
 //                .setVisibility(false)
 //                .build()
 

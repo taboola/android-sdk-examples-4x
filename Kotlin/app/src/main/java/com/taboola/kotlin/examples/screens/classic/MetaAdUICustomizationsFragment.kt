@@ -107,8 +107,8 @@ class MetaAdUICustomizationsFragment : Fragment() {
 //        // Create custom style properties for the call to action button
 //        val callToActionButtonStyleProperties =
 //            TBLCallToActionButtonStylePropertiesBuilder()
-//                // Set the visibility of the call to action, the CTA button will be displayed by default if
-//                // you want to hide it you need to pass false to the setVisibility method
+//                // Sets the visibility of the call-to-action (CTA) button.
+//                // The button is visible by default. for hide the button pass false.
 //                .setVisibility(false)
 //                .build()
 

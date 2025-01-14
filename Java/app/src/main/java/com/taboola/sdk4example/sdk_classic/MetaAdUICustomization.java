@@ -110,7 +110,7 @@ public class MetaAdUICustomization extends BaseTaboolaFragment {
         // Create custom style properties for the call to action button
 //        TBLUiStyleProperties ctaStyleProperties = new TBLCallToActionButtonStylePropertiesBuilder()
 //                // Sets the visibility of the call-to-action (CTA) button.
-//                // The button is visible by default. Pass true to this method to hide it.
+//                // The button is visible by default. for hide the button pass false.
 //                .setVisibility(false)
 //                .build();
 
