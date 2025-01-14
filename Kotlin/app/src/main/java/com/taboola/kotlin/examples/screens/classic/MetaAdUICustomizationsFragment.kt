@@ -109,7 +109,7 @@ class MetaAdUICustomizationsFragment : Fragment() {
 //            TBLCallToActionButtonStylePropertiesBuilder()
 //                // Set the visibility of the call to action, the CTA button will be displayed by default if
 //                // you want to hide it you need to pass false to the setVisibility method
-//                .setVisibility(true)
+//                .setVisibility(false)
 //                .build()
 
         // Set the custom UI properties to the Meta native Ad

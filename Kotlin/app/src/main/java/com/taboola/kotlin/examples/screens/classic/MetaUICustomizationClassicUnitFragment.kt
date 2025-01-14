@@ -136,7 +136,7 @@ class MetaUICustomizationClassicUnitFragment : Fragment() {
 //            TBLCallToActionButtonStylePropertiesBuilder()
 //                // Sets the visibility of the call-to-action (CTA) button.
 //                // The button is visible by default. Pass false to hide.
-//                .setVisibility(true)
+//                .setVisibility(false)
 //                .build()
 
         // Set the custom UI properties to the Meta native Ad

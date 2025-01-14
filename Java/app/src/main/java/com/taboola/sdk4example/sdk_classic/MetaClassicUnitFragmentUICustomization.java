@@ -124,11 +124,11 @@ public class MetaClassicUnitFragmentUICustomization extends BaseTaboolaFragment 
                 .setTypeface(font)
                 .build();
 
-//        // Create custom style properties for the call to action button
+//        Create custom style properties for the call to action button
 //        TBLUiStyleProperties ctaStyleProperties = new TBLCallToActionButtonStylePropertiesBuilder()
-//                // Set the visibility of the call to action, the CTA button will be displayed by default if
-//                // you want to hide it you need to pass false to the setVisibility method
-//                .setVisibility(true)
+//                // Sets the visibility of the call-to-action (CTA) button.
+//                // The button is visible by default. Pass false to hide.
+//                .setVisibility(false)
 //                .build();
 
         // Set the custom UI properties to the Meta native Ad
