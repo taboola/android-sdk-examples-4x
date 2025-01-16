@@ -27,14 +27,13 @@ import com.taboola.android.Taboola;
 import com.taboola.android.annotations.TBL_PLACEMENT_TYPE;
 import com.taboola.android.listeners.TBLClassicListener;
 
+import com.taboola.android.utils.style_properties.TBLTextStylePropertiesBuilder;
 import com.taboola.android.utils.style_properties.TBLTitleStylePropertiesBuilder;
 import com.taboola.android.utils.style_properties.TBLUiStyleProperties;
-import com.taboola.android.utils.style_properties.TBLCallToActionButtonStylePropertiesBuilder;
 import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.MetaConst;
 import com.taboola.sdk4example.R;
 import com.taboola.sdk4example.tabs.BaseTaboolaFragment;
-import com.taboola.android.utils.style_properties.TBLTextStylePropertiesBuilder;
 
 import java.util.HashMap;
 

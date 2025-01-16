@@ -80,6 +80,7 @@ class MetaClassicUnitFragment : Fragment() {
                     Log.d(TAG, "onResize $height")
                 }
             })
+        //Force the ad to be of type image_link
         tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE)
         tblMetaClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID))
         tblMetaClassicUnit.setMetaNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)

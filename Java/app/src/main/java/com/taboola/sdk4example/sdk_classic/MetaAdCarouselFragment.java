@@ -70,6 +70,7 @@ public class MetaAdCarouselFragment extends BaseTaboolaFragment {
                 Log.d(TAG, "onAdReceiveFail " + error);
             }
         });
+        // Force the ad to be of type image_link
         tblClassicUnit.setAdTypeForDebug(MetaConst.TEST_LAYOUT_CAROUSEL_TYPE);
         tblClassicUnit.setUnitExtraProperties(new HashMap<String, String>() {{
             put(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY, MetaConst.AUDIENCE_NETWORK_CAROUSEL_PLACEMENT_ID);
