@@ -21,6 +21,8 @@
     <item name="std_meta_ad" type="id" />
     <item name="std_meta_carousel" type="id" />
     <item name="std_meta_classic_unit" type="id" />
+    <item name="std_meta_ad_UI_customization" type="id" />
+    <item name="std_meta_tbl_classic_unit_ad_UI_customization" type="id" />
     <item name="native_widget" type="id" />
     <item name="native_feed" type="id" />
 

@@ -107,6 +107,8 @@ These will help you remember what the consumer really wants to engage with and w
     <string name="std_feed_lazy_loading_rv">Feed Lazy Loading (RecyclerView)</string>
     <string name="std_mid_article_with_feed_dark_mode_rv">Feed with Dark Mode (RecyclerView)</string>
     <string name="std_meta">Meta Ad Inside ScrollView Fragment</string>
+    <string name="std_meta_ad_UI_customization">MetaAd UI customization</string>
+    <string name="std_meta_tbl_classic_unit_ad_UI_customization">MeteTBLClassicUnit UI customization</string>
     <string name="std_meta_classic_unit">Meta Ad Above Feed Fragment</string>
     <string name="std_meta_carousel">Meta Ad Carousel Fragment</string>
     <string name="native_widget">Native Widget</string>
