@@ -1,0 +1,96 @@
+package com.taboola.kotlin.examples.screens.classic
+
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.facebook.ads.NativeAdLayout
+import com.taboola.android.MetaPlacementProperties
+import com.taboola.android.TBLPublisherInfo
+import com.taboola.android.Taboola
+import com.taboola.android.annotations.TBL_PLACEMENT_TYPE
+import com.taboola.android.listeners.TBLClassicListener
+import com.taboola.kotlin.examples.MetaConst
+import com.taboola.kotlin.examples.PlacementInfo
+import com.taboola.kotlin.examples.R
+
+class MetaClassicUnitFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Taboola.init(TBLPublisherInfo(MetaConst.META_PUBLISHER_NAME))
+        val rootView = inflater.inflate(R.layout.fragment_meta_ad_classic_unit, null)
+        val adContainerTop: NativeAdLayout =
+            rootView.findViewById(R.id.native_ad_container_top)
+        Taboola.setGlobalExtraProperties(object : HashMap<String?, String?>() {
+            init {
+                put(
+                    MetaConst.AUDIENCE_NETWORK_APPLICATION_ID_KEY,
+                    MetaConst.AUDIENCE_NETWORK_APP_ID
+                )
+                put(MetaConst.ENABLE_META_DEMAND_DEBUG_KEY, "true")
+            }
+        })
+        setupAndLoadTaboolaAd(adContainerTop)
+        return rootView
+    }
+
+
+    private fun setupAndLoadTaboolaAd(adContainer: NativeAdLayout) {
+        val widgetProperties = PlacementInfo.metaWidgetProperties()
+        val feedProperties = PlacementInfo.metaFeedProperties()
+        val tblClassicPage = Taboola.getClassicPage(feedProperties.pageUrl, feedProperties.pageType)
+        val metaPlacementProperties =
+            MetaPlacementProperties(widgetProperties.placementName, widgetProperties.mode)
+        val tblMetaClassicUnit = tblClassicPage.buildWithMeta(
+            context,
+            feedProperties.placementName,
+            feedProperties.mode,
+            TBL_PLACEMENT_TYPE.PAGE_MIDDLE,
+            metaPlacementProperties,
+            object : TBLClassicListener() {
+                override fun onItemClick(
+                    placementName: String?,
+                    itemId: String?,
+                    clickUrl: String?,
+                    isOrganic: Boolean,
+                    customData: String?
+                ): Boolean {
+                    Log.d(TAG, "onItemClick")
+                    return super.onItemClick(placementName, itemId, clickUrl, isOrganic, customData)
+                }
+
+                override fun onAdReceiveSuccess() {
+                    super.onAdReceiveSuccess()
+                    Log.d(TAG, "onAdReceiveSuccess")
+                }
+
+                override fun onAdReceiveFail(error: String?) {
+                    super.onAdReceiveFail(error)
+                    Log.d(TAG, "onAdReceiveFail $error")
+                }
+
+                override fun onResize(height: Int) {
+                    super.onResize(height)
+                    Log.d(TAG, "onResize $height")
+                }
+            })
+        //Force the ad to be of type image_link
+        tblMetaClassicUnit.setMetaAdTypeForDebug(MetaConst.TEST_LAYOUT_IMAGE_LINK_TYPE)
+        tblMetaClassicUnit.setUnitExtraProperties(hashMapOf(MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID_KEY to MetaConst.AUDIENCE_NETWORK_PLACEMENT_ID))
+        tblMetaClassicUnit.setMetaNativeUI(MetaConst.DEFAULT_LAYOUT_KEY)
+        adContainer.addView(tblMetaClassicUnit)
+        tblMetaClassicUnit.fetchContent()
+    }
+
+    companion object {
+        private val TAG = MetaClassicUnitFragment::class.java.simpleName
+    }
+}
+
+
