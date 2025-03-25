@@ -32,15 +32,15 @@ class ClassicComposeWidget : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = ComposeView(requireContext()).apply {
-        val tblClassicUnit: TBLClassicComposeUnit = createTaboolaWidget(context)
+    ): View = ComposeView(requireContext()).apply {
+        val tblClassicComposeUnit: TBLClassicComposeUnit = createTaboolaWidget(context)
 
         // Fetch content for Unit
-        tblClassicUnit.fetchContent()
+        tblClassicComposeUnit.fetchContent()
 
         setContent {
             //Add TBLClassicUnit to the UI (to layout)
-            classicIntegration(tblClassicUnit = tblClassicUnit)
+            classicIntegration(tblClassicComposeUnit = tblClassicComposeUnit)
         }
     }
 
@@ -86,12 +86,12 @@ class ClassicComposeWidget : Fragment() {
  * This method will be used in each case in the app when we need to Add TBLClassicUnit (Widget/Feed)
  */
 @Composable
-fun classicIntegration(tblClassicUnit: TBLClassicComposeUnit) {
+fun classicIntegration(tblClassicComposeUnit: TBLClassicComposeUnit) {
     val scrollState = rememberScrollState()
     Column(modifier = Modifier.fillMaxSize().verticalScroll(scrollState)) {
         Text(stringResource(id = R.string.lorem_ipsum_long))
         Spacer(modifier = Modifier.height(500.dp))
-        tblClassicUnit.GetClassicUnitView(state = scrollState)
+        tblClassicComposeUnit.GetClassicUnitView(state = scrollState)
     }
 
 }
