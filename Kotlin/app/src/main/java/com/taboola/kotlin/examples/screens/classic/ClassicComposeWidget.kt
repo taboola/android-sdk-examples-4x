@@ -90,7 +90,6 @@ fun classicIntegration(tblClassicComposeUnit: TBLClassicComposeUnit) {
     val scrollState = rememberScrollState()
     Column(modifier = Modifier.fillMaxSize().verticalScroll(scrollState)) {
         Text(stringResource(id = R.string.lorem_ipsum_long))
-        Spacer(modifier = Modifier.height(500.dp))
         tblClassicComposeUnit.GetClassicUnitView(state = scrollState)
     }
 
