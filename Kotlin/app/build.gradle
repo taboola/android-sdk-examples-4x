@@ -50,7 +50,7 @@ android {
 
 dependencies {
     // Import Taboola SDK
-    implementation 'com.taboola:android-sdk:4.0.0'
+    implementation 'com.taboola:android-sdk:4.0.8'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
