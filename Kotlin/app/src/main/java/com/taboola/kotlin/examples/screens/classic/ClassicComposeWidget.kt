@@ -37,7 +37,7 @@ class ClassicComposeWidget : Fragment() {
 
         setContent {
             //Add TBLClassicUnit to the UI (to layout)
-            classicIntegration(tblClassicComposeUnit = tblClassicComposeUnit)
+            ClassicIntegration(tblClassicComposeUnit = tblClassicComposeUnit)
         }
     }
 
@@ -83,7 +83,7 @@ class ClassicComposeWidget : Fragment() {
  * This method will be used in each case in the app when we need to Add TBLClassicUnit (Widget/Feed)
  */
 @Composable
-fun classicIntegration(tblClassicComposeUnit: TBLClassicComposeUnit) {
+fun ClassicIntegration(tblClassicComposeUnit: TBLClassicComposeUnit) {
     val scrollState = rememberScrollState()
     Column(modifier = Modifier.fillMaxSize().verticalScroll(scrollState)) {
         Text(stringResource(id = R.string.lorem_ipsum_long))
