@@ -50,7 +50,7 @@ class ClassicComposeFeed : Fragment() {
             Taboola.getClassicPage(properties.pageUrl, properties.pageType)
 
         // Define a single Unit to display
-        val classicUnit: TBLClassicComposeUnit = classicPage.buildComposeUnit(
+        val tblClassicComposeUnit: TBLClassicComposeUnit = classicPage.buildComposeUnit(
             context,
             properties.placementName,
             properties.mode,
@@ -67,7 +67,7 @@ class ClassicComposeFeed : Fragment() {
                 }
             }
         )
-        return classicUnit
+        return tblClassicComposeUnit
     }
 
     companion object {
