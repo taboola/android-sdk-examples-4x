@@ -28,7 +28,7 @@ class ClassicComposeFeed : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = ComposeView(requireContext()).apply {
+    ): View = ComposeView(requireContext()).apply {
         setContent {
             // Create and return a Taboola Unit
             val tblClassicComposeUnit = getTaboolaUnit(PlacementInfo.classicFeedProperties())
