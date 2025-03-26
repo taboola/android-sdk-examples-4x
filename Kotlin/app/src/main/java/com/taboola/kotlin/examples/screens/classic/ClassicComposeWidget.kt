@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
@@ -17,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.taboola.android.TBLClassicComposeUnit
 import com.taboola.android.Taboola
@@ -57,7 +54,7 @@ class ClassicComposeWidget : Fragment() {
         val tblClassicPage = Taboola.getClassicPage(properties.pageUrl, properties.pageType)
 
         //Define a single Unit to display
-        val tblClassicUnit: TBLClassicComposeUnit = tblClassicPage.buildComposeUnit(
+        val tblClassicComposeUnit: TBLClassicComposeUnit = tblClassicPage.buildComposeUnit(
             context,
             properties.placementName,
             properties.mode,
@@ -73,7 +70,7 @@ class ClassicComposeWidget : Fragment() {
                     Log.d(TAG,"Taboola | onAdReceiveFail: $error")
                 }
             })
-        return tblClassicUnit
+        return tblClassicComposeUnit
     }
 
     companion object {
