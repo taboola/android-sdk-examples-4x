@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+# Keep specific scroll-related interfaces for Taboola
+-keep interface androidx.core.view.NestedScrollingChild
+-keep interface androidx.core.view.NestedScrollingChild2
+-keep interface androidx.core.view.NestedScrollingChild3
+-keep interface androidx.core.view.ScrollingView
