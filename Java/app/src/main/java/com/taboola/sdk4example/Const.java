@@ -23,4 +23,8 @@ public class Const {
     public static final String FEED_PLACEMENT_NAME =  "Feed without video";
     public static final String FEED_MODE =  "thumbs-feed-01";
     public static final String DARK_MODE = "darkMode";
+
+    //Explore More
+    public static final String EXPLORE_MORE_PLACEMENT_NAME =  "Feed - Explore More";
+    public static final String EXPLORE_MORE_CUSTOM_SEGMENT =  "subscriber";
 }

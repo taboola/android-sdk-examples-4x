@@ -41,6 +41,12 @@
         android:label="@string/nav_classic_compose_feed_lazycolumn"
         />
 
+    <fragment
+        android:id="@+id/nav_classic_explore_more"
+        android:name="com.taboola.kotlin.examples.screens.classic.ExploreMoreFragment"
+        android:label="@string/classic_explore_more"
+        />
+
 
     <fragment
         android:id="@+id/nav_web_widget"

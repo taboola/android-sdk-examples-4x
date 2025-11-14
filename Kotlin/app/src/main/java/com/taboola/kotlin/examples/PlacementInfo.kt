@@ -2,7 +2,7 @@ package com.taboola.kotlin.examples
 
 class PlacementInfo {
 
-    class WidgetProperties  {
+    class WidgetProperties {
         val placementName = "Widget without video"
         val sourceType = "text"
         val pageType = "article"
@@ -29,7 +29,7 @@ class PlacementInfo {
         val mode = "thumbs-feed-01"
     }
 
-    class WebFeedProperties  {
+    class WebFeedProperties {
         val placementName = "Feed without video"
         val sourceType = "text"
         val pageType = "article"
@@ -38,12 +38,22 @@ class PlacementInfo {
         val mode = "thumbs-feed-01"
     }
 
+    class ExploreMoreProperties {
+        val placementName = "Feed - Explore More"
+        val pageType = "article"
+        val pageUrl = "https://blog.taboola.com"
+        val mode = "thumbs-feed-01"
+        val customSegment = "subscriber"
+    }
+
     // Static access
-    companion object  {
+    companion object {
         fun widgetProperties() = WidgetProperties()
         fun classicFeedProperties() = ClassicFeedProperties()
+
         fun nativeFeedProperties() = NativeFeedProperties()
         fun webFeedProperties() = WebFeedProperties()
+        fun exploreMoreProperties() = ExploreMoreProperties()
     }
 
 

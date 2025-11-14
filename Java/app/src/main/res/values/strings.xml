@@ -106,6 +106,7 @@ These will help you remember what the consumer really wants to engage with and w
     <string name="std_feed_pull_to_refresh">Pull to refresh</string>
     <string name="std_feed_lazy_loading_rv">Feed Lazy Loading (RecyclerView)</string>
     <string name="std_mid_article_with_feed_dark_mode_rv">Feed with Dark Mode (RecyclerView)</string>
+    <string name="std_explore_more">Explore More</string>
     <string name="native_widget">Native Widget</string>
     <string name="native_feed">Native Feed</string>
     <!-- TODO: Remove or change this placeholder text -->

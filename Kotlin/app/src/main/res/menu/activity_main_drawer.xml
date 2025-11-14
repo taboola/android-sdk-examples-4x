@@ -23,6 +23,9 @@
             android:id="@+id/nav_classic_compose_feed_recyclerView"
             android:title="@string/nav_classic_compose_feed_lazycolumn" />
         <item
+            android:id="@+id/nav_classic_explore_more"
+            android:title="@string/classic_explore_more" />
+        <item
             android:id="@+id/nav_web_widget"
             android:title="@string/web_widget" />
         <item
