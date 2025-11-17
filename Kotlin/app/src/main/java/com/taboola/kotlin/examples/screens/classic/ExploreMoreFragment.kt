@@ -14,6 +14,16 @@ import com.taboola.android.listeners.TBLExploreMoreClassicListener
 import com.taboola.kotlin.examples.PlacementInfo
 import com.taboola.kotlin.examples.R
 
+/**
+ * A fragment demonstrating the integration of the Taboola SDK's Explore More feature.
+ * <p>
+ * This fragment initializes a Taboola Classic Page and implements a custom back press handler
+ * that conditionally displays the "Explore More" screen upon a system back button press,
+ * allowing users to view more content before exiting the view.
+ * <p>
+ * The fragment keeps track of Explore More status and it will show Explore More
+ * only if it has been loaded and has not been shown
+ */
 class ExploreMoreFragment : Fragment() {
 
     private lateinit var tblClassicPage: TBLClassicPage
@@ -31,16 +41,24 @@ class ExploreMoreFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_explore_more, container, false)
 
-        buildExploreMore(inflater.context)
+        val properties = PlacementInfo.exploreMoreProperties()
+        tblClassicPage = Taboola.getClassicPage(properties.pageUrl, properties.pageType)
+
+        initExploreMore(inflater.context, properties)
         setUpBackPressedHandler()
 
         return root
     }
 
-    private fun buildExploreMore(context: Context?) {
-        val properties = PlacementInfo.exploreMoreProperties()
-
-        tblClassicPage = Taboola.getClassicPage(properties.pageUrl, properties.pageType)
+    /**
+     * Configures the Explore More feature.
+     * <p>
+     * Sets up a listener to track when the Explore More content is successfully received
+     * and when the screen is opened, updating the {@code shouldShowExploreMore} flag accordingly.
+     *
+     * @param context The application or activity context required for Taboola initialization.
+     */
+    private fun initExploreMore(context: Context?, properties: PlacementInfo.ExploreMoreProperties) {
 
         val tblExploreMoreClassicListener = object : TBLExploreMoreClassicListener() {
             override fun onAdReceiveSuccess() {

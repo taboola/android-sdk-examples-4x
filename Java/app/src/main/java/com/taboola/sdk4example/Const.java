@@ -26,5 +26,5 @@ public class Const {
 
     //Explore More
     public static final String EXPLORE_MORE_PLACEMENT_NAME =  "Feed - Explore More";
-    public static final String EXPLORE_MORE_CUSTOM_SEGMENT =  "subscriber";
+    public static final String EXPLORE_MORE_CUSTOM_SEGMENT_SUBSCRIBER =  "subscriber";
 }

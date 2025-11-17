@@ -17,7 +17,16 @@ import com.taboola.sdk4example.tabs.BaseTaboolaFragment;
 import com.taboola.android.TBLClassicPage;
 import com.taboola.android.Taboola;
 
-
+/**
+ * A fragment demonstrating the integration of the Taboola SDK's Explore More feature.
+ * <p>
+ * This fragment initializes a Taboola Classic Page and implements a custom back press handler
+ * that conditionally displays the "Explore More" screen upon a system back button press,
+ * allowing users to view more content before exiting the view.
+ * <p>
+ * The fragment keeps track of Explore More status and it will show Explore More
+ * only if it has been loaded and has not been shown
+ */
 public class ExploreMoreFragment extends BaseTaboolaFragment {
     private TBLClassicPage tblClassicPage;
     private boolean shouldShowExploreMore = false;
@@ -27,15 +36,23 @@ public class ExploreMoreFragment extends BaseTaboolaFragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_explore_more, container, false);
 
-        buildExploreMore(inflater.getContext());
+        tblClassicPage = Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
+
+        initExploreMore(inflater.getContext());
         setUpBackPressedHandler();
 
         return view;
     }
 
-    private void buildExploreMore(Context context) {
-
-        tblClassicPage = Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
+    /**
+     * Configures the Explore More feature.
+     * <p>
+     * Sets up a listener to track when the Explore More content is successfully received
+     * and when the screen is opened, updating the {@code shouldShowExploreMore} flag accordingly.
+     *
+     * @param context The application or activity context required for Taboola initialization.
+     */
+    private void initExploreMore(Context context) {
 
         TBLExploreMoreClassicListener tblExploreMoreClassicListener;
         tblExploreMoreClassicListener = new TBLExploreMoreClassicListener() {
@@ -57,7 +74,7 @@ public class ExploreMoreFragment extends BaseTaboolaFragment {
                 tblExploreMoreClassicListener,
                 Const.EXPLORE_MORE_PLACEMENT_NAME,
                 Const.FEED_MODE,
-                Const.EXPLORE_MORE_CUSTOM_SEGMENT);
+                Const.EXPLORE_MORE_CUSTOM_SEGMENT_SUBSCRIBER);
     }
 
     /**
