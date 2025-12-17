@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.taboola.sdk4example.sdk_classic.ExploreMoreFragment;
 import com.taboola.sdk4example.sdk_classic.FeedLazyLoadInsideRecyclerViewFragment;
 import com.taboola.sdk4example.sdk_classic.FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment;
 import com.taboola.sdk4example.sdk_classic.FeedWithMiddleArticleInsideListViewFragment;
@@ -65,6 +66,7 @@ public class SDKClassicMenuFragment extends Fragment implements View.OnClickList
         addButton(getString(R.string.std_feed_pull_to_refresh), R.id.std_feed_pull_to_refresh, viewGroup);
         addButton(getString(R.string.std_feed_lazy_loading_rv), R.id.std_feed_lazy_loading_rv, viewGroup);
         addButton(getString(R.string.std_mid_article_with_feed_dark_mode_rv), R.id.std_mid_article_with_feed_dark_mode_rv, viewGroup);
+        addButton(getString(R.string.std_explore_more), R.id.std_explore_more, viewGroup);
     }
 
 
@@ -103,6 +105,9 @@ public class SDKClassicMenuFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.std_mid_article_with_feed_dark_mode_rv:
                 fragmentToOpen = new FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment();
+                break;
+            case R.id.std_explore_more:
+                fragmentToOpen = new ExploreMoreFragment();
                 break;
         }
 
