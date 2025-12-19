@@ -26,6 +26,9 @@
             android:id="@+id/nav_classic_explore_more"
             android:title="@string/classic_explore_more" />
         <item
+            android:id="@+id/nav_classic_explore_more_compose"
+            android:title="@string/classic_explore_more_compose" />
+        <item
             android:id="@+id/nav_web_widget"
             android:title="@string/web_widget" />
         <item
