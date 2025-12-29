@@ -12,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -115,10 +116,10 @@ fun ExploreMoreScreen(
     showExploreMore: () -> Unit,
     tblClassicPage: TBLClassicPage
 ) {
-    val properties = remember { PlacementInfo.exploreMoreProperties() }
+    val properties = PlacementInfo.exploreMoreProperties()
     var shouldShowExploreMore by remember { mutableStateOf(false) }
 
-    remember(tblClassicPage, properties) {
+    LaunchedEffect(Unit) {
         initExploreMore(
             tblClassicPage = tblClassicPage,
             context = context,
@@ -162,7 +163,7 @@ private fun initExploreMore(
     properties: PlacementInfo.ExploreMoreProperties,
     onShouldShowExploreMoreChanged: (Boolean) -> Unit
 ) {
-    val listener = object : TBLExploreMoreClassicListener() {
+    val tblClassicListener = object : TBLExploreMoreClassicListener() {
         override fun onAdReceiveSuccess() {
             super.onAdReceiveSuccess()
             Log.d(ExploreMoreComposeFragment.TAG, "Taboola | onAdReceiveSuccess")
@@ -177,13 +178,13 @@ private fun initExploreMore(
 
         override fun onAdReceiveFail(error: String?) {
             super.onAdReceiveFail(error)
-            Log.d(ExploreMoreComposeFragment.TAG, "Taboola | onAdReceiveFail: $error")
+            Log.d(ExploreMoreComposeFragment.TAG, "Taboola | onAdReceiveFail: ${error ?: "Unknown error occurred during ad load."}")
         }
     }
 
     tblClassicPage.initExploreMore(
         context,
-        listener,
+        tblClassicListener,
         properties.placementName,
         properties.mode,
         properties.customSegment

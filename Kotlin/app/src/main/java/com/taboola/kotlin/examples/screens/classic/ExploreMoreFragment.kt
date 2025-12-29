@@ -79,7 +79,7 @@ class ExploreMoreFragment : Fragment() {
 
             override fun onAdReceiveFail(error: String?) {
                 super.onAdReceiveFail(error)
-                Log.d(TAG, "Taboola | onAdReceiveFail: $error")
+                Log.d(TAG, "Taboola | onAdReceiveFail: ${error ?: "Unknown error occurred during ad load."}")
             }
         }
 
