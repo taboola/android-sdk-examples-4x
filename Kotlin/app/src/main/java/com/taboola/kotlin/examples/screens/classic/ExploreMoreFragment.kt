@@ -2,6 +2,7 @@ package com.taboola.kotlin.examples.screens.classic
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -58,17 +59,27 @@ class ExploreMoreFragment : Fragment() {
      *
      * @param context The application or activity context required for Taboola initialization.
      */
-    private fun initExploreMore(context: Context?, properties: PlacementInfo.ExploreMoreProperties) {
+    private fun initExploreMore(
+        context: Context?,
+        properties: PlacementInfo.ExploreMoreProperties
+    ) {
 
         val tblExploreMoreClassicListener = object : TBLExploreMoreClassicListener() {
             override fun onAdReceiveSuccess() {
                 super.onAdReceiveSuccess()
+                Log.d(TAG, "Taboola | onAdReceiveSuccess")
                 shouldShowExploreMore = true
             }
 
             override fun exploreMoreDidOpen() {
                 super.exploreMoreDidOpen()
+                Log.d(TAG, "Taboola | exploreMoreDidOpen")
                 shouldShowExploreMore = false
+            }
+
+            override fun onAdReceiveFail(error: String?) {
+                super.onAdReceiveFail(error)
+                Log.d(TAG, "Taboola | onAdReceiveFail: ${error ?: "Unknown error occurred during ad load."}")
             }
         }
 
@@ -114,5 +125,9 @@ class ExploreMoreFragment : Fragment() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        val TAG: String = ExploreMoreFragment::class.java.simpleName
     }
 }

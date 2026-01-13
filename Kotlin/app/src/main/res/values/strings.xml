@@ -17,6 +17,7 @@
     <string name="classic_widget_xml">Classic Xml Widget</string>
     <string name="classic_viewpager">Classic View Pager</string>
     <string name="classic_explore_more">Classic Explore More</string>
+    <string name="classic_explore_more_compose">Classic Explore More - Compose</string>
     <string name="web_widget">Web Widget</string>
     <string name="web_compose_widget">Web Widget - Compose</string>
     <string name="web_compose_feed">Web Feed - Compose</string>

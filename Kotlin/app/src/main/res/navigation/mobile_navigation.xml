@@ -47,6 +47,12 @@
         android:label="@string/classic_explore_more"
         />
 
+    <fragment
+        android:id="@+id/nav_classic_explore_more_compose"
+        android:name="com.taboola.kotlin.examples.screens.classic.ExploreMoreComposeFragment"
+        android:label="@string/classic_explore_more_compose"
+        />
+
 
     <fragment
         android:id="@+id/nav_web_widget"
