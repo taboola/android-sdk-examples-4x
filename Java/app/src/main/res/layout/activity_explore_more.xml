@@ -16,6 +16,40 @@
             android:layout_marginBottom="10dp"
             android:text="@string/first_text_block" />
 
+        <LinearLayout
+            android:id="@+id/loading_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/loading_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/explore_more_loading" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/show_explore_more_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/show_explore_more" />
+
+        <Button
+            android:id="@+id/set_back_button_trigger_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/set_back_button_trigger" />
+
     </LinearLayout>
 
 </ScrollView>

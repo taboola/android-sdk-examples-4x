@@ -5,20 +5,29 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import android.content.Context
-import android.view.MenuItem
+import androidx.compose.foundation.layout.Row
+import androidx.compose.ui.Alignment
 import androidx.fragment.app.Fragment
 import com.taboola.android.TBLClassicPage
 import com.taboola.android.Taboola
@@ -29,12 +38,20 @@ import com.taboola.kotlin.examples.R
 /**
  * A fragment demonstrating the integration of the Taboola SDK's Explore More feature using Jetpack Compose.
  * <p>
- * This fragment initializes a Taboola Classic Page and sets up the back button trigger
- * that conditionally displays the "Explore More" screen upon a system back button press,
- * allowing users to view more content before exiting the view.
+ * This fragment initializes a Taboola Classic Page and provides UI to demonstrate
+ * both the {@code showExploreMore} and {@code setExploreMoreBackButtonTrigger} APIs.
  * <p>
- * The fragment uses the SDK's built-in back button trigger which automatically handles
- * showing Explore More only if it has been loaded and the screen is a root screen.
+ * The fragment displays a loading indicator ("Explore More loading") while Explore More
+ * is being loaded. Once loading completes successfully, two buttons appear:
+ * <ul>
+ *   <li>"Show Explore More" - Manually triggers the Explore More modal</li>
+ *   <li>"Set Back Button Trigger" - Sets up automatic Explore More display on back button press</li>
+ * </ul>
+ * Both buttons disappear after either one is clicked to indicate that an action has been taken.
+ * <p>
+ * The back button trigger will automatically show Explore More on back button press if:
+ * - Explore More has been loaded successfully
+ * - The screen is a root screen (back button would exit the app)
  */
 class ExploreMoreComposeFragment : Fragment() {
 
@@ -50,15 +67,14 @@ class ExploreMoreComposeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val properties = PlacementInfo.exploreMoreProperties()
-        initializeTaboolaPage(properties)
-        setUpBackButtonTrigger()
+        initializeTaboolaPage(properties = PlacementInfo.exploreMoreProperties())
 
         return ComposeView(requireContext()).apply {
             setContent {
                 ExploreMoreScreen(
                     context = requireContext(),
-                    tblClassicPage = tblClassicPage
+                    tblClassicPage = tblClassicPage,
+                    fragment = this@ExploreMoreComposeFragment
                 )
             }
         }
@@ -78,17 +94,23 @@ class ExploreMoreComposeFragment : Fragment() {
 
     /**
      * Sets up the back button trigger using the SDK's built-in method.
-     * This will automatically show Explore More on back button press if:
-     * - Explore More has been loaded successfully
-     * - The screen is a root screen (back button would exit the app)
-     * Note that Explore More can also be manually triggered by any other action.
+     * <p>
+     * This configures the system back button to automatically show Explore More
+     * when pressed, but only if:
+     * <ul>
+     *   <li>Explore More has been loaded successfully</li>
+     *   <li>The screen is a root screen (back button would exit the app)</li>
+     * </ul>
+     * This method is called when the user clicks the "Set Back Button Trigger" button.
      */
-    private fun setUpBackButtonTrigger() {
+    fun setUpBackButtonTrigger() {
+        val activity = requireActivity()
+
         tblClassicPage.setExploreMoreBackButtonTrigger(
-            requireActivity(),
-            requireActivity().onBackPressedDispatcher,
+            activity,
+            activity.onBackPressedDispatcher,
             viewLifecycleOwner,
-            requireActivity().supportFragmentManager
+            activity.supportFragmentManager
         )
     }
 
@@ -100,44 +122,112 @@ class ExploreMoreComposeFragment : Fragment() {
 @Composable
 fun ExploreMoreScreen(
     context: Context,
-    tblClassicPage: TBLClassicPage
+    tblClassicPage: TBLClassicPage,
+    fragment: ExploreMoreComposeFragment
 ) {
-    val properties = PlacementInfo.exploreMoreProperties()
+    var isLoadingVisible by remember { mutableStateOf(true) }
+    var areButtonsVisible by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         initExploreMore(
             tblClassicPage = tblClassicPage,
             context = context,
-            properties = properties
+            properties = PlacementInfo.exploreMoreProperties(),
+            onLoadingStateChanged = { isLoading ->
+                isLoadingVisible = isLoading
+            },
+            onButtonsVisibilityChanged = { areVisible ->
+                areButtonsVisible = areVisible
+            }
         )
     }
 
-    Text(
-        text = stringResource(id = R.string.lorem_ipsum),
-        fontSize = 20.sp,
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(8.dp)
-    )
+    ) {
+        Text(
+            text = stringResource(id = R.string.lorem_ipsum),
+            fontSize = 20.sp,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        // Loading indicator
+        if (isLoadingVisible) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CircularProgressIndicator(modifier = Modifier.padding(end = 10.dp))
+                Text(
+                    text = stringResource(id = R.string.explore_more_loading),
+                )
+            }
+        }
+
+        // Show Explore More button
+        if (areButtonsVisible) {
+            Button(
+                onClick = {
+                    Log.d(ExploreMoreComposeFragment.TAG, "Show Explore More button pressed")
+                    tblClassicPage.showExploreMore(fragment.requireActivity().supportFragmentManager)
+                    areButtonsVisible = false
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+            ) {
+                Text(text = stringResource(id = R.string.show_explore_more))
+            }
+
+            // Set Back Button Trigger button
+            Button(
+                onClick = {
+                    Log.d(ExploreMoreComposeFragment.TAG, "Set Back Button Trigger button pressed")
+                    fragment.setUpBackButtonTrigger()
+                    areButtonsVisible = false
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+            ) {
+                Text(text = stringResource(id = R.string.set_back_button_trigger))
+            }
+        }
+    }
 }
 
 /**
- * Configures the Explore More feature.
+ * Configures the Explore More feature by initializing it with the Taboola SDK.
+ * <p>
+ * Sets up listeners that handle the loading state UI:
+ * - Hides the loading indicator when Explore More loads successfully or fails
+ * - Shows the action buttons when Explore More loads successfully
  *
  * @param tblClassicPage The Taboola Classic Page
  * @param context The application or activity context required for Taboola initialization
  * @param properties The placement properties for Explore More configuration
+ * @param onLoadingStateChanged Callback to update loading indicator visibility
+ * @param onButtonsVisibilityChanged Callback to update buttons visibility
  */
 private fun initExploreMore(
     tblClassicPage: TBLClassicPage,
     context: Context,
-    properties: PlacementInfo.ExploreMoreProperties
+    properties: PlacementInfo.ExploreMoreProperties,
+    onLoadingStateChanged: (Boolean) -> Unit,
+    onButtonsVisibilityChanged: (Boolean) -> Unit
 ) {
     val tblClassicListener = object : TBLExploreMoreClassicListener() {
         override fun onAdReceiveSuccess() {
             super.onAdReceiveSuccess()
             Log.d(ExploreMoreComposeFragment.TAG, "Taboola | onAdReceiveSuccess")
+            // Hide loading indicator
+            onLoadingStateChanged(false)
+            // Show buttons after Explore More is successfully loaded
+            onButtonsVisibilityChanged(true)
         }
 
         override fun exploreMoreDidOpen() {
@@ -147,7 +237,12 @@ private fun initExploreMore(
 
         override fun onAdReceiveFail(error: String?) {
             super.onAdReceiveFail(error)
-            Log.d(ExploreMoreComposeFragment.TAG, "Taboola | onAdReceiveFail: ${error ?: "Unknown error occurred during ad load."}")
+            Log.d(
+                ExploreMoreComposeFragment.TAG,
+                "Taboola | onAdReceiveFail: ${error ?: "Unknown error occurred during ad load."}"
+            )
+            // Hide loading indicator
+            onLoadingStateChanged(false)
         }
     }
 
