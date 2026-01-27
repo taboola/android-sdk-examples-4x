@@ -1,6 +1,7 @@
 package com.taboola.sdk4example;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.taboola.sdk4example.sdk_classic.ExploreMoreFragment;
+import com.taboola.sdk4example.sdk_classic.ExploreMoreActivity;
 import com.taboola.sdk4example.sdk_classic.FeedLazyLoadInsideRecyclerViewFragment;
 import com.taboola.sdk4example.sdk_classic.FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment;
 import com.taboola.sdk4example.sdk_classic.FeedWithMiddleArticleInsideListViewFragment;
@@ -107,8 +108,12 @@ public class SDKClassicMenuFragment extends Fragment implements View.OnClickList
                 fragmentToOpen = new FeedWithMiddleArticleDarkModeInsideRecyclerViewFragment();
                 break;
             case R.id.std_explore_more:
-                fragmentToOpen = new ExploreMoreFragment();
-                break;
+                // Start ExploreMoreActivity with flags to clear the task stack 
+                // Because Explore More auto trigger works only if the activity or fragment is the root screen
+                Intent intent = new Intent(getContext(), ExploreMoreActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                return;
         }
 
         if (fragmentToOpen != null) {

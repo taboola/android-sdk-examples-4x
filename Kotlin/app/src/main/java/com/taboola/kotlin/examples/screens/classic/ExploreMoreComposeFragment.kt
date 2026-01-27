@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -13,10 +12,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
@@ -34,17 +29,16 @@ import com.taboola.kotlin.examples.R
 /**
  * A fragment demonstrating the integration of the Taboola SDK's Explore More feature using Jetpack Compose.
  * <p>
- * This fragment initializes a Taboola Classic Page and implements a custom back press handler
+ * This fragment initializes a Taboola Classic Page and sets up the back button trigger
  * that conditionally displays the "Explore More" screen upon a system back button press,
  * allowing users to view more content before exiting the view.
  * <p>
- * The fragment keeps track of Explore More status and it will show Explore More
- * only if it has been loaded and has not been shown
+ * The fragment uses the SDK's built-in back button trigger which automatically handles
+ * showing Explore More only if it has been loaded and the screen is a root screen.
  */
 class ExploreMoreComposeFragment : Fragment() {
 
     private lateinit var tblClassicPage: TBLClassicPage
-    private var shouldShowExploreMore = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,16 +49,18 @@ class ExploreMoreComposeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = ComposeView(requireContext()).apply {
-        setContent {
-            initializeTaboolaPage(PlacementInfo.exploreMoreProperties())
+    ): View {
+        val properties = PlacementInfo.exploreMoreProperties()
+        initializeTaboolaPage(properties)
+        setUpBackButtonTrigger()
 
-            ExploreMoreScreen(
-                context = requireContext(),
-                setShouldShowExploreMore = ::setShouldShowExploreMore,
-                showExploreMore = ::showExploreMore,
-                tblClassicPage = tblClassicPage
-            )
+        return ComposeView(requireContext()).apply {
+            setContent {
+                ExploreMoreScreen(
+                    context = requireContext(),
+                    tblClassicPage = tblClassicPage
+                )
+            }
         }
     }
 
@@ -81,27 +77,19 @@ class ExploreMoreComposeFragment : Fragment() {
     }
 
     /**
-     * Displays the Explore More screen using the Taboola SDK.
+     * Sets up the back button trigger using the SDK's built-in method.
+     * This will automatically show Explore More on back button press if:
+     * - Explore More has been loaded successfully
+     * - The screen is a root screen (back button would exit the app)
+     * Note that Explore More can also be manually triggered by any other action.
      */
-    fun showExploreMore() {
-        tblClassicPage.showExploreMore(requireActivity().supportFragmentManager)
-    }
-
-    /**
-     * Updates the shouldShowExploreMore flag.
-     * This is called from the composable when the Explore More state changes.
-     */
-    fun setShouldShowExploreMore(shouldShow: Boolean) {
-        shouldShowExploreMore = shouldShow
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Check if the selected menu item is the back arrow on the Toolbar/ActionBar and if Explore More should be revealed
-        if (item.itemId == android.R.id.home && shouldShowExploreMore) {
-            showExploreMore()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+    private fun setUpBackButtonTrigger() {
+        tblClassicPage.setExploreMoreBackButtonTrigger(
+            requireActivity(),
+            requireActivity().onBackPressedDispatcher,
+            viewLifecycleOwner,
+            requireActivity().supportFragmentManager
+        )
     }
 
     companion object {
@@ -112,28 +100,16 @@ class ExploreMoreComposeFragment : Fragment() {
 @Composable
 fun ExploreMoreScreen(
     context: Context,
-    setShouldShowExploreMore: (Boolean) -> Unit,
-    showExploreMore: () -> Unit,
     tblClassicPage: TBLClassicPage
 ) {
     val properties = PlacementInfo.exploreMoreProperties()
-    var shouldShowExploreMore by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         initExploreMore(
             tblClassicPage = tblClassicPage,
             context = context,
-            properties = properties,
-            onShouldShowExploreMoreChanged = {
-                shouldShowExploreMore = it
-                setShouldShowExploreMore(it)
-            }
+            properties = properties
         )
-    }
-
-    // Handle back button press to show Explore More
-    BackHandler(enabled = shouldShowExploreMore) {
-        showExploreMore()
     }
 
     Text(
@@ -148,32 +124,25 @@ fun ExploreMoreScreen(
 
 /**
  * Configures the Explore More feature.
- * <p>
- * Sets up a listener to track when the Explore More content is successfully received
- * and when the screen is opened, updating the shouldShowExploreMore flag accordingly.
  *
  * @param tblClassicPage The Taboola Classic Page
  * @param context The application or activity context required for Taboola initialization
  * @param properties The placement properties for Explore More configuration
- * @param onShouldShowExploreMoreChanged Callback to update the shouldShowExploreMore state
  */
 private fun initExploreMore(
     tblClassicPage: TBLClassicPage,
     context: Context,
-    properties: PlacementInfo.ExploreMoreProperties,
-    onShouldShowExploreMoreChanged: (Boolean) -> Unit
+    properties: PlacementInfo.ExploreMoreProperties
 ) {
     val tblClassicListener = object : TBLExploreMoreClassicListener() {
         override fun onAdReceiveSuccess() {
             super.onAdReceiveSuccess()
             Log.d(ExploreMoreComposeFragment.TAG, "Taboola | onAdReceiveSuccess")
-            onShouldShowExploreMoreChanged(true)
         }
 
         override fun exploreMoreDidOpen() {
             super.exploreMoreDidOpen()
             Log.d(ExploreMoreComposeFragment.TAG, "Taboola | exploreMoreDidOpen")
-            onShouldShowExploreMoreChanged(false)
         }
 
         override fun onAdReceiveFail(error: String?) {
