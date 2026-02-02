@@ -113,7 +113,7 @@ public class SDKClassicMenuFragment extends Fragment implements View.OnClickList
                 Intent intent = new Intent(getContext(), ExploreMoreActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                return;
+                break;
         }
 
         if (fragmentToOpen != null) {

@@ -21,7 +21,7 @@ import com.taboola.kotlin.examples.R
  * This fragment initializes a Taboola Classic Page and provides UI to demonstrate
  * both the {@code showExploreMore} and {@code setExploreMoreBackButtonTrigger} APIs.
  * <p>
- * The fragment displays a loading indicator ("Explore More loading") while Explore More
+ * The fragment displays a loading indicator ("Explore More Loading") while Explore More
  * is being loaded. Once loading completes successfully, two buttons appear:
  * <ul>
  *   <li>"Show Explore More" - Manually triggers the Explore More modal</li>

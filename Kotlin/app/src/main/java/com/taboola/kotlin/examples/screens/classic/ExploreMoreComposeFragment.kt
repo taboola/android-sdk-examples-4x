@@ -41,7 +41,7 @@ import com.taboola.kotlin.examples.R
  * This fragment initializes a Taboola Classic Page and provides UI to demonstrate
  * both the {@code showExploreMore} and {@code setExploreMoreBackButtonTrigger} APIs.
  * <p>
- * The fragment displays a loading indicator ("Explore More loading") while Explore More
+ * The fragment displays a loading indicator ("Explore More Loading") while Explore More
  * is being loaded. Once loading completes successfully, two buttons appear:
  * <ul>
  *   <li>"Show Explore More" - Manually triggers the Explore More modal</li>
@@ -67,7 +67,7 @@ class ExploreMoreComposeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        initializeTaboolaPage(properties = PlacementInfo.exploreMoreProperties())
+        initializeTaboolaPage(exploreMoreProperties = PlacementInfo.exploreMoreProperties())
 
         return ComposeView(requireContext()).apply {
             setContent {
@@ -84,10 +84,10 @@ class ExploreMoreComposeFragment : Fragment() {
      * Define a Page that represents this screen
      */
     private fun initializeTaboolaPage(
-        properties: PlacementInfo.ExploreMoreProperties
+        exploreMoreProperties: PlacementInfo.ExploreMoreProperties
     ) {
         val classicPage: TBLClassicPage =
-            Taboola.getClassicPage(properties.pageUrl, properties.pageType)
+            Taboola.getClassicPage(exploreMoreProperties.pageUrl, exploreMoreProperties.pageType)
 
         tblClassicPage = classicPage
     }
@@ -126,7 +126,10 @@ fun ExploreMoreScreen(
     fragment: ExploreMoreComposeFragment
 ) {
     var isLoadingVisible by remember { mutableStateOf(true) }
-    var areButtonsVisible by remember { mutableStateOf(false) }
+
+    // Controls whether the action buttons ("Show Explore More" and "Set Back Button Trigger") should be displayed.
+    // Set to true when Explore More loads successfully, and false after either button is clicked.
+    var shouldShowActionButtons by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         initExploreMore(
@@ -137,7 +140,7 @@ fun ExploreMoreScreen(
                 isLoadingVisible = isLoading
             },
             onButtonsVisibilityChanged = { areVisible ->
-                areButtonsVisible = areVisible
+                shouldShowActionButtons = areVisible
             }
         )
     }
@@ -169,12 +172,12 @@ fun ExploreMoreScreen(
         }
 
         // Show Explore More button
-        if (areButtonsVisible) {
+        if (shouldShowActionButtons) {
             Button(
                 onClick = {
                     Log.d(ExploreMoreComposeFragment.TAG, "Show Explore More button pressed")
                     tblClassicPage.showExploreMore(fragment.requireActivity().supportFragmentManager)
-                    areButtonsVisible = false
+                    shouldShowActionButtons = false
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -188,7 +191,7 @@ fun ExploreMoreScreen(
                 onClick = {
                     Log.d(ExploreMoreComposeFragment.TAG, "Set Back Button Trigger button pressed")
                     fragment.setUpBackButtonTrigger()
-                    areButtonsVisible = false
+                    shouldShowActionButtons = false
                 },
                 modifier = Modifier
                     .fillMaxWidth()

@@ -109,7 +109,7 @@ These will help you remember what the consumer really wants to engage with and w
     <string name="std_explore_more">Explore More</string>
     <string name="show_explore_more">Show Explore More</string>
     <string name="set_back_button_trigger">Set Back Button Trigger</string>
-    <string name="explore_more_loading">Explore More loading</string>
+    <string name="explore_more_loading">Explore More Loading</string>
     <string name="native_widget">Native Widget</string>
     <string name="native_feed">Native Feed</string>
     <!-- TODO: Remove or change this placeholder text -->
