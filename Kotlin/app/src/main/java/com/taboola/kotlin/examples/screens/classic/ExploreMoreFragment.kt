@@ -4,10 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.taboola.android.TBLClassicPage
 import com.taboola.android.Taboola
@@ -18,17 +18,27 @@ import com.taboola.kotlin.examples.R
 /**
  * A fragment demonstrating the integration of the Taboola SDK's Explore More feature.
  * <p>
- * This fragment initializes a Taboola Classic Page and implements a custom back press handler
- * that conditionally displays the "Explore More" screen upon a system back button press,
- * allowing users to view more content before exiting the view.
+ * This fragment initializes a Taboola Classic Page and provides UI to demonstrate
+ * both the {@code showExploreMore} and {@code setExploreMoreBackButtonTrigger} APIs.
  * <p>
- * The fragment keeps track of Explore More status and it will show Explore More
- * only if it has been loaded and has not been shown
+ * The fragment displays a loading indicator ("Explore More Loading") while Explore More
+ * is being loaded. Once loading completes successfully, two buttons appear:
+ * <ul>
+ *   <li>"Show Explore More" - Manually triggers the Explore More modal</li>
+ *   <li>"Set Back Button Trigger" - Sets up automatic Explore More display on back button press</li>
+ * </ul>
+ * Both buttons disappear after either one is clicked to indicate that an action has been taken.
+ * <p>
+ * The back button trigger will automatically show Explore More on back button press if:
+ * - Explore More has been loaded successfully
+ * - The screen is a root screen (back button would exit the app)
  */
 class ExploreMoreFragment : Fragment() {
 
     private lateinit var tblClassicPage: TBLClassicPage
-    private var shouldShowExploreMore = false
+    private lateinit var showExploreMoreButton: Button
+    private lateinit var setBackButtonTriggerButton: Button
+    private lateinit var exploreMoreLoadingContainer: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,19 +55,22 @@ class ExploreMoreFragment : Fragment() {
         val properties = PlacementInfo.exploreMoreProperties()
         tblClassicPage = Taboola.getClassicPage(properties.pageUrl, properties.pageType)
 
+        exploreMoreLoadingContainer = root.findViewById(R.id.loading_container)
+        setUpButtons(root)
         initExploreMore(inflater.context, properties)
-        setUpBackPressedHandler()
 
         return root
     }
 
     /**
-     * Configures the Explore More feature.
+     * Configures the Explore More feature by initializing it with the Taboola SDK.
      * <p>
-     * Sets up a listener to track when the Explore More content is successfully received
-     * and when the screen is opened, updating the {@code shouldShowExploreMore} flag accordingly.
+     * Sets up listeners that handle the loading state UI:
+     * - Hides the loading indicator when Explore More loads successfully or fails
+     * - Shows the action buttons when Explore More loads successfully
      *
      * @param context The application or activity context required for Taboola initialization.
+     * @param properties The placement properties for Explore More configuration
      */
     private fun initExploreMore(
         context: Context?,
@@ -68,18 +81,26 @@ class ExploreMoreFragment : Fragment() {
             override fun onAdReceiveSuccess() {
                 super.onAdReceiveSuccess()
                 Log.d(TAG, "Taboola | onAdReceiveSuccess")
-                shouldShowExploreMore = true
+                // Hide loading indicator
+                exploreMoreLoadingContainer.visibility = View.GONE
+                // Show buttons after Explore More is successfully loaded
+                showExploreMoreButton.visibility = View.VISIBLE
+                setBackButtonTriggerButton.visibility = View.VISIBLE
             }
 
             override fun exploreMoreDidOpen() {
                 super.exploreMoreDidOpen()
                 Log.d(TAG, "Taboola | exploreMoreDidOpen")
-                shouldShowExploreMore = false
             }
 
             override fun onAdReceiveFail(error: String?) {
                 super.onAdReceiveFail(error)
-                Log.d(TAG, "Taboola | onAdReceiveFail: ${error ?: "Unknown error occurred during ad load."}")
+                Log.d(
+                    TAG,
+                    "Taboola | onAdReceiveFail: ${error ?: "Unknown error occurred during ad load."}"
+                )
+                // Hide loading indicator
+                exploreMoreLoadingContainer.visibility = View.GONE
             }
         }
 
@@ -93,38 +114,64 @@ class ExploreMoreFragment : Fragment() {
     }
 
     /**
-     * Sets up the handler to intercept the system's back button press.
-     * If the condition 'shouldShowExploreMore' is true, it displays the Explore More screen instead of navigating back.
-     * Note that Explore More can also be manually triggered by any other action.
+     * Sets up the UI buttons to demonstrate both {@code showExploreMore} and
+     * {@code setExploreMoreBackButtonTrigger} APIs.
+     * <p>
+     * The buttons are hidden initially and will appear only after Explore More is
+     * successfully loaded
+     * <p>
+     * When the "Show Explore More" button is clicked, it immediately displays the
+     * Explore More modal and both buttons disappear.
+     * <p>
+     * When the "Set Back Button Trigger" button is clicked, it configures the back
+     * button to automatically show Explore More (if conditions are met) and both
+     * buttons disappear.
+     *
+     * @param root The root view of the fragment
      */
-    private fun setUpBackPressedHandler() {
-        // Create an OnBackPressedCallback object
-        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Check if Explore More should be displayed
-                if (shouldShowExploreMore) {
-                    // If true, call showExploreMore
-                    tblClassicPage.showExploreMore(requireActivity().supportFragmentManager)
-                } else {
-                    // If false, disable this callback and manually trigger the system's back press
-                    isEnabled = false
-                    requireActivity().onBackPressedDispatcher.onBackPressed()
-                }
-            }
+    private fun setUpButtons(root: View) {
+        showExploreMoreButton = root.findViewById(R.id.show_explore_more_btn)
+        setBackButtonTriggerButton = root.findViewById(R.id.set_back_button_trigger_btn)
+
+        // Hide buttons initially - they will appear after Explore More is loaded
+        showExploreMoreButton.visibility = View.GONE
+        setBackButtonTriggerButton.visibility = View.GONE
+
+        showExploreMoreButton.setOnClickListener {
+            Log.d(TAG, "Show Explore More button pressed")
+            tblClassicPage.showExploreMore(requireActivity().supportFragmentManager)
+            showExploreMoreButton.visibility = View.GONE
+            setBackButtonTriggerButton.visibility = View.GONE
         }
 
-        // Add the callback to the activity's back press dispatcher
-        requireActivity().onBackPressedDispatcher
-            .addCallback(getViewLifecycleOwner(), callback)
+        setBackButtonTriggerButton.setOnClickListener {
+            Log.d(TAG, "Set Back Button Trigger button pressed")
+            setUpBackButtonTrigger()
+            showExploreMoreButton.visibility = View.GONE
+            setBackButtonTriggerButton.visibility = View.GONE
+        }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Check if the selected menu item is the the back arrow on the Toolbar/ActionBar and if Explore More should be revealed
-        if (item.itemId == android.R.id.home && shouldShowExploreMore) {
-            tblClassicPage.showExploreMore(requireActivity().supportFragmentManager)
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+    /**
+     * Sets up the back button trigger using the SDK's built-in method.
+     * <p>
+     * This configures the system back button to automatically show Explore More
+     * when pressed, but only if:
+     * <ul>
+     *   <li>Explore More has been loaded successfully</li>
+     *   <li>The screen is a root screen (back button would exit the app)</li>
+     * </ul>
+     * This method is called when the user clicks the "Set Back Button Trigger" button.
+     */
+    private fun setUpBackButtonTrigger() {
+        val activity = requireActivity()
+
+        tblClassicPage.setExploreMoreBackButtonTrigger(
+            activity,
+            activity.onBackPressedDispatcher,
+            viewLifecycleOwner,
+            activity.supportFragmentManager
+        )
     }
 
     companion object {
