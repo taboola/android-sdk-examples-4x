@@ -46,6 +46,14 @@ class PlacementInfo {
         val customSegment = "subscriber"
     }
 
+    class InterstitialProperties {
+        val placementName = "Trigger Interstitial"
+        val pageType = "article"
+        val pageUrl = "https://blog.taboola.com"
+        val mode = "full-screen-interstitial-test"
+        val customSegment = "Vignette"
+    }
+
     // Static access
     companion object {
         fun widgetProperties() = WidgetProperties()
@@ -54,6 +62,7 @@ class PlacementInfo {
         fun nativeFeedProperties() = NativeFeedProperties()
         fun webFeedProperties() = WebFeedProperties()
         fun exploreMoreProperties() = ExploreMoreProperties()
+        fun interstitialProperties() = InterstitialProperties()
     }
 
 
