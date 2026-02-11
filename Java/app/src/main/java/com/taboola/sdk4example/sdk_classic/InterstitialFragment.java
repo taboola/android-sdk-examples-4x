@@ -19,6 +19,23 @@ import com.taboola.android.listeners.TBLClassicInterstitialListener;
 import com.taboola.sdk4example.Const;
 import com.taboola.sdk4example.R;
 
+/**
+ * Shows a Taboola Classic interstitial flow.
+ * <p>
+ * This fragment initializes a Classic page and demonstrates how to load and present
+ * a full-screen interstitial using the Taboola SDK.
+ * <p>
+ * Interstitial implementation overview:
+ * <ul>
+ *     <li>Creates a {@link TBLClassicPage} with the page URL/type from {@link Const}.</li>
+ *     <li>Initializes the interstitial placement with placement name, mode, and custom segment.</li>
+ *     <li>Loads the ad immediately; the loading UI is visible until {@code onInterstitialLoaded}.</li>
+ *     <li>Enables the "show" button only after a successful load to avoid empty presentation.</li>
+ *     <li>Presents the interstitial on user action and reacts to lifecycle callbacks
+ *     (presented/dismissed/clicked) for UI updates and logging.</li>
+ *     <li>If loading fails, the loading UI is hidden and the error is surfaced to the user.</li>
+ * </ul>
+ */
 public class InterstitialFragment extends Fragment {
 
     private static final String TAG = InterstitialFragment.class.getSimpleName();
@@ -30,6 +47,9 @@ public class InterstitialFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_interstitial, container, false);
     }
 
+    /**
+     * Initializes the Taboola Classic page, sets up callbacks, and loads the interstitial.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
