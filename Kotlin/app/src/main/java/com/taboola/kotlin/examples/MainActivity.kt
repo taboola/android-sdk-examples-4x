@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
         R.id.nav_native_feed,
         R.id.nav_classic_explore_more,
         R.id.nav_classic_explore_more_compose,
-        R.id.nav_classic_interstitial
+        R.id.nav_classic_interstitial,
+        R.id.nav_classic_interstitial_compose
     )
 
     // Fragments that should become root screens (back button exits app)

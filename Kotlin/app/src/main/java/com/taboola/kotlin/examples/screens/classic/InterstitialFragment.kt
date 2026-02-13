@@ -53,10 +53,10 @@ class InterstitialFragment : Fragment() {
         val interstitialLoadingContainer = view.findViewById<LinearLayout>(R.id.interstitial_loading_container)
         val showInterstitialButton = view.findViewById<Button>(R.id.show_interstitial_btn)
 
-        val properties = PlacementInfo.interstitialProperties()
-        tblClassicPage = Taboola.getClassicPage(properties.pageUrl, properties.pageType)
+        val interstitialProperties = PlacementInfo.interstitialProperties()
+        tblClassicPage = Taboola.getClassicPage(interstitialProperties.pageUrl, interstitialProperties.pageType)
 
-        val listener = object : TBLClassicInterstitialListener() {
+        val tblClassicInterstitialListener = object : TBLClassicInterstitialListener() {
             override fun onInterstitialLoaded() {
                 super.onInterstitialLoaded()
                 interstitialLoadingContainer.isVisible = false
@@ -99,10 +99,10 @@ class InterstitialFragment : Fragment() {
         }
 
         tblClassicPage.initInterstitial(
-            properties.placementName,
-            properties.mode,
-            properties.customSegment,
-            listener
+            interstitialProperties.placementName,
+            interstitialProperties.mode,
+            interstitialProperties.customSegment,
+            tblClassicInterstitialListener
         )
 
         tblClassicPage.loadInterstitial()

@@ -58,7 +58,7 @@ public class InterstitialFragment extends Fragment {
         Button showInterstitialButton = view.findViewById(R.id.show_interstitial_btn);
 
         tblClassicPage = Taboola.getClassicPage(Const.PAGE_URL, Const.PAGE_TYPE);
-        TBLClassicInterstitialListener listener = new TBLClassicInterstitialListener() {
+        TBLClassicInterstitialListener tblClassicInterstitialListener = new TBLClassicInterstitialListener() {
             @Override
             public void onInterstitialLoaded() {
                 super.onInterstitialLoaded();
@@ -111,7 +111,7 @@ public class InterstitialFragment extends Fragment {
                 Const.INTERSTITIAL_PLACEMENT_NAME,
                 Const.INTERSTITIAL_MODE,
                 Const.INTERSTITIAL_CUSTOM_SEGMENT_DEFAULT,
-                listener
+                tblClassicInterstitialListener
         );
 
         tblClassicPage.loadInterstitial();

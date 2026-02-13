@@ -32,6 +32,9 @@
             android:id="@+id/nav_classic_interstitial"
             android:title="@string/classic_interstitial" />
         <item
+            android:id="@+id/nav_classic_interstitial_compose"
+            android:title="@string/classic_interstitial_compose" />
+        <item
             android:id="@+id/nav_web_widget"
             android:title="@string/web_widget" />
         <item

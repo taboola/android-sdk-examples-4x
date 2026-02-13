@@ -19,6 +19,7 @@
     <string name="classic_explore_more">Classic Explore More</string>
     <string name="classic_explore_more_compose">Classic Explore More - Compose</string>
     <string name="classic_interstitial">Classic Interstitial</string>
+    <string name="classic_interstitial_compose">Classic Interstitial - Compose</string>
     <string name="web_widget">Web Widget</string>
     <string name="web_compose_widget">Web Widget - Compose</string>
     <string name="web_compose_feed">Web Feed - Compose</string>
@@ -32,7 +33,6 @@
     <string name="show_explore_more">Show Explore More</string>
     <string name="set_back_button_trigger">Set Back Button Trigger</string>
     <string name="explore_more_loading">Explore More Loading</string>
-    <string name="interstitial_custom_segment_hint">Custom segment</string>
     <string name="interstitial_loading">Loading Interstitial</string>
     <string name="interstitial_show">Show Interstitial</string>
     <string name="lorem_ipsum_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse egestas rutrum sollicitudin. Sed pulvinar ac leo vel dignissim. Vestibulum sit amet pulvinar justo, ac laoreet diam. Suspendisse in lectus quis neque mollis semper ac ut lorem. Vestibulum vulputate suscipit orci, non finibus mauris accumsan at. Ut ultrices est eros, et molestie magna egestas sit amet. Donec nec hendrerit nunc. Mauris ac blandit tellus, in pulvinar ipsum.
