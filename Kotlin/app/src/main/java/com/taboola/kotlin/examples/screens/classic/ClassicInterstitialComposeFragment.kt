@@ -18,10 +18,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,6 +42,8 @@ import com.taboola.kotlin.examples.R
 class ClassicInterstitialComposeFragment : Fragment() {
 
     private lateinit var tblClassicPage: TBLClassicPage
+    private var isLoading by mutableStateOf(true)
+    private var canShowInterstitial by mutableStateOf(false)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,36 +55,8 @@ class ClassicInterstitialComposeFragment : Fragment() {
             interstitialProperties.pageUrl,
             interstitialProperties.pageType
         )
-
-        return ComposeView(requireContext()).apply {
-            setContent {
-                InterstitialComposeScreen(
-                    tblClassicPage = tblClassicPage,
-                    interstitialProperties = interstitialProperties,
-                    onError = { error ->
-                        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
-                    }
-                )
-            }
-        }
-    }
-
-    companion object {
-        val TAG = ClassicInterstitialComposeFragment::class.java.simpleName
-    }
-}
-
-@Composable
-private fun InterstitialComposeScreen(
-    tblClassicPage: TBLClassicPage,
-    interstitialProperties: PlacementInfo.InterstitialProperties,
-    onError: (String) -> Unit
-) {
-    var isLoading by remember { mutableStateOf(true) }
-    var canShowInterstitial by remember { mutableStateOf(false) }
-    val scrollState = rememberScrollState()
-
-    LaunchedEffect(Unit) {
+        isLoading = true
+        canShowInterstitial = false
         tblClassicPage.initInterstitial(
             interstitialProperties.placementName,
             interstitialProperties.mode,
@@ -94,46 +66,68 @@ private fun InterstitialComposeScreen(
                     super.onInterstitialLoaded()
                     isLoading = false
                     canShowInterstitial = true
-                    Log.d(ClassicInterstitialComposeFragment.TAG, "The Interstitial is loaded successfully.")
+                    Log.d(TAG, "The Interstitial is loaded successfully.")
                 }
 
                 override fun onInterstitialWillPresent() {
                     super.onInterstitialWillPresent()
-                    Log.d(ClassicInterstitialComposeFragment.TAG, "The Interstitial will be presented.")
+                    Log.d(TAG, "The Interstitial will be presented.")
                 }
 
                 override fun onInterstitialPresented() {
                     super.onInterstitialPresented()
                     canShowInterstitial = false
-                    Log.d(ClassicInterstitialComposeFragment.TAG, "The Interstitial is presented.")
+                    Log.d(TAG, "The Interstitial is presented.")
                 }
 
                 override fun onInterstitialWillDismiss() {
                     super.onInterstitialWillDismiss()
-                    Log.d(ClassicInterstitialComposeFragment.TAG, "The Interstitial will be dismissed.")
+                    Log.d(TAG, "The Interstitial will be dismissed.")
                 }
 
                 override fun onInterstitialDismissed() {
                     super.onInterstitialDismissed()
-                    Log.d(ClassicInterstitialComposeFragment.TAG, "The Interstitial is dismissed.")
+                    Log.d(TAG, "The Interstitial is dismissed.")
                 }
 
                 override fun onInterstitialClicked() {
                     super.onInterstitialClicked()
-                    Log.d(ClassicInterstitialComposeFragment.TAG, "The Interstitial is clicked.")
+                    Log.d(TAG, "The Interstitial is clicked.")
                 }
 
                 override fun interstitialDidFailToLoadAdWithError(error: String) {
                     super.interstitialDidFailToLoadAdWithError(error)
                     isLoading = false
-                    onError(error)
-                    Log.d(ClassicInterstitialComposeFragment.TAG, error)
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, error)
                 }
             }
         )
-
         tblClassicPage.loadInterstitial()
+
+        return ComposeView(requireContext()).apply {
+            setContent {
+                InterstitialComposeScreen(
+                    tblClassicPage = tblClassicPage,
+                    isLoading = isLoading,
+                    canShowInterstitial = canShowInterstitial
+                )
+            }
+        }
     }
+
+    companion object {
+        val TAG = this::class.java.simpleName
+    }
+}
+
+@Composable
+private fun InterstitialComposeScreen(
+    tblClassicPage: TBLClassicPage,
+    isLoading: Boolean,
+    canShowInterstitial: Boolean
+) {
+    val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
