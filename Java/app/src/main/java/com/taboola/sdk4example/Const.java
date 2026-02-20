@@ -27,4 +27,9 @@ public class Const {
     //Explore More
     public static final String EXPLORE_MORE_PLACEMENT_NAME =  "Feed - Explore More";
     public static final String EXPLORE_MORE_CUSTOM_SEGMENT_SUBSCRIBER =  "subscriber";
+
+    //Interstitial
+    public static final String INTERSTITIAL_PLACEMENT_NAME = "Trigger Interstitial";
+    public static final String INTERSTITIAL_MODE = "full-screen-interstitial-test";
+    public static final String INTERSTITIAL_CUSTOM_SEGMENT_DEFAULT = "Vignette";
 }

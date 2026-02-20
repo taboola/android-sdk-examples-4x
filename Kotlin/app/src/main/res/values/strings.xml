@@ -18,6 +18,8 @@
     <string name="classic_viewpager">Classic View Pager</string>
     <string name="classic_explore_more">Classic Explore More</string>
     <string name="classic_explore_more_compose">Classic Explore More - Compose</string>
+    <string name="classic_interstitial">Classic Interstitial</string>
+    <string name="classic_interstitial_compose">Classic Interstitial - Compose</string>
     <string name="web_widget">Web Widget</string>
     <string name="web_compose_widget">Web Widget - Compose</string>
     <string name="web_compose_feed">Web Feed - Compose</string>
@@ -31,6 +33,8 @@
     <string name="show_explore_more">Show Explore More</string>
     <string name="set_back_button_trigger">Set Back Button Trigger</string>
     <string name="explore_more_loading">Explore More Loading</string>
+    <string name="interstitial_loading">Loading Interstitial</string>
+    <string name="interstitial_show">Show Interstitial</string>
     <string name="lorem_ipsum_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse egestas rutrum sollicitudin. Sed pulvinar ac leo vel dignissim. Vestibulum sit amet pulvinar justo, ac laoreet diam. Suspendisse in lectus quis neque mollis semper ac ut lorem. Vestibulum vulputate suscipit orci, non finibus mauris accumsan at. Ut ultrices est eros, et molestie magna egestas sit amet. Donec nec hendrerit nunc. Mauris ac blandit tellus, in pulvinar ipsum.
                                     Aliquam lacinia auctor hendrerit. Fusce aliquet turpis ac tortor dignissim pellentesque. Morbi at odio ligula. Ut fermentum dui et libero feugiat euismod. Vestibulum auctor accumsan accumsan. Nam sit amet pretium lectus, eu vulputate ipsum. Mauris tempor mauris ac lorem cursus, lobortis bibendum neque fermentum. Integer lacinia ac neque id accumsan. Suspendisse placerat ac eros quis tempor.
                                     Vivamus posuere sapien nec metus egestas efficitur. Aliquam in lorem a nibh vulputate mattis. Quisque vestibulum at orci ut aliquam. Ut ornare euismod sollicitudin. Nulla eget facilisis neque. Proin at pulvinar eros, et iaculis urna. Donec a maximus nisi. Praesent suscipit mi quis sapien semper, id venenatis mauris dapibus. Morbi commodo augue erat, eget condimentum odio posuere at. Curabitur id condimentum mi. Sed scelerisque finibus magna, eget commodo arcu consectetur non. Vivamus quis dui porta, interdum justo volutpat, lacinia mauris. Curabitur risus mi, scelerisque ut magna in, lobortis mattis risus. Integer dui quam, luctus in nunc quis, volutpat semper eros. Mauris nec finibus libero.

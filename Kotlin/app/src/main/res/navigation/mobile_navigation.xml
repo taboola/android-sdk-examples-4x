@@ -53,6 +53,16 @@
         android:label="@string/classic_explore_more_compose"
         />
 
+    <fragment
+        android:id="@+id/nav_classic_interstitial"
+        android:name="com.taboola.kotlin.examples.screens.classic.InterstitialFragment"
+        android:label="@string/classic_interstitial"
+        tools:layout="@layout/fragment_classic_interstitial" />
+
+    <fragment
+        android:id="@+id/nav_classic_interstitial_compose"
+        android:name="com.taboola.kotlin.examples.screens.classic.ClassicInterstitialComposeFragment"
+        android:label="@string/classic_interstitial_compose" />
 
     <fragment
         android:id="@+id/nav_web_widget"
